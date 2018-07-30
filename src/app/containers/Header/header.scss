@@ -32,6 +32,12 @@ $header-height: 4rem;
 
 .header-title-container {
   padding: .2rem;
+  &:hover {
+    border: 1px solid red;
+  }
+  &:active {
+    border: 1px solid orange;
+  }
 }
 
 .logoImage {

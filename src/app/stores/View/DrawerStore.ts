@@ -4,18 +4,27 @@ import { observable, action } from 'mobx';
 
 export default class DrawerStore {
 
-  @observable public drawerVisible: boolean = false;
+  @observable public drawerRightVisible: boolean = false;
 
-  @action openDrawer = () => {
-    this.drawerVisible = true;
+  @action openDrawerRight = () => {
+    this.drawerRightVisible = true;
   }
 
-  @action closeDrawer = () => {
-    this.drawerVisible = false;
+  @action closeDrawerRight = () => {
+    this.drawerRightVisible = false;
   }
 
-  @action public toggleDrawerStore = () => {
-    this.drawerVisible = !this.drawerVisible;
+  /////////////////////////////
+
+  @observable public drawerLeftVisible: boolean = false;
+
+  @action openDrawerLeft = () => {
+    this.drawerLeftVisible = true;
   }
+
+  @action closeDrawerLeft = () => {
+    this.drawerLeftVisible = false;
+  }
+
 
 }

@@ -81,6 +81,7 @@ h4 {
 .root-children {
   max-width: 1024px;
   margin: 0 auto;
+  padding: .5rem;
 }
 
 .btn {
@@ -110,4 +111,8 @@ h4 {
 ///////////////////////////////////////////////////
 // Imports
 @import '../containers/Header/header';
-@import '../containers/Drawer/index';
+@import '../containers/DrawerRight/index';
+@import '../containers/DrawerLeft/index';
+@import '../containers/ListView/index';
+@import '../containers/TileView/index';
+@import '../containers/MapView/index';

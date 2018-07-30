@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 @observer
-export default class Drawer extends React.Component<Props, {}> {
+export default class DrawerRight extends React.Component<Props, {}> {
 
   renderProfile() {
     return (
