@@ -1,0 +1,59 @@
+$header-height: 4rem;
+
+.header-container {
+  height: $header-height;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  @extend .noselect;
+  border-bottom: 3px solid lightgrey;
+}
+
+.header-left {
+  padding-left: .2rem;
+  padding-right: .2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  div {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.header-hamburger-menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title-container {
+  padding: .2rem;
+}
+
+.logoImage {
+  height: $header-height;
+}
+
+.header-right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.header-auth-btns {
+  height: 100%;
+}
+
+.header-button {
+  //background: transparent;
+  //height: 100%;
+  //border: none;
+  //width: 8rem;
+}

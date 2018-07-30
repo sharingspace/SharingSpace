@@ -1,0 +1,6 @@
+.idea/
+auth/
+node_modules/
+.DS_Store
+dist/
+google_dev_upload.json
