@@ -10,7 +10,7 @@ export default class DrawerLeft extends React.Component<Props, {}> {
     return (<div>
       {list.map((elem, i) => {
         return <div key={i}>
-          domain {i}
+          sharing network {i}
         </div>
       })}
     </div>)

@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { navStore } from 'stores';
 import { Button } from 'antd';
 import { FaBars } from 'react-icons/fa';
-import { drawerStore } from '../../stores';
+import { drawerStore, navStore } from '../../stores';
+import { Route, Switch } from 'react-router';
+import { withRouter } from 'react-router';
 
 
 @observer
 export class Header extends React.Component<any, any> {
+
+  constructor(props) {
+    super(props);
+  }
 
   menuButtonPressed() {
     drawerStore.openDrawerRight();
@@ -19,10 +24,29 @@ export class Header extends React.Component<any, any> {
     </div>
   }
 
+  navTo(route) {
+    this.props.history.push(route);
+  }
+
   renderRightViewSelect() {
-    return <div>
-      View select
-    </div>
+    return (
+      <Switch>
+        <Route path="/list" >
+          <div className='view-select-button-container' onClick={() => this.navTo('/grid')}>
+            Grid
+          </div>
+        </Route>
+        <Route path="/grid" >
+          <div className='view-select-button-container' onClick={() => this.navTo('/map')}>
+            Map
+          </div>
+        </Route>
+        <Route path="/map" >
+          <div className='view-select-button-container' onClick={() => this.navTo('/list')}>
+            List
+          </div>
+        </Route>
+      </Switch>)
   }
 
   renderRightHamburger() {
@@ -38,7 +62,6 @@ export class Header extends React.Component<any, any> {
   }
 
   render() {
-    const { history } = this.props;
     return (
         <div className={'header-container'}>
           <div className={'header-left'}>
@@ -63,4 +86,4 @@ export class Header extends React.Component<any, any> {
   }
 }
 
-export default Header;
+export default withRouter(Header);

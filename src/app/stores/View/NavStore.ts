@@ -29,11 +29,25 @@ export default class NavStore {
     this.route(true, '/home');
   }
 
-  public routeToLogin = () => {
-    this.route(false, '/login');
+  public routeToList = () => {
+    console.log('nav to list');
+    this.route(true, '/list');
   }
 
+  public routeToGrid = () => {
+    console.log('nav to grid');
+    this.route(true, '/grid');
+  }
+
+  public routeToMap = () => {
+    console.log('nav to map');
+    this.route(true, '/map');
+  }
+
+
+
   private route(isPrivate: boolean, route: string) {
+    console.log('this history', route)
     // if (isPrivate) {
       // check for auth
     //   authStore.checkToken((res) => {
@@ -46,7 +60,8 @@ export default class NavStore {
     //   });
     // } else {
     //   // just nav it
-    //   this.history.push(route);
+
     // }
+    this.history.push(route);
   }
 }

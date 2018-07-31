@@ -16,30 +16,34 @@ import RouteHOC from './containers/routeHOC';
 // Stores
 import { navStore, authStore } from 'stores';
 
+
+
 // enable MobX strict mode
 useStrict(true);
 
 const history = createBrowserHistory();
-navStore.saveHistory(history);
+
+// navStore.saveHistory(history);
+
+// {/* <IconContext.Provider value={{ className: "global-icon-classname" }}> */}
+    // </IconContext.Provider>
 
 @observer
 class App extends React.Component {
   render() {
     return (
-      <IconContext.Provider value={{ className: "global-icon-classname" }}>
-        <div className={'app'}>
-          <Router history={history}>
-            <Root history={history}>
-              <Switch>
-                <Route exact={true} path="/list" component={RouteHOC(ListView)} />
-                <Route exact={true} path="/tile" component={RouteHOC(TileView)} />
-                <Route exact={true} path="/map" component={RouteHOC(MapView)} />
-                <Redirect from='*' to='/list'/>
-              </Switch>
-            </Root>
-          </Router>
-        </div>
-      </IconContext.Provider>
+      <div className={'app'}>
+        <Router history={history}>
+          <Root>
+            <Switch>
+              <Route exact={true} path="/list" component={ListView} />
+              <Route exact={true} path="/grid" component={TileView} />
+              <Route exact={true} path="/map" component={MapView} />
+              <Redirect from='*' to='/list'/>
+            </Switch>
+          </Root>
+        </Router>
+      </div>
     );
   }
 }

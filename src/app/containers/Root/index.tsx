@@ -6,8 +6,11 @@ import { drawerStore } from '../../stores';
 import { observer } from 'mobx-react';
 import DrawerRight from '../DrawerRight';
 import DrawerLeft from '../DrawerLeft';
+import { withRouter } from 'react-router';
+
 
 const devTool = () => {
+  return null;
   if ( config.appEnv === 'dev' ) {
     const DevTools = require('mobx-react-devtools').default;
     return (<DevTools />);
@@ -16,12 +19,15 @@ const devTool = () => {
 };
 
 export interface Props {
-  history: any;
   children: any;
 }
 
 @observer
-export default class Root extends React.Component<any, {}> {
+class Root extends React.Component<Props, any> {
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (
@@ -32,7 +38,7 @@ export default class Root extends React.Component<any, {}> {
           open={drawerStore.drawerRightVisible}
           anchor="right"
         >
-          <DrawerRight />
+          <DrawerRight {...this.props}/>
         </SwipeableDrawer>
 
         <SwipeableDrawer
@@ -41,10 +47,11 @@ export default class Root extends React.Component<any, {}> {
           open={drawerStore.drawerLeftVisible}
           anchor="left"
         >
-          <DrawerLeft />
+          <DrawerLeft {...this.props}/>
         </SwipeableDrawer>
 
-        <Header history={this.props.history}/>
+        <Header/>
+
         <div className={'root-children'}>
             {this.props.children}
         </div>
@@ -53,3 +60,5 @@ export default class Root extends React.Component<any, {}> {
     );
   }
 }
+
+export default withRouter(Root);
