@@ -1,7 +1,8 @@
 .list-view-container {
-
 }
 
+$each-list-item-background-color: #f9fbff;
+$each-list-item-background-color-border-color: darken($each-list-item-background-color, 2%);
 .each-list-item-container {
   display: flex;
   flex-direction: row;
@@ -9,12 +10,20 @@
   padding: .5rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
+  border: 1px solid $each-list-item-background-color-border-color;
   margin-top: .5rem;
   margin-bottom: .5rem;
+  background-color: $each-list-item-background-color;
+  border-radius: .5rem;
+  &:hover {
+    background-color: darken($each-list-item-background-color, 2%);
+    border: 1px solid darken($each-list-item-background-color-border-color, 2%);
+  }
+  &:active {
+    background-color: lighten($each-list-item-background-color, 5%);
+  }
   div {
     flex: 1;
-    border: 1px solid blue;
     display: flex;
     align-items: center;
     justify-content: center;

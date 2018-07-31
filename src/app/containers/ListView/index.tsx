@@ -5,27 +5,37 @@ import { observer } from 'mobx-react';
 @observer
 export default class ListView extends React.Component<Props, {}> {
 
+  listItemClicked(elem) {
+    console.log('==== elem', elem)
+  }
+
   renderListOrNoContent() {
     let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ,17, 18, 19, 20];
-
     if(list.length === 0) {
-      return <div>
+      return (<div>
         No content found
-      </div>
+      </div>)
     } else {
-      return <div>
+      return (<div>
         {list.map((elem, i) => {
-          return <div className='each-list-item-container' key={i}>
-            <div>
-              <img className='each-list-item-image' src={'http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-check-icon.png'} />
-            </div>
+          let size = 3;
+          let imageUrl = 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/sign-check-icon.png';
+          let divImageStyle = {
+            background: 'url(' + imageUrl + ')',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            flex: `0 ${size}rem`,
+            height: `${size}rem`,
+          }
+          return <div className='each-list-item-container' key={i} onClick={() => this.listItemClicked(elem)}>
+            <div style={divImageStyle}></div>
             <div>Collection name</div>
             <div>Other attrib</div>
             <div>Other attrib</div>
             <div>Other attrib</div>
           </div>
         })}
-      </div>
+      </div>)
     }
 
   }
