@@ -1,26 +1,39 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import { Button } from 'antd';
-import { FaBars } from 'react-icons/fa';
+import {
+  FaBars,
+  FaLocationArrow,
+  FaList,
+  FaUserFriends,
+  FaPlusSquare,
+  FaTh
+} from 'react-icons/fa';
 import { drawerStore, navStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 
-
 @observer
 export class Header extends React.Component<any, any> {
 
+  iconSize: number;
+
   constructor(props) {
     super(props);
+    this.iconSize = 40;
   }
 
   menuButtonPressed() {
     drawerStore.openDrawerRight();
   }
 
+  navToUserList() {
+    console.log('====== NAV TO USERS LIST')
+  }
+
   renderRightMembers() {
-    return <div>
-      members icon
+    return <div className='header-icon-container' onClick={() => this.navToUserList()}>
+      <FaUserFriends size={this.iconSize} />
     </div>
   }
 
@@ -28,22 +41,26 @@ export class Header extends React.Component<any, any> {
     this.props.history.push(route);
   }
 
+  navToNewEntry() {
+    console.log('===== NEW ENTRY')
+  }
+
   renderRightViewSelect() {
     return (
       <Switch>
         <Route path="/list" >
           <div className='view-select-button-container' onClick={() => this.navTo('/grid')}>
-            Grid
+            <FaTh size={this.iconSize}/>
           </div>
         </Route>
         <Route path="/grid" >
           <div className='view-select-button-container' onClick={() => this.navTo('/map')}>
-            Map
+            <FaLocationArrow size={this.iconSize}/>
           </div>
         </Route>
         <Route path="/map" >
           <div className='view-select-button-container' onClick={() => this.navTo('/list')}>
-            List
+            <FaList size={this.iconSize}/>
           </div>
         </Route>
       </Switch>)
@@ -51,13 +68,13 @@ export class Header extends React.Component<any, any> {
 
   renderRightHamburger() {
     return <div className='header-hamburger-menu-container' onClick={() => this.menuButtonPressed()}>
-      <FaBars size={45} />
+      <FaBars className='active-icon' size={this.iconSize} />
     </div>
   }
 
-  renderRightPlusButton() {
-    return <div>
-      Plus button
+  renderNewEntry() {
+    return <div className='header-icon-container' onClick={() => this.navToNewEntry()}>
+      <FaPlusSquare size={this.iconSize} />
     </div>
   }
 
@@ -79,6 +96,7 @@ export class Header extends React.Component<any, any> {
           <div className={'header-right'}>
             {this.renderRightMembers()}
             {this.renderRightViewSelect()}
+            {this.renderNewEntry()}
             {this.renderRightHamburger()}
           </div>
         </div>

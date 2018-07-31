@@ -24,10 +24,17 @@ $header-height: 4rem;
   }
 }
 
-.header-hamburger-menu-container {
+.header-icon-container {
+  padding-left: .2rem;
+  padding-right: .2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  @extend .active-icon;
+}
+
+.header-hamburger-menu-container {
+  @extend .header-icon-container;
 }
 
 .header-title-container {
@@ -53,10 +60,6 @@ $header-height: 4rem;
   padding-right: .5rem;
 }
 
-.header-auth-btns {
-  height: 100%;
-}
-
 .header-button {
   //background: transparent;
   //height: 100%;
@@ -65,6 +68,6 @@ $header-height: 4rem;
 }
 
 .view-select-button-container {
-  border: 1px solid red;
-  padding: .5rem;
+  // border: 1px solid red;
+  @extend .header-icon-container;
 }
