@@ -19,7 +19,9 @@ $global-red: #FF0000;
 @import '~antd/dist/antd.css';
 @import '../../../node_modules/include-media/dist/_include-media';
 
-
+// React grid
+@import '../../../node_modules/react-grid-layout/css/styles.css';
+@import '../../../node_modules/react-resizable/css/styles.css';
 
 $breakpoints: (
   'phone': 320px,
@@ -112,4 +114,5 @@ $active-icon-color: #565656;
 @import '../containers/DrawerLeft/index';
 @import '../containers/ListView/index';
 @import '../containers/TileView/index';
+@import '../containers/TileView/tile/index';
 @import '../containers/MapView/index';
