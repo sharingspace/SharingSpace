@@ -18,6 +18,7 @@ export default class Tile extends React.Component<any, {}> {
     let inlineImageStyle = {
       flex: 1,
       width: '100%',
+      background: 'url(' + imageUrl + ')',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       border: '1px solid orange',
@@ -31,7 +32,9 @@ export default class Tile extends React.Component<any, {}> {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: '1px solid purple'
+      border: '1px solid purple',
+      background: 'rgba(0, 0, 0, .4)',
+      color: 'white'
     }
 
     return <div key={this.props.key} style={containerStyle}>

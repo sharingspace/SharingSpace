@@ -29,6 +29,14 @@ export default class TileView extends React.Component<Props, {}> {
     this.rowHeight = 90;
   }
 
+  layoutEdited(layout) {
+    console.log('=== layout', layout);
+  }
+
+  onDrag(data) {
+    console.log('==== ON DRAG', data)
+  }
+
   generateLayouts() {
     let results = {
       lg: [],
@@ -65,10 +73,12 @@ export default class TileView extends React.Component<Props, {}> {
         cols={this.columnConfig}
         rowHeight={this.rowHeight}
         breakpoints={this.breakpoints}
+        onLayoutChange={(layout: any) => this.layoutEdited(layout)}
+        onDrag={(data:any) => this.onDrag(data)}
       >
         {this.itemList.map((elem, i) => {
           return <div key={this.sharedKey + i} className="each-grid-container">
-            <Tile data={elem} />
+            <Tile key={i} data={elem} />
           </div>
         })}
       </ResponsiveGridLayout>
