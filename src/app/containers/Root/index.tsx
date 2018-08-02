@@ -50,12 +50,16 @@ class Root extends React.Component<Props, any> {
           <DrawerLeft {...this.props}/>
         </SwipeableDrawer>
 
-        <Header/>
+        <div className={'root-header-container'}>
+          <Header/>
+        </div>
 
         <div className={'root-children'}>
             {this.props.children}
         </div>
+
         {devTool()}
+
       </div>
     );
   }
