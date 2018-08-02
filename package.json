@@ -70,6 +70,7 @@
     "moment": "^2.22.2",
     "normalize.scss": "^0.1.0",
     "npm": "^5.6.0",
+    "packery": "^2.1.2",
     "react": "^16.2.0",
     "react-click-outside": "^3.0.0",
     "react-dom": "^16.2.0",

@@ -37,9 +37,9 @@ export default class Tile extends React.Component<any, {}> {
       color: 'white'
     }
 
-    return <div key={this.props.key} style={containerStyle}>
-      <div style={inlineImageStyle}></div>
-      <div style ={titleStyle}>
+    return <div key={this.props.key} style={containerStyle as any}>
+      <div style={inlineImageStyle as any}></div>
+      <div style ={titleStyle as any}>
         Title
       </div>
     </div>

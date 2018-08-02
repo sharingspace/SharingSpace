@@ -1,7 +1,23 @@
+.grid-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid green;
+  overflow-y: scroll;
+}
+
 .each-grid-container {
   border: 1px solid red;
   // padding: .2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.packery-grid {
+}
+
+.grid-item {
+  border: 1px solid orange;
+  // height: 3rem;
+  // width: 3rem;
 }

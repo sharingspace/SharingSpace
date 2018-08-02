@@ -4,91 +4,72 @@ import { observer } from 'mobx-react';
 import GridLayout from 'react-grid-layout';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Tile from './tile';
+import Packery from 'packery';
 
 @observer
 export default class TileView extends React.Component<Props, {}> {
 
-  itemList: any;
-  sharedKey: string;
-  breakpoints: object;
-  columnConfig: any;
-  rowHeight: number;
+  packeryElem: any;
+  packeryObject: any;
+  packeryGridRef: any;
+  unregisterLeaveHook: any;
 
   constructor(props) {
     super(props);
-    this.itemList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    this.sharedKey = 'grid_elem_';
-    this.breakpoints = {
-      lg: 800,
-      sm: 700
-    }
-    this.columnConfig = {
-      lg: 8,
-      sm: 1
-    }
-    this.rowHeight = 90;
+    this.packeryGridRef = React.createRef();
   }
 
-  layoutEdited(layout) {
-    console.log('=== layout', layout);
+  routerWillLeave(nextLocation) {
+    return false;
   }
 
-  onDrag(data) {
-    console.log('==== ON DRAG', data)
+  componentDidMount() {
+    setTimeout(() => {
+      this.generatePackeryGrid();
+    }, 0);
   }
 
-  generateLayouts() {
-    let results = {
-      lg: [],
-      sm: []
-    };
+  generatePackeryGrid() {
+    let packeryElem = this.packeryGridRef.current;
+    packeryElem.style.cssText = `height: 10rem`;
 
-    this.itemList.forEach((elem, i) => {
-      results.lg.push({
-        i: this.sharedKey + i,
-        x: i % this.columnConfig.lg,
-        y: Math.floor(i / this.columnConfig.lg),
-        w: 1,
-        h: 1,
-        static: false,
-      })
-      results.sm.push({
-        i: this.sharedKey + i,
-        x: 0,
-        y: i,
-        w: 2,
-        h: 1,
-        static: false,
-      })
+    // init packery
+    let packeryObject = new Packery( packeryElem, {
+      // options
+      itemSelector: '.grid-item',
+      gutter: 10,
+      originLeft: true,
+      originTop: true,
+    });
+
+    let list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    list.forEach((listElem, i) => {
+      let elem = document.createElement('div');
+      elem.className = 'grid-item';
+
+      let height = Math.random() * 5 + 3;
+      let width = Math.random() * 5 + 3;
+
+      elem.style.cssText = `height: ${height}rem; width: ${width}rem`;
+
+      let textNode = document.createTextNode("box: " + i);
+      elem.appendChild(textNode);
+
+      packeryElem.appendChild( elem );
+      packeryObject.appended( elem );
+      packeryObject.layout();
     })
-    return results;
   }
 
   renderGrid() {
-    const ResponsiveGridLayout = WidthProvider(Responsive);
     return (
-      <ResponsiveGridLayout
-        className="layout"
-        layouts={this.generateLayouts()}
-        cols={this.columnConfig}
-        rowHeight={this.rowHeight}
-        breakpoints={this.breakpoints}
-        onLayoutChange={(layout: any) => this.layoutEdited(layout)}
-        onDrag={(data:any) => this.onDrag(data)}
-      >
-        {this.itemList.map((elem, i) => {
-          return <div key={this.sharedKey + i} className="each-grid-container">
-            <Tile key={i} data={elem} />
-          </div>
-        })}
-      </ResponsiveGridLayout>
+      <div ref={this.packeryGridRef} className='packery-grid'></div>
     )
   }
 
   render() {
     return (
-      <div className="">
-        <div>Tile view</div>
+      <div className="grid-container">
         {this.renderGrid()}
       </div>
     );

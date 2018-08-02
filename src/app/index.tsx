@@ -25,7 +25,7 @@ useStrict(true);
 const history = createBrowserHistory();
 
 @observer
-class App extends React.Component {
+class App extends React.Component<any, any> {
 
   resizeThrottleTime: number;
 
