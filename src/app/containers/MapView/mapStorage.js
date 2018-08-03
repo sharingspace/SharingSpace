@@ -1,5 +1,4 @@
 import { observable, action, computed, toJS } from 'mobx';
-import "wrld.js";
 
 class MapStore {
 
@@ -37,6 +36,11 @@ class MapStore {
       return true;
     }
   }
+
+  resizeMapElem(newWidth) {
+    this.mapElem.style.width = newWidth + 'px';
+  }
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
