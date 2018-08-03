@@ -4,7 +4,6 @@ $header-height: 4rem;
   height: $header-height;
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   margin: 0 auto;
   @extend .noselect;
   border-bottom: 3px solid lightgrey;

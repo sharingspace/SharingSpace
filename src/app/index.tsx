@@ -16,7 +16,8 @@ import RouteHOC from './containers/routeHOC';
 // Stores
 import { navStore, authStore } from 'stores';
 // Utilities
-import { throttle } from 'throttle-debounce';
+import _ from 'lodash'
+
 
 // enable MobX strict mode
 useStrict(true);
@@ -44,8 +45,15 @@ class App extends React.Component<any, any> {
 
     this.setSize();
     // set size explicitly on resize
-    window.onresize = throttle(this.resizeThrottleTime, (data) => {
-      this.setSize();
+    window.onresize = _.throttle((data) => {
+      console.log('set size')
+      // this.setSize();
+      setInterval(() => {
+        this.setSize();
+      }, 100)
+    }, this.resizeThrottleTime, {
+      leading: true,
+      trailing: true
     });
   }
 
