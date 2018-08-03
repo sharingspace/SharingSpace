@@ -12,6 +12,9 @@ class MapStore {
     this.apiKey = 'dd208c3425464e703d197ef3cbbd6736';
   }
 
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  // deals with saving and retriving of map elements for react component
   saveMapElem(newMapElem) {
     this.mapElem = newMapElem;
   }
@@ -34,23 +37,20 @@ class MapStore {
       return true;
     }
   }
+  //////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
 
-
-  generatePopUp(data) {
-    console.log('popup data', data)
-    // var popup = L.popup()
-    // .setLatLng([37.7952, -122.4028])
-    // .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-    // .openOn(map);
-
-  }
-
-
-  addMarkers() {
-    console.log('generate markers');
-
-    let title = 'Test title';
-
+  addSingleMarker(params) {
+    let title = params.title;
+    // create popup
+    let popupOptions = {
+      className: 'each-wrld3d-popup',
+      elevation: 0.0,
+    }
+    let thisPopup = L.popup(popupOptions)
+    .setLatLng([this.initLat, this.initLng])
+    .setContent("Transamerica Pyramid")
+    // create marker
     let markerOptions = {
       elevation: 0.0,
       title: title,
@@ -58,35 +58,18 @@ class MapStore {
       riseOnHover: true,
       riseOffset: 250,
     }
-
-    let popupOptions = {
-      className: 'each-wrld3d-popup',
-      elevation: 0.0,
-    }
-
-    let thisPopup = L.popup(popupOptions)
-    .setLatLng([this.initLat, this.initLng])
-    .setContent("Transamerica Pyramid")
-    // .addTo(this.mapObject);
-
-
     let thisMarker = L.marker([this.initLat, this.initLng], markerOptions)
-    // .bindPopup(thisPopup)
-
-    thisMarker.on('click', (data) => {
-      console.log('-- click', data)
-    })
-
+    // bind popup to marker
     thisMarker.bindPopup(thisPopup).openPopup();
-
+    // add to map
     thisMarker.addTo(this.mapObject);
-
-
   }
 
-  markerClicked() {
-    console.log('marker clicked');
-
+  addMarkers() {
+    let params = {
+      title: 'Marker title'
+    }
+    this.addSingleMarker(params);
   }
 
 }
