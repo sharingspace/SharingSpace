@@ -1,0 +1,22 @@
+.root-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // border: 1px solid green;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.root-header-container {
+  width: 100%;
+}
+
+.root-children {
+  margin: 0 auto;
+  // padding: .5rem;
+  // border: 1px solid orange;
+  display: flex;
+  width: 100%;
+  max-width: 1024px;
+  flex: 1;
+}

@@ -1,5 +1,8 @@
 .list-view-container {
   width: 100%;
+  // border: 1px solid red;
+  overflow-y: scroll;
+  padding: $global-edge-padding;
 }
 
 $each-list-item-background-color: #f9fbff;

@@ -5,15 +5,18 @@
   box-sizing: border-box;
 }
 
+
+$global-blue: #1890FF;
+$global-red: #FF0000;
+$global-dark: #3a3a3a;
+$global-edge-padding: .5rem;
+
 body, html {
   font-size: 19px;
   background-color: white;
   font-family: sans-serif;
+  color: $global-dark;
 }
-
-
-$global-blue: #1890FF;
-$global-red: #FF0000;
 
 // Imported Utilities
 @import '~antd/dist/antd.css';
@@ -65,7 +68,7 @@ h4 {
 }
 
 .app_master_container {
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 
 .global-icon-classname {
@@ -82,30 +85,6 @@ h4 {
   // background-color: red;
   padding: .5rem;
 
-}
-
-
-.root-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  // border: 1px solid green;
-  height: 100%;
-  overflow-y: scroll;
-}
-
-.root-header-container {
-  width: 100%;
-}
-
-.root-children {
-  margin: 0 auto;
-  padding: .5rem;
-  // border: 1px solid orange;
-  display: flex;
-  width: 100%;
-  max-width: 1024px;
-  flex: 1;
 }
 
 $active-icon-color: #565656;
@@ -131,9 +110,9 @@ $active-icon-color: #565656;
 
 ///////////////////////////////////////////////////
 // Imports
+@import '../containers/Root/index';
 @import '../containers/Header/header';
 @import '../containers/DrawerRight/index';
-@import '../containers/DrawerLeft/index';
 @import '../containers/ListView/index';
 @import '../containers/TileView/index';
 @import '../containers/TileView/tile/index';

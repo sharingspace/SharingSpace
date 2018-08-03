@@ -28,7 +28,7 @@ export class Header extends React.Component<any, any> {
   }
 
   navToUserList() {
-    console.log('====== NAV TO USERS LIST')
+    console.log('====== NAV TO USERS LIST');
   }
 
   renderRightMembers() {
@@ -42,7 +42,7 @@ export class Header extends React.Component<any, any> {
   }
 
   navToNewEntry() {
-    console.log('===== NEW ENTRY')
+    console.log('===== NEW ENTRY');
   }
 
   renderRightViewSelect() {
@@ -87,7 +87,7 @@ export class Header extends React.Component<any, any> {
               onClick={() => drawerStore.openDrawerLeft()}
               className='header-title-container'
             >
-              Channel name here??
+              Channel name
             </div>
 
           </div>
