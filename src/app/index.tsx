@@ -41,8 +41,6 @@ class App extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    // init map so we have a jump on loading
-    mapStorage.initMap();
 
     this.setSize();
     // set size explicitly on resize
