@@ -26,6 +26,10 @@ body, html {
 @import '../../../node_modules/react-grid-layout/css/styles.css';
 @import '../../../node_modules/react-resizable/css/styles.css';
 
+// Leaflet css for wrld3D
+@import '../../../node_modules/leaflet/dist/leaflet.css';
+
+
 $breakpoints: (
   'phone': 320px,
   'tablet': 768px,

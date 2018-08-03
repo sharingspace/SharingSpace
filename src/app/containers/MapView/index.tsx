@@ -8,17 +8,8 @@ import mapStorage from './mapStorage';
 @observer
 class MapView extends React.Component<any, {}> {
 
-  apiKey: string;
-  initLat: number;
-  initLng: number;
-  initZoom: number;
-
   constructor(props) {
     super(props);
-    this.apiKey = 'dd208c3425464e703d197ef3cbbd6736';
-    this.initLat = 34.342501;
-    this.initLng = -112.100465;
-    this.initZoom = 17;
   }
 
   initMap() {
@@ -27,9 +18,9 @@ class MapView extends React.Component<any, {}> {
     mapElem.style.cssText = 'width: 100%; height: 100%';
     this.appendMapElemToParent(mapElem)
 
-    let mapObject =  L.Wrld.map("map_elem_id", this.apiKey, {
-      center: [ this.initLat, this.initLng ],
-      zoom: this.initZoom
+    let mapObject =  L.Wrld.map("map_elem_id", mapStorage.apiKey, {
+      center: [ mapStorage.initLat, mapStorage.initLng ],
+      zoom: mapStorage.initZoom
     });
 
     // store on storage class
@@ -42,12 +33,17 @@ class MapView extends React.Component<any, {}> {
     containerElem.appendChild(mapElem);
   }
 
-  componentDidMount() {
+  initOrRetrieveMap() {
     if(!mapStorage.isMapElemSaved()) {
       this.initMap()
     } else {
       this.appendMapElemToParent(mapStorage.retrieveMapElem());
     }
+  }
+
+  componentDidMount() {
+    this.initOrRetrieveMap();
+    mapStorage.addMarkers();
   }
 
   render() {
