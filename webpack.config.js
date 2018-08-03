@@ -71,6 +71,36 @@ const plugins = (env) => {
   return env.configSelect === 'prod' ? myPlugins.concat(prodPlugins) : myPlugins;
 };
 
+
+const typeScriptLoaderOptions = {
+    // "useBabel": true,
+    // "babelOptions": {
+    //     "babelrc": false, /* Important line */
+    //     "presets": [
+    //         ["@babel/preset-env", {
+    //           "targets": {
+    //             "browsers": "last 2 versions, ie 11"
+    //           },
+    //           "modules": false
+    //         }]
+    //     ],
+    // },
+    // "babelCore": "@babel/core", // needed for Babel v7
+}
+
+const returnTsxLoaderOptions = (dev) => {
+  if(dev === 'prod') {
+    return [
+       { loader: 'ts-loader' , options: typeScriptLoaderOptions}
+     ]
+  } else {
+    return [
+       { loader: 'react-hot-loader/webpack' },
+       { loader: 'ts-loader' , options: typeScriptLoaderOptions}
+     ]
+  }
+}
+
 module.exports = env => {
   return {
     context: sourcePath,
@@ -98,15 +128,10 @@ module.exports = env => {
     },
     module: {
       loaders: [
-        // .ts, .tsx
+        // .tsx
         {
-          test: /\.tsx?$/,
-          use: env === 'prod'
-            ? 'awesome-typescript-loader'
-            : [
-              'react-hot-loader/webpack',
-              'awesome-typescript-loader'
-            ]
+          test: /\.(tsx|ts)$/,
+          use: returnTsxLoaderOptions(env),
         },
         {
           test: /\.js$/,

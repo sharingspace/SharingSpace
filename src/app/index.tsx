@@ -14,7 +14,7 @@ import MapView from './containers/MapView';
 // HOC
 import RouteHOC from './containers/routeHOC';
 // Stores
-import { navStore, authStore } from 'stores';
+import { navStore, authStore, sizeStore } from 'stores';
 // Utilities
 import _ from 'lodash'
 
@@ -34,10 +34,6 @@ class App extends React.Component<any, any> {
 
   constructor(props) {
     super(props);
-    this.state = {
-      h: 0,
-      w: 0
-    };
     this.resizeThrottleTime = 500;
   }
 
@@ -46,8 +42,6 @@ class App extends React.Component<any, any> {
     this.setSize();
     // set size explicitly on resize
     window.onresize = _.throttle((data) => {
-      console.log('set size')
-      // this.setSize();
       setInterval(() => {
         this.setSize();
       }, 100)
@@ -58,17 +52,16 @@ class App extends React.Component<any, any> {
   }
 
   setSize() {
-    this.setState({
-      w: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-      h: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    })
+    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    sizeStore.setSize(h, w);
   }
 
   render() {
-    const { h, w } = this.state;
+    const { width, height } = sizeStore;
     let appMasterStyle = {
-      height: h,
-      width: w
+      height: height,
+      width: width
     }
 
     return (

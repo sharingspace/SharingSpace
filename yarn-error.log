@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/brian/.nvm/versions/node/v8.0.0/bin/node /usr/local/bin/yarn add SizeMe
+  /Users/brian/.nvm/versions/node/v8.0.0/bin/node /usr/local/bin/yarn start
 
 PATH: 
   /Users/brian/.nvm/versions/node/v8.0.0/bin:/usr/local/opt/openssl/bin:/usr/local/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/brian/bin:/usr/local/sbin:/Users/brian/.rbenv/shims:/Users/brian/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/X11/bin:/Applications/Wireshark.app/Contents/MacOS:/Users/brian/.composer/vendor/bin
@@ -78,7 +78,9 @@ npm manifest:
       "@types/webpack-env": "^1.13.6",
       "antd": "^3.5.4",
       "axios": "^0.18.0",
+      "babel-plugin-transform-decorators-legacy": "^1.3.5",
       "install": "^0.12.1",
+      "lodash": "^4.17.10",
       "mobx": "^3.6.2",
       "mobx-react": "^4.3.5",
       "mobx-react-form": "^1.32.3",
@@ -86,6 +88,7 @@ npm manifest:
       "moment": "^2.22.2",
       "normalize.scss": "^0.1.0",
       "npm": "^5.6.0",
+      "packery": "^2.1.2",
       "react": "^16.2.0",
       "react-click-outside": "^3.0.0",
       "react-dom": "^16.2.0",
@@ -93,6 +96,7 @@ npm manifest:
       "react-icons": "^3.0.1",
       "react-router": "^4.2.0",
       "react-router-dom": "^4.3.1",
+      "react-sizeme": "^2.5.2",
       "style-loader": "^0.19.1",
       "styled-media-query": "^2.0.1",
       "tslint": "4.5.1",
@@ -1405,6 +1409,18 @@ Lockfile:
     dependencies:
       babel-helper-is-void-0 "^0.3.0"
   
+  babel-plugin-syntax-decorators@^6.1.18:
+    version "6.13.0"
+    resolved "https://registry.yarnpkg.com/babel-plugin-syntax-decorators/-/babel-plugin-syntax-decorators-6.13.0.tgz#312563b4dbde3cc806cee3e416cceeaddd11ac0b"
+  
+  babel-plugin-transform-decorators-legacy@^1.3.5:
+    version "1.3.5"
+    resolved "https://registry.yarnpkg.com/babel-plugin-transform-decorators-legacy/-/babel-plugin-transform-decorators-legacy-1.3.5.tgz#0e492dffa0edd70529072887f8aa86d4dd8b40a1"
+    dependencies:
+      babel-plugin-syntax-decorators "^6.1.18"
+      babel-runtime "^6.2.0"
+      babel-template "^6.3.0"
+  
   babel-plugin-transform-inline-consecutive-adds@^0.3.0:
     version "0.3.0"
     resolved "https://registry.yarnpkg.com/babel-plugin-transform-inline-consecutive-adds/-/babel-plugin-transform-inline-consecutive-adds-0.3.0.tgz#f07d93689c0002ed2b2b62969bdd99f734e03f57"
@@ -1493,14 +1509,14 @@ Lockfile:
       mkdirp "^0.5.1"
       source-map-support "^0.4.15"
   
-  babel-runtime@6.x, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
+  babel-runtime@6.x, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
     dependencies:
       core-js "^2.4.0"
       regenerator-runtime "^0.11.0"
   
-  babel-template@^6.24.1, babel-template@^6.26.0:
+  babel-template@^6.24.1, babel-template@^6.26.0, babel-template@^6.3.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
     dependencies:
@@ -1564,6 +1580,10 @@ Lockfile:
       isobject "^3.0.1"
       mixin-deep "^1.2.0"
       pascalcase "^0.1.1"
+  
+  batch-processor@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/batch-processor/-/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
   
   batch@0.6.1:
     version "0.6.1"
@@ -2810,6 +2830,10 @@ Lockfile:
       inherits "^2.0.1"
       minimalistic-assert "^1.0.0"
   
+  desandro-matches-selector@^2.0.0:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz#717beed4dc13e7d8f3762f707a6d58a6774218e1"
+  
   destroy@~1.0.4:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
@@ -3002,6 +3026,12 @@ Lockfile:
   electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.30, electron-to-chromium@^1.3.47:
     version "1.3.50"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.50.tgz#7438b76f92b41b919f3fbdd350fbd0757dacddf7"
+  
+  element-resize-detector@^1.1.12:
+    version "1.1.14"
+    resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.1.14.tgz#af064a0a618a820ad570a95c5eec5b77be0128c1"
+    dependencies:
+      batch-processor "^1.0.0"
   
   elliptic@^6.0.0:
     version "6.4.0"
@@ -3221,6 +3251,10 @@ Lockfile:
   etag@~1.8.1:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
+  
+  ev-emitter@^1.0.0:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
   
   event-emitter@~0.3.5:
     version "0.3.5"
@@ -3507,6 +3541,12 @@ Lockfile:
     dependencies:
       glob "~5.0.0"
   
+  fizzy-ui-utils@^2.0.0:
+    version "2.0.7"
+    resolved "https://registry.yarnpkg.com/fizzy-ui-utils/-/fizzy-ui-utils-2.0.7.tgz#7df45dcc4eb374a08b65d39bb9a4beedf7330505"
+    dependencies:
+      desandro-matches-selector "^2.0.0"
+  
   flatten@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
@@ -3726,6 +3766,10 @@ Lockfile:
   get-caller-file@^1.0.1:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
+  
+  get-size@^2.0.2:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/get-size/-/get-size-2.0.3.tgz#54a1d0256b20ea7ac646516756202769941ad2ef"
   
   get-stdin@^4.0.1:
     version "4.0.1"
@@ -5296,7 +5340,7 @@ Lockfile:
     dependencies:
       lodash._reinterpolate "~3.0.0"
   
-  lodash.throttle@^4.0.0:
+  lodash.throttle@^4.0.0, lodash.throttle@^4.1.1:
     version "4.1.1"
     resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   
@@ -6352,6 +6396,14 @@ Lockfile:
       os-homedir "^1.0.0"
       os-tmpdir "^1.0.0"
   
+  outlayer@^2.0.0:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/outlayer/-/outlayer-2.1.1.tgz#29863b6de10ea5dadfffcadfa0d728907387e9a2"
+    dependencies:
+      ev-emitter "^1.0.0"
+      fizzy-ui-utils "^2.0.0"
+      get-size "^2.0.2"
+  
   p-finally@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
@@ -6384,6 +6436,13 @@ Lockfile:
       registry-auth-token "^3.0.1"
       registry-url "^3.0.3"
       semver "^5.1.0"
+  
+  packery@^2.1.2:
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/packery/-/packery-2.1.2.tgz#92a3cc3303e781f151d93ee34d13325790c4f13f"
+    dependencies:
+      get-size "^2.0.2"
+      outlayer "^2.0.0"
   
   pacote@^7.6.1:
     version "7.6.1"
@@ -7865,6 +7924,16 @@ Lockfile:
       path-to-regexp "^1.7.0"
       prop-types "^15.6.1"
       warning "^4.0.1"
+  
+  react-sizeme@^2.5.2:
+    version "2.5.2"
+    resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.5.2.tgz#e7041390cfb895ed15d896aa91d76e147e3b70b5"
+    dependencies:
+      element-resize-detector "^1.1.12"
+      invariant "^2.2.2"
+      lodash.debounce "^4.0.8"
+      lodash.throttle "^4.1.1"
+      shallowequal "^1.0.2"
   
   react-slick@~0.23.1:
     version "0.23.1"
@@ -10087,14 +10156,17 @@ Lockfile:
       readable-stream "^2.0.0"
 
 Trace: 
-  Error: https://registry.npmjs.org/SizeMe: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:65019:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:132430:22)
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c webpack-dev-server -d --history-api-fallback --hot --inline --progress --env.frontendsource dev --env.configSelect dev --colors --port 3000 --open
+  Directory: /Users/brian/Documents/animal_labs/projects/arcosanti/anyshare/anyshare_frontend
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
       at emitTwo (events.js:125:13)
-      at Request.emit (events.js:213:7)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:133413:10)
-      at emitOne (events.js:115:13)
-      at Request.emit (events.js:210:7)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:133333:12)
-      at Object.onceWrapper (events.js:312:19)
-      at emitNone (events.js:110:20)
+      at ChildProcess.emit (events.js:213:7)
+      at maybeClose (internal/child_process.js:887:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:208:5)
