@@ -7,7 +7,13 @@
 }
 
 .grid-item {
-  border: 1px solid orange;
-  // height: 3rem;
-  // width: 3rem;
+  // border: 2px solid darkgrey;
+  // border-radius: .5rem;
+}
+
+.each-grid-item-background-container {
+  border: 2px solid lightgrey;
+  height: 100%;
+  display: flex;
+  border-radius: .5rem;
 }

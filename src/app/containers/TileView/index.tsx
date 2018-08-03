@@ -47,13 +47,24 @@ export default class TileView extends React.Component<Props, {}> {
       let elem = document.createElement('div');
       elem.className = 'grid-item';
 
-      let height = Math.random() * 5 + 3;
-      let width = Math.random() * 5 + 3;
+      let sizeModifier = 5;
+
+      let height = Math.random() * 5 + sizeModifier;
+      let width = Math.random() * 5 + sizeModifier;
 
       elem.style.cssText = `height: ${height}rem; width: ${width}rem`;
 
       let textNode = document.createTextNode("box: " + i);
-      elem.appendChild(textNode);
+
+      let imageUrl = 'http://paulbourke.net/dome/skyvision/test.jpg';
+
+      let backgroundNode = document.createElement('div');
+      backgroundNode.className = 'each-grid-item-background-container';
+      backgroundNode.style.background = 'url(' + imageUrl + ')';
+      backgroundNode.style.backgroundSize = 'cover';
+      backgroundNode.style.backgroundPosition = 'center';
+
+      elem.appendChild(backgroundNode);
 
       packeryElem.appendChild( elem );
       packeryObject.appended( elem );
