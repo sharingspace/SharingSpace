@@ -7,8 +7,7 @@ import {
   FaInfoCircle
 } from 'react-icons/fa';
 
-@observer
-export default class DrawerRight extends React.Component<Props, {}> {
+class DrawerRight extends React.Component<Props, {}> {
 
   renderProfile() {
     let name = 'My Name';
@@ -121,3 +120,5 @@ export default class DrawerRight extends React.Component<Props, {}> {
     );
   }
 }
+
+export default observer(DrawerRight);

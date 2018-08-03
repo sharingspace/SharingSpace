@@ -1,6 +1,9 @@
 import { authStore } from 'stores';
 
-export default class NavStore {
+class NavStore {
+
+  constructor() {
+  }
 
   public currentPath: string = '';
 
@@ -65,3 +68,5 @@ export default class NavStore {
     this.history.push(route);
   }
 }
+
+export default NavStore;

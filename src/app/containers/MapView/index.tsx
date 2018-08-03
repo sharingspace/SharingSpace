@@ -2,10 +2,11 @@ import { Props } from '../Root';
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import "wrld.js";
-import sizeMe from 'react-sizeme';
 import mapStorage from './mapStorage';
 
-@observer
+declare var L: any
+
+
 class MapView extends React.Component<any, {}> {
 
   constructor(props) {
@@ -20,7 +21,8 @@ class MapView extends React.Component<any, {}> {
 
     let mapObject =  L.Wrld.map("map_elem_id", mapStorage.apiKey, {
       center: [ mapStorage.initLat, mapStorage.initLng ],
-      zoom: mapStorage.initZoom
+      zoom: mapStorage.initZoom,
+      indoorsEnabled: true
     });
 
     // store on storage class
@@ -54,4 +56,4 @@ class MapView extends React.Component<any, {}> {
   }
 }
 
-export default sizeMe({ monitorHeight: true })(MapView);
+export default observer(MapView);

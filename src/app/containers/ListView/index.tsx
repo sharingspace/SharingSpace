@@ -2,8 +2,7 @@ import { Props } from '../Root';
 import * as React from 'react';
 import { observer } from 'mobx-react';
 
-@observer
-export default class ListView extends React.Component<Props, {}> {
+class ListView extends React.Component<Props, {}> {
 
   listItemClicked(elem) {
     console.log('==== elem', elem)
@@ -50,3 +49,5 @@ export default class ListView extends React.Component<Props, {}> {
     );
   }
 }
+
+export default observer(ListView);

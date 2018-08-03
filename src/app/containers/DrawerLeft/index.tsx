@@ -9,8 +9,7 @@ import {
   FaSquare
 } from 'react-icons/fa';
 
-@observer
-export default class DrawerLeft extends React.Component<Props, {}> {
+class DrawerLeft extends React.Component<Props, {}> {
 
   renderDomains() {
     let list = [1, 2, 3, 4, 5];
@@ -71,3 +70,5 @@ export default class DrawerLeft extends React.Component<Props, {}> {
     );
   }
 }
+
+export default observer(DrawerLeft);

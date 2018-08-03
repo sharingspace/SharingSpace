@@ -2,7 +2,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
-import { useStrict } from 'mobx';
 import { Router, Route, Switch, Redirect } from 'react-router';
 import { observer } from 'mobx-react';
 import { IconContext } from 'react-icons';
@@ -19,15 +18,11 @@ import { navStore, authStore, sizeStore } from 'stores';
 import _ from 'lodash'
 
 
-// enable MobX strict mode
-useStrict(true);
-
 import mapStorage from './containers/MapView/mapStorage';
 
 // creat history
 const history = createBrowserHistory();
 
-@observer
 class App extends React.Component<any, any> {
 
   resizeThrottleTime: number;
@@ -81,8 +76,10 @@ class App extends React.Component<any, any> {
   }
 }
 
+const ObsevingApp = observer(App);
+
 // render react DOM
 ReactDOM.render(
-  <App />,
+  <ObsevingApp />,
   document.getElementById('root')
 );

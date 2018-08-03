@@ -1,30 +1,42 @@
 import { authStore } from 'stores';
-import { observable, action } from 'mobx';
+import { observable, action, decorate } from 'mobx';
 
+class DrawerStore {
 
-export default class DrawerStore {
+  drawerRightVisible: boolean;
+  drawerLeftVisible: boolean;
 
-  @observable public drawerRightVisible: boolean = false;
+  constructor() {
+    this.drawerRightVisible = false;
+    this.drawerLeftVisible = false;
+  }
 
-  @action openDrawerRight = () => {
+  openDrawerRight() {
     this.drawerRightVisible = true;
   }
 
-  @action closeDrawerRight = () => {
+  closeDrawerRight() {
     this.drawerRightVisible = false;
   }
 
   /////////////////////////////
 
-  @observable public drawerLeftVisible: boolean = false;
-
-  @action openDrawerLeft = () => {
+  openDrawerLeft() {
     this.drawerLeftVisible = true;
   }
 
-  @action closeDrawerLeft = () => {
+  closeDrawerLeft() {
     this.drawerLeftVisible = false;
   }
-
-
 }
+
+decorate(DrawerStore, {
+  drawerRightVisible: observable,
+  openDrawerRight: action,
+  closeDrawerRight: action,
+  drawerLeftVisible: observable,
+  openDrawerLeft: action,
+  closeDrawerLeft: action
+})
+
+export default DrawerStore;

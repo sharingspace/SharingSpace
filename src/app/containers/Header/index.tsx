@@ -13,8 +13,7 @@ import { drawerStore, navStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 
-@observer
-export class Header extends React.Component<any, any> {
+class Header extends React.Component<any, any> {
 
   iconSize: number;
 
@@ -104,4 +103,4 @@ export class Header extends React.Component<any, any> {
   }
 }
 
-export default withRouter(Header);
+export default withRouter(observer(Header));

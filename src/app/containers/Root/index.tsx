@@ -22,7 +22,6 @@ export interface Props {
   children: any;
 }
 
-@observer
 class Root extends React.Component<Props, any> {
 
   constructor(props) {
@@ -65,4 +64,4 @@ class Root extends React.Component<Props, any> {
   }
 }
 
-export default withRouter(Root);
+export default withRouter(observer(Root));
