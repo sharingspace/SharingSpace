@@ -21,6 +21,8 @@ import { throttle } from 'throttle-debounce';
 // enable MobX strict mode
 useStrict(true);
 
+import mapStorage from './containers/MapView/mapStorage';
+
 // creat history
 const history = createBrowserHistory();
 
@@ -39,6 +41,9 @@ class App extends React.Component<any, any> {
   }
 
   componentDidMount() {
+    // init map so we have a jump on loading
+    mapStorage.initMap();
+
     this.setSize();
     // set size explicitly on resize
     window.onresize = throttle(this.resizeThrottleTime, (data) => {
