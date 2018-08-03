@@ -37,9 +37,9 @@ class MapView extends React.Component<any, {}> {
     mapStorage.resizeMapElem(width);
   }
 
-  appendMapElemToParent(mapElem) {
+  appendMapElemToParent(elemToAdd) {
     let containerElem = document.querySelector('.map-view-container');
-    containerElem.appendChild(mapElem);
+    containerElem.appendChild(elemToAdd);
   }
 
   initOrRetrieveMap() {
