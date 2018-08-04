@@ -64,6 +64,7 @@
     "antd": "^3.5.4",
     "axios": "^0.18.0",
     "install": "^0.12.1",
+    "leaflet-easybutton": "^2.3.0",
     "lodash": "^4.17.10",
     "mobx": "^4.0.0",
     "mobx-react": "^5.0.0",

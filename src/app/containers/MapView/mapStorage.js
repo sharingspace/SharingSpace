@@ -1,4 +1,5 @@
 import { observable, action, computed, toJS } from 'mobx';
+import ExitIndoorButton from './mapComponents/exitIndoorButton';
 
 class MapStore {
 
@@ -9,6 +10,7 @@ class MapStore {
     this.initLng = -112.100465;
     this.initZoom = 17;
     this.apiKey = 'dd208c3425464e703d197ef3cbbd6736';
+    this.exitControl = new ExitIndoorButton({title: 'Exit'});
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -22,7 +24,11 @@ class MapStore {
   }
 
   saveMapObject(newMapObject) {
+    // saved map object
     this.mapObject = newMapObject;
+    // set up listeners
+    this.mapObject.indoors.on('indoormapenter', (event) => this.onEnterIndoors(event));
+    this.mapObject.indoors.on('indoormapexit', (event) => this.onExitIndoors(event));
   }
 
   retrieveMapObject() {
@@ -44,15 +50,27 @@ class MapStore {
   /////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////
 
+  onEnterIndoors(event) {
+    this.displayExitButton();
+  }
 
-  exitIndoors() {
-    this.mapObject.indoors.exit();
+  onExitIndoors() {
+    this.hideExitButton();
   }
 
 
+  displayExitButton() {
+    this.mapObject.addControl( this.exitControl );
+  }
+
+  hideExitButton() {
+    this.exitControl.remove();
+  }
+
   //////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
 
+  // for each item, add one of these
   addSingleMarker(params) {
     let title = params.title;
     // create popup
