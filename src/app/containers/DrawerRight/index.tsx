@@ -6,6 +6,7 @@ import {
   FaCog,
   FaInfoCircle
 } from 'react-icons/fa';
+import SearchInput from '../SearchInput';
 
 class DrawerRight extends React.Component<Props, {}> {
 
@@ -61,21 +62,6 @@ class DrawerRight extends React.Component<Props, {}> {
     </div>)
   }
 
-  renderSearchInput() {
-    let inlineInputStyle = {
-      fontSize: '1.5rem',
-      borderRadius: '1.5rem',
-      border: '1px solid lightgrey',
-      marginTop: '.5rem',
-      marginBottom: '.5rem',
-      padding: '.5rem'
-    }
-    return <input
-      style={inlineInputStyle}
-      placeholder="Search here"
-    />
-  }
-
   renderOptions2() {
     return (<div>
       <div className='each-right-entry-container'>
@@ -84,7 +70,7 @@ class DrawerRight extends React.Component<Props, {}> {
         </div>
       </div>
 
-      {this.renderSearchInput()}
+      <SearchInput />
 
       <div className='each-right-entry-container'>
         <div className='each-drawer-title-container'>

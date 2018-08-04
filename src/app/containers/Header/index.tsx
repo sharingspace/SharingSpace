@@ -12,6 +12,7 @@ import {
 import { drawerStore, navStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
+import SearchInput from '../SearchInput';
 
 class Header extends React.Component<any, any> {
 
@@ -77,27 +78,31 @@ class Header extends React.Component<any, any> {
     </div>
   }
 
+  renderRightMobile() {
+    return <div className={'header-right-mobile'}>
+      {this.renderRightHamburger()}
+    </div>
+  }
+
+  renderRightDesktop() {
+    return <div className={'header-right-desktop'}>
+      {this.renderRightMembers()}
+      {this.renderRightViewSelect()}
+      {this.renderNewEntry()}
+      {this.renderRightHamburger()}
+    </div>
+  }
+
   render() {
     return (
         <div className={'header-container'}>
           <div className={'header-left'}>
-
-            <div
-              onClick={() => drawerStore.openDrawerLeft()}
-              className='header-title-container'
-            >
-              Channel name
-            </div>
-
+            <SearchInput />
           </div>
 
+          {this.renderRightMobile()}
+          {this.renderRightDesktop()}
 
-          <div className={'header-right'}>
-            {this.renderRightMembers()}
-            {this.renderRightViewSelect()}
-            {this.renderNewEntry()}
-            {this.renderRightHamburger()}
-          </div>
         </div>
     );
   }
