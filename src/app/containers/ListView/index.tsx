@@ -1,11 +1,13 @@
 import { Props } from '../Root';
 import * as React from 'react';
 import { observer } from 'mobx-react';
+import LoadingWheel from '../LoadingWheel';
+import { listStore } from '../../stores';
 
 class ListView extends React.Component<Props, {}> {
 
   listItemClicked(elem) {
-    console.log('==== elem', elem)
+    console.log('==== elem', elem);
   }
 
   renderListOrNoContent() {
@@ -27,7 +29,7 @@ class ListView extends React.Component<Props, {}> {
             height: `${size}rem`,
           }
           return <div className='each-list-item-container' key={i} onClick={() => this.listItemClicked(elem)}>
-            <div style={divImageStyle}></div>
+            <div style={divImageStyle as any}></div>
             <div>Collection name</div>
             <div>Other attrib</div>
             <div>Other attrib</div>
@@ -36,15 +38,21 @@ class ListView extends React.Component<Props, {}> {
         })}
       </div>)
     }
+  }
 
+  renderLoadingOrList() {
+    const { listLoading } = listStore;
+    if(listLoading) {
+      return <LoadingWheel />
+    } else {
+      return this.renderListOrNoContent();
+    }
   }
 
   render() {
     return (
       <div className="list-view-container">
-        <div>List view</div>
-        <hr />
-        {this.renderListOrNoContent()}
+        {this.renderLoadingOrList()}
       </div>
     );
   }

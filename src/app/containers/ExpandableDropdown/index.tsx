@@ -6,11 +6,13 @@ import {
   FaChevronUp
 } from 'react-icons/fa';
 
-class ExpandableDropdown extends React.Component<Props, {}> {
+class ExpandableDropdown extends React.Component<any, any> {
 
-  dropdownOpen: boolean;
+  title: string;
+  icon: any;
 
-  constructor() {
+  constructor(props) {
+    super(props);
     this.state = {
       dropdownOpen: false
     }
@@ -35,7 +37,7 @@ class ExpandableDropdown extends React.Component<Props, {}> {
     if(this.state.dropdownOpen) {
       return <div>
         {list.map((elem, i) => {
-          return <div>Each elem {i}</div>
+          return <div key={i}>Each elem {i}</div>
         })}
       </div>
     } else {
@@ -54,7 +56,7 @@ class ExpandableDropdown extends React.Component<Props, {}> {
       alignItems: 'center',
       justifyContent: 'space-between'
     }
-    return <div style={titleStyle} className='expandable-dropdown-title-container' onClick={() => this.titlePressed()}>
+    return <div style={titleStyle as any} className='expandable-dropdown-title-container' onClick={() => this.titlePressed()}>
       <div>{this.props.title}</div>
       {this.renderDropdownIcon()}
     </div>

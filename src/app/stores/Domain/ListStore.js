@@ -27,12 +27,13 @@ class ListStore {
     setTimeout(() => {
 
       if(thisQueryCallTime >= this.lastQueryTime) {
+        this.listLoading = false;
         // Only handle the query if it's the most recent
         // ignore all others
         console.log('======== handle it')
       }
 
-    }, 4000)
+    }, 300)
   }
 }
 

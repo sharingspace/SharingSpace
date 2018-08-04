@@ -60,9 +60,9 @@ class DrawerRight extends React.Component<any, {}> {
 
     return (
       <div className="drawer-right-profile-container">
-        <div style={profileContainer}>
-          <div style={inlineImageStyle}></div>
-          <div style={nameStyle}>{name}</div>
+        <div style={profileContainer as any}>
+          <div style={inlineImageStyle as any}></div>
+          <div style={nameStyle as any}>{name}</div>
         </div>
 
         <LineItem title={'Messages'} icon={FaEnvelope} />
@@ -100,12 +100,14 @@ class DrawerRight extends React.Component<any, {}> {
 
   renderChannelDropdown() {
     let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return <ExpandableDropdown title={'Channels'} list={list} />
+    return <ExpandableDropdown title={'Channels'} list={list} >
+    </ExpandableDropdown >
   }
 
   renderNetworksDropdown() {
     let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return <ExpandableDropdown title={'Networks'} list={list} />
+    return <ExpandableDropdown title={'Networks'} list={list} >
+    </ExpandableDropdown >
   }
 
   renderScrollableMiddle() {
@@ -114,7 +116,7 @@ class DrawerRight extends React.Component<any, {}> {
       flex: 1,
       overflowY: 'scroll'
     }
-    return <div style={scrollableStyle}>
+    return <div style={scrollableStyle as any}>
       {this.renderChannelDropdown()}
       {this.renderLineBreak()}
       {this.renderNetworksDropdown()}
@@ -148,16 +150,16 @@ class DrawerRight extends React.Component<any, {}> {
     }
 
     return (
-      <div style={masterContainerStyle} className='drawer-right-container'>
-        <div style={topStaticStyle}>
+      <div style={masterContainerStyle as any} className='drawer-right-container'>
+        <div style={topStaticStyle as any}>
           {this.renderProfile()}
           {this.renderThisChannelData()}
           {this.renderLineBreak()}
         </div>
-        <div style={middleScrollStyle}>
+        <div style={middleScrollStyle as any}>
         {this.renderScrollableMiddle()}
         </div>
-        <div style={bottomStaticStyle}>
+        <div style={bottomStaticStyle as any}>
           {this.renderOptionsBottom()}
         </div>
       </div>
