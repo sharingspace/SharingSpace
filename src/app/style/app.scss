@@ -9,6 +9,7 @@
 $global-blue: #1890FF;
 $global-red: #FF0000;
 $global-dark: #3a3a3a;
+$global-light: white;
 $global-edge-padding: .5rem;
 
 body, html {
@@ -122,3 +123,4 @@ $active-icon-color: #565656;
 @import '../containers/TileView/index';
 @import '../containers/TileView/tile/index';
 @import '../containers/MapView/index';
+@import '../containers/ExpandableDropdown/index';

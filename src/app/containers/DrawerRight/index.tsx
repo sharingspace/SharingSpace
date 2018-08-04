@@ -7,8 +7,24 @@ import {
   FaInfoCircle
 } from 'react-icons/fa';
 import SearchInput from '../SearchInput';
+import ExpandableDropdown from '../ExpandableDropdown';
 
-class DrawerRight extends React.Component<Props, {}> {
+
+class LineItem extends React.Component<any, any> {
+  render() {
+    let Icon = this.props.icon;
+    return <div className='each-right-entry-container'>
+      <div className='each-drawer-title-container'>
+        {this.props.title}
+      </div>
+      <div className='each-drawer-icon-container'>
+        <Icon />
+      </div>
+    </div>
+  }
+}
+
+class DrawerRight extends React.Component<any, {}> {
 
   renderProfile() {
     let name = 'My Name';
@@ -21,39 +37,38 @@ class DrawerRight extends React.Component<Props, {}> {
       height: imageSize + 'rem',
       width: imageSize + 'rem',
       borderRadius: imageSize / 2 + 'rem',
-      border: '3px solid #353535'
+      border: '3px solid #353535',
+      flex: '0 auto ' + imageSize + 'rem',
+      margin: '.5rem'
     }
+
+    let profileContainer = {
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+      // border: '1px solid green',
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+
+    let nameStyle = {
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
+      flex: 1
+    }
+
     return (
       <div className="drawer-right-profile-container">
-        <div style={inlineImageStyle}></div>
-        <div className="drawer-profile-name-container">{name}</div>
+        <div style={profileContainer}>
+          <div style={inlineImageStyle}></div>
+          <div style={nameStyle}>{name}</div>
+        </div>
+
+        <LineItem title={'Messages'} icon={FaEnvelope} />
+
       </div>
     )
-  }
-
-  renderOptions() {
-    return (<div>
-
-      <div className='each-right-entry-container'>
-        <div className='each-drawer-title-container'>
-          Messages
-        </div>
-        <div className='each-drawer-icon-container'>
-          <FaEnvelope />
-        </div>
-      </div>
-
-      <div className='each-right-entry-container'>
-        <div className='each-drawer-title-container'>
-          Settings
-        </div>
-
-        <div className='each-drawer-icon-container'>
-          <FaCog />
-        </div>
-      </div>
-
-    </div>)
   }
 
   renderLineBreak() {
@@ -62,46 +77,89 @@ class DrawerRight extends React.Component<Props, {}> {
     </div>)
   }
 
-  renderOptions2() {
-    return (<div>
+  renderThisChannelData() {
+    return <div>
+
       <div className='each-right-entry-container'>
         <div className='each-drawer-title-container'>
           Age Of Solar / Name
         </div>
       </div>
 
-      <SearchInput />
+      <LineItem title={'Information'} icon={FaInfoCircle} />
+      <LineItem title={'Controls'} icon={FaCog} />
 
-      <div className='each-right-entry-container'>
-        <div className='each-drawer-title-container'>
-          Information
-        </div>
+    </div>
+  }
 
-        <div className='each-drawer-icon-container'>
-          <FaInfoCircle />
-        </div>
-      </div>
-
-      <div className='each-right-entry-container'>
-        <div className='each-drawer-title-container'>
-          Controls
-        </div>
-
-        <div className='each-drawer-icon-container'>
-          <FaCog />
-        </div>
-      </div>
-
+  renderOptionsBottom() {
+    return (<div>
+      <LineItem title={'Settings'} icon={FaCog} />
     </div>)
   }
 
+  renderChannelDropdown() {
+    let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return <ExpandableDropdown title={'Channels'} list={list} />
+  }
+
+  renderNetworksDropdown() {
+    let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return <ExpandableDropdown title={'Networks'} list={list} />
+  }
+
+  renderScrollableMiddle() {
+    let scrollableStyle = {
+      // border: '1px solid red',
+      flex: 1,
+      overflowY: 'scroll'
+    }
+    return <div style={scrollableStyle}>
+      {this.renderChannelDropdown()}
+      {this.renderLineBreak()}
+      {this.renderNetworksDropdown()}
+    </div>
+  }
+
   render() {
+
+    let masterContainerStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      flex: 1,
+      // width: '10rem'
+    }
+
+    let topStaticStyle = {
+      flex: 0,
+      // border: '1px solid green'
+    }
+
+    let middleScrollStyle = {
+      flex: 1,
+      // border: '1px solid blue',
+      overflowY: 'scroll'
+    }
+
+    let bottomStaticStyle = {
+      flex: 0,
+      // border: '1px solid orange'
+    }
+
     return (
-      <div className="drawer-right-container">
-        {this.renderProfile()}
-        {this.renderOptions()}
-        {this.renderLineBreak()}
-        {this.renderOptions2()}
+      <div style={masterContainerStyle} className='drawer-right-container'>
+        <div style={topStaticStyle}>
+          {this.renderProfile()}
+          {this.renderThisChannelData()}
+          {this.renderLineBreak()}
+        </div>
+        <div style={middleScrollStyle}>
+        {this.renderScrollableMiddle()}
+        </div>
+        <div style={bottomStaticStyle}>
+          {this.renderOptionsBottom()}
+        </div>
       </div>
     );
   }
