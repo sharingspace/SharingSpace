@@ -3,15 +3,16 @@ export default class SharedButton extends L.Control {
     super(props)
     console.log('==== shared button props', props)
     this.title = props.title;
+    this.onClick = props.onClick;
     this.options = {
         position: 'topleft'
     }
 
   }
 
-  onClick() {
-    console.log('== BUTTON WAS CLICKED')
-  }
+  // onClick() {
+  //   console.log('== BUTTON WAS CLICKED')
+  // }
 
   onAdd(map) {
     console.log('=========== rops', this)
@@ -28,7 +29,9 @@ export default class SharedButton extends L.Control {
     container.style.fontWeight = 'bold';
     container.innerText = this.title;
     container.onclick = (event) => {
-      this.onClick();
+
+      this.onClick(this);
+      
     }
     return container;
   }

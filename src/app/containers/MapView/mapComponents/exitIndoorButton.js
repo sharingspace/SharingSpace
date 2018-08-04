@@ -5,7 +5,7 @@ export default class ExitIndoorButton extends SharedButton {
     super(props)
   }
 
-  onClick() {
-    this._map.indoors.exit();
-  }
+  // onClick() {
+  //   this._map.indoors.exit();
+  // }
 }

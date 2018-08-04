@@ -10,7 +10,24 @@ class MapStore {
     this.initLng = -112.100465;
     this.initZoom = 17;
     this.apiKey = 'dd208c3425464e703d197ef3cbbd6736';
-    this.exitControl = new ExitIndoorButton({title: 'Exit'});
+    this.exitControl = new ExitIndoorButton({
+      title: 'Exit',
+      onClick: (classThis) => {
+        classThis._map.indoors.exit();
+      }
+    });
+    this.floorUpControl = new ExitIndoorButton({
+      title: 'Up',
+      onClick: (classThis) => {
+        classThis._map.indoors.moveUp();
+      }
+    });
+    this.floorDownControl = new ExitIndoorButton({
+      title: 'Down',
+      onClick: (classThis) => {
+        classThis._map.indoors.moveDown();
+      }
+    });
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -51,20 +68,24 @@ class MapStore {
   /////////////////////////////////////////////////////////////////////
 
   onEnterIndoors(event) {
-    this.displayExitButton();
+    this.displayIndoorControls();
   }
 
   onExitIndoors() {
-    this.hideExitButton();
+    this.hideIndoorControls();
   }
 
 
-  displayExitButton() {
+  displayIndoorControls() {
     this.mapObject.addControl( this.exitControl );
+    this.mapObject.addControl( this.floorUpControl );
+    this.mapObject.addControl( this.floorDownControl );
   }
 
-  hideExitButton() {
+  hideIndoorControls() {
     this.exitControl.remove();
+    this.floorUpControl.remove();
+    this.floorDownControl.remove();
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -79,17 +100,31 @@ class MapStore {
       elevation: 0.0,
     }
     let thisPopup = L.popup(popupOptions)
-    .setLatLng([this.initLat, this.initLng])
-    .setContent("Transamerica Pyramid")
+    .setLatLng([params.lat, params.lng])
+    .setContent(params.title)
     // create marker
+    let inactiveOpacity = .8;
+    let activeOpacity = 1;
     let markerOptions = {
       elevation: 0.0,
       title: title,
       alt: title,
-      riseOnHover: true,
-      riseOffset: 250,
+      opacity: inactiveOpacity
     }
-    let thisMarker = L.marker([this.initLat, this.initLng], markerOptions)
+    let thisMarker = L.marker([params.lat, params.lng], markerOptions)
+    thisMarker.on('mouseover', (data) => {
+      thisMarker.setOpacity(activeOpacity);
+      // data.target._map.dragging.enable();
+      console.log('---- data', data)
+      this.mapObject.dragging.enable();
+    })
+    thisMarker.on('mouseout', (data) => {
+      thisMarker.setOpacity(inactiveOpacity);
+      // data.target._map.dragging.enable();
+      console.log('---- data', data)
+      this.mapObject.dragging.enable();
+    })
+
     // bind popup to marker
     thisMarker.bindPopup(thisPopup).openPopup();
     // add to map
@@ -97,10 +132,16 @@ class MapStore {
   }
 
   addMarkers() {
-    let params = {
-      title: 'Marker title'
+    let multiplyFactor = .001;
+    for(let i = 0; i < 100; i++) {
+      let params = {
+        title: 'Marker title' + i,
+        lat: ( (Math.random() - .5) * multiplyFactor ) + this.initLat,
+        lng: ( (Math.random() - .5) * multiplyFactor ) + this.initLng
+      }
+      this.addSingleMarker(params);
     }
-    this.addSingleMarker(params);
+
   }
 
 }
