@@ -17,7 +17,6 @@ class MapView extends React.Component<any, {}> {
   componentWillReact() {
     const { listJS } = listStore;
     const { width, height } = sizeStore;
-    console.log('- map will react', listJS)
     mapStorage.resizeMapElem(width);
     mapStorage.addMarkers(listJS);
   }

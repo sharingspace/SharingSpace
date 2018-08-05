@@ -145,11 +145,27 @@ class MapStore {
     // loop through list and add markers
     let multiplyFactor = .001;
     list.forEach((elem, i) => {
-      let params = {
-        title: 'Marker title' + i,
-        lat: ( (Math.random() - .5) * multiplyFactor ) + this.initLat,
-        lng: ( (Math.random() - .5) * multiplyFactor ) + this.initLng
+      // handling junk data
+      // just don't render it
+      if(elem == null) {
+        return;
       }
+      if(elem.lat === null) {
+        return;
+      }
+      if(elem.lng === null) {
+        return;
+      }
+
+      let params = {
+        title: `${elem.display_name} ${elem.natural_post_type} ${elem.title}`,
+        // old randomizer
+        // lat: ( (Math.random() - .5) * multiplyFactor ) + this.initLat,
+        // lng: ( (Math.random() - .5) * multiplyFactor ) + this.initLng
+        lat: elem.lat,
+        lng: elem.lng
+      }
+
       this.addSingleMarker(params);
     })
 
