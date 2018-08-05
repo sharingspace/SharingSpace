@@ -14,6 +14,14 @@ class MapView extends React.Component<any, {}> {
     super(props);
   }
 
+  componentWillReact() {
+    const { listJS } = listStore;
+    const { width, height } = sizeStore;
+    console.log('- map will react', listJS)
+    mapStorage.resizeMapElem(width);
+    mapStorage.addMarkers(listJS);
+  }
+
   initMap() {
     const { width } = sizeStore;
     let mapElem = document.createElement('div');
@@ -33,10 +41,6 @@ class MapView extends React.Component<any, {}> {
     mapStorage.saveMapObject(mapObject);
   }
 
-  componentWillReact() {
-    const { width, height } = sizeStore;
-    mapStorage.resizeMapElem(width);
-  }
 
   appendMapElemToParent(elemToAdd) {
     let containerElem = document.querySelector('.map-view-container');
@@ -53,7 +57,7 @@ class MapView extends React.Component<any, {}> {
 
   componentDidMount() {
     this.initOrRetrieveMap();
-    mapStorage.addMarkers();
+    // mapStorage.addMarkers();
   }
 
   renderLoadingWheel() {
@@ -91,6 +95,8 @@ class MapView extends React.Component<any, {}> {
   render() {
     // leave this in here so the component responds to it with new renders
     const { width, height } = sizeStore;
+    const { listLoading, listJS } = listStore;
+
     let containerStyle = {
       display: 'flex',
       flex: 1,

@@ -4,8 +4,9 @@ import ExitIndoorButton from './mapComponents/exitIndoorButton';
 class MapStore {
 
   constructor() {
-    mapElem: null;
-    mapObject: null;
+    this.mapElem = null;
+    this.mapObject = null;
+    this.markersList = [];
     this.initLat = 34.342501;
     this.initLng = -112.100465;
     this.initZoom = 17;
@@ -114,33 +115,43 @@ class MapStore {
     let thisMarker = L.marker([params.lat, params.lng], markerOptions)
     thisMarker.on('mouseover', (data) => {
       thisMarker.setOpacity(activeOpacity);
-      // data.target._map.dragging.enable();
-      console.log('---- data', data)
-      this.mapObject.dragging.enable();
     })
     thisMarker.on('mouseout', (data) => {
       thisMarker.setOpacity(inactiveOpacity);
-      // data.target._map.dragging.enable();
-      console.log('---- data', data)
-      this.mapObject.dragging.enable();
     })
 
     // bind popup to marker
     thisMarker.bindPopup(thisPopup).openPopup();
     // add to map
     thisMarker.addTo(this.mapObject);
+    this.markersList.push(thisMarker);
   }
 
-  addMarkers() {
+  clearAllMarkers() {
+    this.markersList.forEach((elem, i) => {
+      elem.remove();
+    })
+    this.markersList = [];
+  }
+
+  addMarkers(list) {
+    if(!list) {
+      return;
+    }
+
+    // clear map
+    this.clearAllMarkers();
+
+    // loop through list and add markers
     let multiplyFactor = .001;
-    for(let i = 0; i < 100; i++) {
+    list.forEach((elem, i) => {
       let params = {
         title: 'Marker title' + i,
         lat: ( (Math.random() - .5) * multiplyFactor ) + this.initLat,
         lng: ( (Math.random() - .5) * multiplyFactor ) + this.initLng
       }
       this.addSingleMarker(params);
-    }
+    })
 
   }
 

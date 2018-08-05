@@ -1,7 +1,6 @@
 export default class SharedButton extends L.Control {
   constructor(props) {
     super(props)
-    console.log('==== shared button props', props)
     this.title = props.title;
     this.onClick = props.onClick;
     this.options = {
@@ -31,7 +30,7 @@ export default class SharedButton extends L.Control {
     container.onclick = (event) => {
 
       this.onClick(this);
-      
+
     }
     return container;
   }

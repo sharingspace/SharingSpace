@@ -167,6 +167,7 @@ module.exports = env => {
     devServer: {
       contentBase: sourcePath,
       hot: true,
+      disableHostCheck: true,
       stats: {
         warnings: false
       }

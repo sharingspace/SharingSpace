@@ -1,9 +1,19 @@
 import { observable, decorate, action, toJS, computed } from 'mobx';
+import testData from '../../services/testData';
+
+let parseImageUrl = (elem) => {
+  let rootUrl = 'https://arcoop.anyshare.coop/';
+  if(elem.image_url) {
+    return rootUrl + elem.image_url
+  } else {
+    return null;
+  }
+}
 
 class ListStore {
 
   constructor() {
-    this.list = [];
+    this.list = null;
     this.query = '';
     this.listLoading = false;
     this.lastQueryTime = Date.now();
@@ -17,11 +27,25 @@ class ListStore {
   }
 
   clearList() {
-    this.list = [];
+    this.list = null;
+  }
+
+  formatListData(list) {
+    let formattedList = list.map((elem, i) => {
+      return {
+        ...elem,
+        parsedImageUrl: parseImageUrl(elem)
+      }
+    })
+    return formattedList;
   }
 
   get listJS() {
-    return toJS(this.list);
+    if(!this.list) {
+      return [];
+    } else {
+      return this.formatListData( toJS(this.list.rows) );
+    }
   }
 
   getList() {
@@ -33,12 +57,39 @@ class ListStore {
     console.log('Get list');
     this.listLoading = true;
 
+
+
+    // let url = 'https://arcoop.anyshare.coop/entry/json.browse';
+    // let reqListener = () => {
+    //   console.log(this.responseText);
+    // }
+    //
+    // console.log(document.cookie);
+    //
+    // var req = new XMLHttpRequest();
+    // req.addEventListener("load", reqListener);
+    // req.withCredentials = true;
+    // req.open("GET", url);
+    // req.send();
+
+
+    // axios.get('', {withCredentials: true})
+    // .then((res) => {
+    //   console.log('res', res);
+    // })
+    // .catch((err) => {
+    //   console.log('err', err)
+    // })
+
     setTimeout(() => {
       if(thisQueryCallTime >= this.lastQueryTime) {
         this.listLoading = false;
         // Only handle the query if it's the most recent
         // ignore all others
-        this.list = new Array( this.query.length );
+
+        // this.list = new Array( this.query.length );
+
+        this.list = testData;
       }
 
     }, 300)
