@@ -49,9 +49,20 @@ class TileView extends React.Component<Props, {}> {
   }
 
   renderLoadingOrContent() {
-    const { listLoading } = listStore;
+    const { listLoading, listJS } = listStore;
     if(listLoading) {
       return <LoadingWheel />
+    } else if(listJS.length === 0) {
+      let style = {
+        display: 'flex',
+        flex: 1,
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+      return <div style={style}>
+        No Content
+      </div>
     }
   }
 
