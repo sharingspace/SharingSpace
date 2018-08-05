@@ -5,9 +5,11 @@ import GridLayout from 'react-grid-layout';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Tile from './tile';
 import Packery from 'packery';
+import LoadingWheel from '../LoadingWheel';
+import { listStore } from '../../stores';
+import packeryStorage from './packeryStorage';
 
-@observer
-export default class TileView extends React.Component<Props, {}> {
+class TileView extends React.Component<Props, {}> {
 
   packeryElem: any;
   packeryObject: any;
@@ -17,6 +19,7 @@ export default class TileView extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
     this.packeryGridRef = React.createRef();
+
   }
 
   routerWillLeave(nextLocation) {
@@ -24,65 +27,42 @@ export default class TileView extends React.Component<Props, {}> {
   }
 
   componentDidMount() {
+    const { listLoading, listJS } = listStore;
     setTimeout(() => {
-      this.generatePackeryGrid();
+      let list = listJS;
+      packeryStorage.initPackeryElem(this.packeryGridRef);
+      packeryStorage.initPackeryObject();
+      packeryStorage.populatePackery(list);
     }, 0);
   }
 
-  generatePackeryGrid() {
-    let packeryElem = this.packeryGridRef.current;
-    packeryElem.style.cssText = `height: 10rem`;
-
-    // init packery
-    let packeryObject = new Packery( packeryElem, {
-      // options
-      itemSelector: '.grid-item',
-      gutter: 10,
-      originLeft: true,
-      originTop: true,
-    });
-
-    let list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    list.forEach((listElem, i) => {
-      let elem = document.createElement('div');
-      elem.className = 'grid-item';
-
-      let sizeModifier = 5;
-
-      let height = Math.random() * 5 + sizeModifier;
-      let width = Math.random() * 5 + sizeModifier;
-
-      elem.style.cssText = `height: ${height}rem; width: ${width}rem`;
-
-      let textNode = document.createTextNode("box: " + i);
-
-      let imageUrl = 'http://paulbourke.net/dome/skyvision/test.jpg';
-
-      let backgroundNode = document.createElement('div');
-      backgroundNode.className = 'each-grid-item-background-container';
-      backgroundNode.style.background = 'url(' + imageUrl + ')';
-      backgroundNode.style.backgroundSize = 'cover';
-      backgroundNode.style.backgroundPosition = 'center';
-
-      elem.appendChild(backgroundNode);
-
-      packeryElem.appendChild( elem );
-      packeryObject.appended( elem );
-      packeryObject.layout();
-    })
+  componentWillReact() {
+    const { listLoading, listJS } = listStore;
+    packeryStorage.populatePackery(listJS);
   }
 
   renderGrid() {
+    const { listJS, listLoading } = listStore;
     return (
       <div ref={this.packeryGridRef} className='packery-grid'></div>
     )
   }
 
+  renderLoadingOrContent() {
+    const { listLoading } = listStore;
+    if(listLoading) {
+      return <LoadingWheel />
+    }
+  }
+
   render() {
     return (
       <div className="grid-container">
+        {this.renderLoadingOrContent()}
         {this.renderGrid()}
       </div>
     );
   }
 }
+
+export default observer(TileView)
