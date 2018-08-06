@@ -12,8 +12,17 @@ class ListView extends React.Component<Props, {}> {
 
   renderListOrNoContent() {
     const { listJS } = listStore;
+
+    let inlineNoContentStyle = {
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+    }
+
     if(listJS.length === 0) {
-      return (<div>
+      return (<div style={inlineNoContentStyle}>
         No content found
       </div>)
     } else {

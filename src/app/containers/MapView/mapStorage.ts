@@ -3,6 +3,18 @@ import ExitIndoorButton from './mapComponents/exitIndoorButton';
 
 class MapStore {
 
+
+  mapElem: any;
+  mapObject: any;
+  markersList: any;
+  initLat: any;
+  initLng: any;
+  initZoom: any;
+  apiKey: any;
+  exitControl: any;
+  floorUpControl: any;
+  floorDownControl: any;
+
   constructor() {
     this.mapElem = null;
     this.mapObject = null;
@@ -45,8 +57,8 @@ class MapStore {
     // saved map object
     this.mapObject = newMapObject;
     // set up listeners
-    this.mapObject.indoors.on('indoormapenter', (event) => this.onEnterIndoors(event));
-    this.mapObject.indoors.on('indoormapexit', (event) => this.onExitIndoors(event));
+    this.mapObject.indoors.on('indoormapenter', (event: any) => this.onEnterIndoors(event));
+    this.mapObject.indoors.on('indoormapexit', (event: any) => this.onExitIndoors(event));
   }
 
   retrieveMapObject() {

@@ -2,12 +2,11 @@
 React Frontend Client
 
 
-####Project by Animal Labs
+#### Project by Animal Labs
 For questions, contact:
 Brian Fogg
 brian.fogg@animallabs.co
 
----
 
 ## Getting Started
 
@@ -28,7 +27,6 @@ This will execute the `start` command in `package.json` which currently looks li
 
 This should fire up `webpack-dev-server` and open a tab in chrome (or your browser of default)
 
----
 
 ## Tech Stack
 
