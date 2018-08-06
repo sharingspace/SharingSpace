@@ -77,13 +77,17 @@ Typescript sometimes does not like inline style objects being passed to dom elem
 
 #### Quick example
 
-`let borderRadiusSize = .5`
-`let inlineStyle = {
+```
+let borderRadiusSize = .5
+
+let inlineStyle = {
   border: '1px solid red',
   flex: 1,
   borderRadius: borderRadiusSize + 'rem'
-}`
-`<div className={'helloWorldContainer'} style={helloInlineStyle as any}>Hello world</div>`
+}
+
+<div className={'helloWorldContainer'} style={helloInlineStyle as any}>Hello world</div>
+```
 
 #### @include-media
 It's a great library which will allow you to avoid writing media queries ever again.
