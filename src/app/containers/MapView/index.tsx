@@ -32,7 +32,9 @@ class MapView extends React.Component<any, {}> {
     let mapObject =  L.Wrld.map("map_elem_id", mapStorage.apiKey, {
       center: [ mapStorage.initLat, mapStorage.initLng ],
       zoom: mapStorage.initZoom,
-      indoorsEnabled: true
+      indoorsEnabled: true,
+      // zoomControl: true,
+      // maxZoom: 19
     });
 
     // store on storage class
