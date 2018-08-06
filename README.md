@@ -7,7 +7,6 @@ For questions, contact:
 Brian Fogg
 brian.fogg@animallabs.co
 
-
 ===
 
 ## Getting Started
@@ -43,6 +42,7 @@ This should fire up `webpack-dev-server` and open a tab in chrome (or your brows
 #### [React Router](https://reacttraining.com/react-router/)
 #### [SCSS](https://sass-lang.com/);
 #### [Material UI](https://material-ui.com/);
+#### [@include-media](https://include-media.com/)
 
 
 ## Technical Considerations
@@ -85,6 +85,31 @@ Typescript sometimes does not like inline style objects being passed to dom elem
 }`
 `<div className={'helloWorldContainer'} style={helloInlineStyle as any}>Hello world</div>`
 
+#### @include-media
+It's a great library which will allow you to avoid writing media queries ever again.
+Breakpoints are set in `src/app/style/app.scss`
+
+```
+$breakpoints: (
+  'phone': 320px,
+  'tablet': 768px,
+  'desktop': 1024px
+) !default;
+```
+
+And they're used in the stylesheets like this:
+```
+.header-right-mobile {
+  @extend .header-right;
+  border: 1px solid green;
+  @include media('>=tablet') {
+    display: none;
+  }
+}
+```
+
+Also note the use of `@extend`. This allows class based reuse of css style classes. Great for keeping stylesheets [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and maintainable.
+
 
 ### Storage / Mobx
 
@@ -103,15 +128,21 @@ Instantiating stores on the fly is great if you want lists of components to each
 
 ### Packery / Wrld3D in React context
 
-Packery and Wrld3D are somewhat at odds with React's fundamental render methodology. React likes to re-render elements of the dom according to it's own will. If a property is passed down which is different, the requisite React components will re-paint themselves into the dom.
+Packery and Wrld3D are somewhat at odds with React's fundamental render methodology. React likes to re-render elements of the dom according to the props passed in to it's various components. If a property is passed down which is changed, the requisite downstream React components will re-render themselves into the dom. This can cause problems for third party libraries which were built to work with jQuery style apps where dom elements are not being created and destroyed regularly in this way.
 
-Packery and Wrld3D both require a dom element to stay on the dom. These libraries target the same element and do their own rendering. If React re-paints Packery or Wrld3D's container dom element, these libraries will lose touch with the dom and we won't see the content.
+Packery and Wrld3D both require a dom element to persist on the dom. These libraries consistently target the same element and handle rendering in their own ways. If React re-paints Packery or Wrld3D's parent container dom element, these libraries will lose touch with the dom and we won't see any content.
 
 This is solved by creating dom nodes manually and storing them in special classes which are referenced by the React components. When a React component loads, it will check it's corresponding storage class and re-use the library control object and containing element. This should cut down on memory usage as the containers are not destroyed even as the app navigates away from their display pages.
 
 Wrld3D is especially heavy. It is loaded once on first navigation to the 3D map view page. The container and control objects are cached and do not require another render after this first load.
 
+See `src/app/containers/TileView/packeryStorage.ts` and `src/app/containers/MapView/mapStorage.ts` to see how this is handled. There's still possibly some room for improvement here.
+
+Possible improvement: Rendering and creating these elements on first page load, regardless of the page so they're already present by the time user navigates to MapView or TileView. This could cut down on the lag we currently experience.
+
 ### Drawers used in this project
 [https://material-ui.com/demos/drawers/](https://material-ui.com/demos/drawers/);
 Controlled by `src/app/stores/View/DrawerStore`
-These drawers also allow gestures swipes in from the side of the screen.
+These drawers also allow gestures swipes in from the side of the screen. They're simple and nice to use. Just make sure that they don't go too wide on mobile. They expand based on the content inside.
+
+Possible improvement: Set max width to a value derived from `src/app/stores/View/SizeStore.ts`. This will prevent anything from going too wide
