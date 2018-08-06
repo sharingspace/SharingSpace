@@ -7,7 +7,7 @@ For questions, contact:
 Brian Fogg
 brian.fogg@animallabs.co
 
-===
+---
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ This will execute the `start` command in `package.json` which currently looks li
 
 This should fire up `webpack-dev-server` and open a tab in chrome (or your browser of default)
 
-===
+---
 
 ## Tech Stack
 
@@ -40,8 +40,8 @@ This should fire up `webpack-dev-server` and open a tab in chrome (or your brows
 #### [Wrld3D](https://www.wrld3d.com/)
 #### [Packery](https://packery.metafizzy.co/)
 #### [React Router](https://reacttraining.com/react-router/)
-#### [SCSS](https://sass-lang.com/);
-#### [Material UI](https://material-ui.com/);
+#### [SCSS](https://sass-lang.com/)
+#### [Material UI](https://material-ui.com/)
 #### [@include-media](https://include-media.com/)
 
 
@@ -64,7 +64,7 @@ This should fire up `webpack-dev-server` and open a tab in chrome (or your brows
 
 ### Styling
 
-####`React Inline Styles` vs `SCSS stylesheets`
+#### `React Inline Styles` vs `SCSS stylesheets`
 
 In this app, we're using both. Each component should have it's own SCSS style sheet sitting next to it in the container file. These stylesheets are all imported at the bottom of `src/app/style/app.scss`. Styles in these sheets should be used to declaring unchanging and fundamental styles and layout properties of the app.
 
