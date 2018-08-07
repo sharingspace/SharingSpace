@@ -10,6 +10,7 @@ import Root from './containers/Root';
 import ListView from './containers/ListView';
 import TileView from './containers/TileView';
 import MapView from './containers/MapView';
+import HomeView from './containers/HomeView';
 // HOC
 import RouteHOC from './containers/routeHOC';
 // Stores
@@ -93,10 +94,11 @@ class App extends React.Component<any, any> {
         <Router history={history}>
           <Root>
             <Switch>
+              <Route exact={true} path="/" component={HomeView} />
               <Route exact={true} path="/list" component={ListView} />
               <Route exact={true} path="/grid" component={TileView} />
               <Route exact={true} path="/map" component={MapView} />
-              <Redirect from='*' to='/list'/>
+              <Redirect from='*' to='/'/>
             </Switch>
           </Root>
         </Router>
