@@ -26,9 +26,7 @@ class MapStore {
     this.initLat = 34.342501;
     this.initLng = -112.100465;
     this.initZoom = 17;
-
     this.mapReadyToView = false;
-
     this.apiKey = 'dd208c3425464e703d197ef3cbbd6736';
     this.exitControl = new ExitIndoorButton({
       title: 'Exit',
@@ -48,7 +46,6 @@ class MapStore {
         classThis._map.indoors.moveDown();
       }
     });
-
 
     // finally, start initiating the elem and object
     this.initMapElemAndObject();
@@ -77,8 +74,8 @@ class MapStore {
       indoorsEnabled: true,
     });
     // setup indoor enter / exit buttons
-    mapObject.indoors.on('indoormapenter', (event: any) => this.onEnterIndoors(event));
-    mapObject.indoors.on('indoormapexit', (event: any) => this.onExitIndoors(event));
+    mapObject.indoors.on('indoormapenter', (event: any) => this.onEnterIndoors());
+    mapObject.indoors.on('indoormapexit', (event: any) => this.onExitIndoors());
     mapObject.on('initialstreamingcomplete', (data: any) => {
       console.log('on initialstreamingcomplete', data)
       this.mapReadyToView = true;
@@ -91,7 +88,7 @@ class MapStore {
     this.mapElem.style.width = newWidth + 'px';
   }
 
-  onEnterIndoors(event) {
+  onEnterIndoors() {
     this.displayIndoorControls();
   }
 
@@ -183,14 +180,12 @@ class MapStore {
 
       this.addSingleMarker(params);
     })
-
   }
-
 }
 
 decorate(MapStore, {
   mapReadyToView: observable,
   mapViewHasBeenNavigatedToOnce: observable
-})
+} as any);
 
 export default MapStore;

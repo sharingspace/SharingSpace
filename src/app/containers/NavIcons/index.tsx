@@ -23,7 +23,7 @@ class NavIconParentClass extends React.Component<any, any> {
   }
 }
 
-export class NavToMapIcon extends NavIconParentClass<any, any> {
+export class NavToMapIcon extends NavIconParentClass {
   render() {
     return <div className='view-select-button-container' onClick={() => this.props.onClick()}>
       <FaLocationArrow size={this.iconSize}/>
@@ -31,7 +31,7 @@ export class NavToMapIcon extends NavIconParentClass<any, any> {
   }
 }
 
-export class NavToListIcon extends NavIconParentClass<any, any> {
+export class NavToListIcon extends NavIconParentClass {
   render() {
     return <div className='view-select-button-container' onClick={() => this.props.onClick()}>
       <FaList size={this.iconSize}/>
@@ -39,7 +39,7 @@ export class NavToListIcon extends NavIconParentClass<any, any> {
   }
 }
 
-export class NavToGridIcon extends NavIconParentClass<any, any> {
+export class NavToGridIcon extends NavIconParentClass {
   render() {
     return <div className='view-select-button-container' onClick={() => this.props.onClick()}>
       <FaTh size={this.iconSize}/>
@@ -47,7 +47,7 @@ export class NavToGridIcon extends NavIconParentClass<any, any> {
   }
 }
 
-export class NavToMembersIcon extends NavIconParentClass<any, any> {
+export class NavToMembersIcon extends NavIconParentClass {
   render() {
     return <div className='header-icon-container' onClick={() => this.props.onClick()}>
       <FaUserFriends size={this.iconSize} />
