@@ -17,7 +17,7 @@
 @import '../../../node_modules/leaflet/dist/leaflet.css';
 
 // google fonts
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro|Varela+Round');
+@import url('https://fonts.googleapis.com/css?family=Chelsea+Market|Source+Sans+Pro');
 
 $global-blue: #1890FF;
 $global-red: #FF0000;
@@ -56,7 +56,7 @@ h1, h2, h3, h4 {
   @include media ('<tablet') {
     text-align: center;
   }
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Chelsea Market', cursive;
 }
 
 h1 {
