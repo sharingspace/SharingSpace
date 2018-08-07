@@ -39,12 +39,14 @@ class NavToMapIconUnObserved extends NavIconParentClass {
     let inlineStyle: any = {};
     let functionToFireOnClick = this.props.onClick;
 
-    if(!mapReadyToView) {
-      inlineStyle.color = 'lightgrey';
-      functionToFireOnClick = () => {
-        console.log('do nothing')
-      }
-    }
+    // this is to prevent button from working while map is loading
+    // if(!mapReadyToView) {
+    //   inlineStyle.color = 'lightgrey';
+    //   functionToFireOnClick = () => {
+    //     console.log('do nothing')
+    //   }
+    // }
+
     return <div
       className='view-select-button-container'
       style={inlineStyle}

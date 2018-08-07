@@ -25,12 +25,15 @@ class LineItem extends React.Component<LineItemProps, any> {
   render() {
     let inlineStyle: any = {};
     let functionToFire = this.props.onClick;
-    if(this.props.disabled) {
-      functionToFire = (e) => {
-        // do nothing with the function
-      };
-      inlineStyle.color = 'lightgrey';
-    }
+
+    // this is to prevent map nav from working until map is loaded
+    // if(this.props.disabled) {
+    //   functionToFire = (e) => {
+    //     // do nothing with the function
+    //   };
+    //   inlineStyle.color = 'lightgrey';
+    // }
+
     let Icon = this.props.icon;
     return <div style={inlineStyle as any} className='each-right-entry-container' onClick={(e) => functionToFire(e)}>
       <div className='each-drawer-title-container'>

@@ -73,8 +73,8 @@ class App extends React.Component<any, any> {
       bottom: 0,
       left: 0,
       border: '1px solid red',
-      height: 100,
-      width: 100,
+      height: 1,
+      width: 1,
       display: 'none'
     }
     return <div style={style as any}>
