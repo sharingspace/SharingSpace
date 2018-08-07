@@ -59,6 +59,8 @@ class ListStore {
 
 
 
+    // experimenting with API calls here
+
     // let url = 'https://arcoop.anyshare.coop/entry/json.browse';
     // let reqListener = () => {
     //   console.log(this.responseText);
@@ -87,8 +89,10 @@ class ListStore {
         // Only handle the query if it's the most recent
         // ignore all others
 
+        // testing using fake list data
         // this.list = new Array( this.query.length );
 
+        // write list data to store
         this.list = testData;
       }
 

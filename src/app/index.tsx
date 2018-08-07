@@ -13,7 +13,7 @@ import MapView from './containers/MapView';
 // HOC
 import RouteHOC from './containers/routeHOC';
 // Stores
-import { navStore, authStore, sizeStore } from 'stores';
+import { navStore, sizeStore } from 'stores';
 // Utilities
 import _ from 'lodash'
 

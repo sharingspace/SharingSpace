@@ -3,7 +3,6 @@ import ExitIndoorButton from './mapComponents/exitIndoorButton';
 
 class MapStore {
 
-
   mapElem: any;
   mapObject: any;
   markersList: any;

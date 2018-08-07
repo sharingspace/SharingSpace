@@ -1,4 +1,3 @@
-import { authStore } from 'stores';
 import { observable, action, decorate } from 'mobx';
 
 class DrawerStore {

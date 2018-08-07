@@ -1,3 +1,7 @@
+// example code on how to handle models in typescript
+// these can be used when pulling data from the backend
+// models should match the backend
+
 // class Campaign {
 //   campaign_id: number;
 //   campaign_type: string;
