@@ -14,6 +14,13 @@ import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
 
+import {
+  NavToMapIcon,
+  NavToListIcon,
+  NavToGridIcon,
+  NavToMembersIcon
+} from '../NavIcons';
+
 class Header extends React.Component<any, any> {
 
   iconSize: number;
@@ -32,9 +39,7 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightMembers() {
-    return <div className='header-icon-container' onClick={() => this.navToUserList()}>
-      <FaUserFriends size={this.iconSize} />
-    </div>
+    return <NavToMembersIcon onClick={() => this.navToUserList()} />
   }
 
   navTo(route) {
@@ -43,27 +48,6 @@ class Header extends React.Component<any, any> {
 
   navToNewEntry() {
     console.log('===== NEW ENTRY');
-  }
-
-  renderRightViewSelect() {
-    return (
-      <Switch>
-        <Route path="/list" >
-          <div className='view-select-button-container' onClick={() => this.navTo('/grid')}>
-            <FaTh size={this.iconSize}/>
-          </div>
-        </Route>
-        <Route path="/grid" >
-          <div className='view-select-button-container' onClick={() => this.navTo('/map')}>
-            <FaLocationArrow size={this.iconSize}/>
-          </div>
-        </Route>
-        <Route path="/map" >
-          <div className='view-select-button-container' onClick={() => this.navTo('/list')}>
-            <FaList size={this.iconSize}/>
-          </div>
-        </Route>
-      </Switch>)
   }
 
   renderRightHamburger() {
@@ -87,7 +71,9 @@ class Header extends React.Component<any, any> {
   renderRightDesktop() {
     return <div className={'header-right-desktop'}>
       {this.renderRightMembers()}
-      {this.renderRightViewSelect()}
+      <NavToGridIcon onClick={() => this.navTo('/grid')} />
+      <NavToMapIcon onClick={() => this.navTo('/map')} />
+      <NavToListIcon onClick={() => this.navTo('/list')} />
       {this.renderNewEntry()}
       {this.renderRightHamburger()}
     </div>

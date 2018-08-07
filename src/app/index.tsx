@@ -62,7 +62,7 @@ class App extends React.Component<any, any> {
     // ie: it's on the dom and it's on the page, but users can't see it
     //
     // this solves my problem... don't ask why...
-    
+
     const { mapReadyToView } = mapStore;
     if(mapReadyToView) {
       return null;
@@ -76,7 +76,7 @@ class App extends React.Component<any, any> {
       width: 100,
       display: 'none'
     }
-    return <div style={style}>
+    return <div style={style as any}>
       <MapView />
     </div>
   }
