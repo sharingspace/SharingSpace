@@ -11,18 +11,28 @@ import {
 } from 'react-icons/fa';
 import SearchInput from '../SearchInput';
 import ExpandableDropdown from '../ExpandableDropdown';
-import { drawerStore } from '../../stores';
+import { drawerStore, mapStore } from '../../stores';
 
 interface LineItemProps {
   title: string,
   icon: any,
-  onClick: any
+  onClick: any,
+  disabled: boolean
 }
 
 class LineItem extends React.Component<LineItemProps, any> {
+
   render() {
+    let inlineStyle: any = {};
+    let functionToFire = this.props.onClick;
+    if(this.props.disabled) {
+      functionToFire = (e) => {
+        // do nothing with the function
+      };
+      inlineStyle.color = 'lightgrey';
+    }
     let Icon = this.props.icon;
-    return <div className='each-right-entry-container' onClick={(e) => this.props.onClick(e)}>
+    return <div style={inlineStyle as any} className='each-right-entry-container' onClick={(e) => functionToFire(e)}>
       <div className='each-drawer-title-container'>
         {this.props.title}
       </div>
@@ -42,12 +52,17 @@ class DrawerRight extends React.Component<any, {}> {
 
   }
 
-  renderNavItems() {
 
+  renderNavItems() {
+    const { mapReadyToView } = mapStore;
+    let mapItemDisabled = false;
+    if(!mapReadyToView) {
+      mapItemDisabled = true;
+    }
     return <div>
-      <LineItem title={'Grid View'} icon={FaLocationArrow} onClick={() => this.navTo('/grid') }/>
-      <LineItem title={'List View'} icon={FaList} onClick={() => this.navTo('/list') }/>
-      <LineItem title={'Map View'} icon={FaTh} onClick={() => this.navTo('/map') }/>
+      <LineItem disabled={false} title={'Grid View'} icon={FaTh} onClick={() => this.navTo('/grid') }/>
+      <LineItem disabled={false} title={'List View'} icon={FaList} onClick={() => this.navTo('/list') }/>
+      <LineItem disabled={mapItemDisabled} title={'Map View'} icon={FaLocationArrow} onClick={() => this.navTo('/map') }/>
     </div>
   }
 
@@ -89,16 +104,22 @@ class DrawerRight extends React.Component<any, {}> {
           <div style={inlineImageStyle as any}></div>
           <div style={nameStyle as any}>{name}</div>
         </div>
-
-        <LineItem title={'Messages'} icon={FaEnvelope} onClick={() => console.log('on click')}/>
-
+        <LineItem disabled={false} title={'Messages'} icon={FaEnvelope} onClick={() => console.log('on click')}/>
       </div>
     )
   }
 
   renderLineBreak() {
-    return (<div>
-      <hr />
+    let style = {
+      marginTop: '.1rem',
+      marginBottom: '.1rem',
+    }
+    let lineStyle = {
+      height: '1px',
+      backgroundColor: 'lightgrey',
+    }
+    return (<div style={style}>
+      <div style={lineStyle}></div>
     </div>)
   }
 
@@ -111,15 +132,15 @@ class DrawerRight extends React.Component<any, {}> {
         </div>
       </div>
 
-      <LineItem title={'Information'} icon={FaInfoCircle} onClick={() => console.log('on click')}/>
-      <LineItem title={'Controls'} icon={FaCog} onClick={() => console.log('on click')}/>
+      <LineItem disabled={false} title={'Information'} icon={FaInfoCircle} onClick={() => console.log('on click')}/>
+      <LineItem disabled={false} title={'Controls'} icon={FaCog} onClick={() => console.log('on click')}/>
 
     </div>
   }
 
   renderOptionsBottom() {
     return (<div>
-      <LineItem title={'Settings'} icon={FaCog} onClick={() => console.log('on click')}/>
+      <LineItem disabled={false} title={'Settings'} icon={FaCog} onClick={() => console.log('on click')}/>
     </div>)
   }
 

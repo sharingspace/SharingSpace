@@ -23,7 +23,7 @@ class ListView extends React.Component<Props, {}> {
 
     if(listJS.length === 0) {
       return (<div style={inlineNoContentStyle}>
-        No content found
+        No content
       </div>)
     } else {
       return (<div>

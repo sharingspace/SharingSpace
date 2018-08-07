@@ -9,7 +9,7 @@ import {
   FaPlusSquare,
   FaTh
 } from 'react-icons/fa';
-import { drawerStore, navStore } from '../../stores';
+import { drawerStore, navStore, mapStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
@@ -19,21 +19,42 @@ interface NavIconParentProps {
   onClick: any
 }
 
-class NavIconParentClass extends React.Component<NavIconParentProps, any> {
+class NavIconParentClassUbObserved extends React.Component<NavIconParentProps, any> {
   iconSize: number;
   constructor(props) {
     super(props);
     this.iconSize = 40;
   }
 }
+let NavIconParentClass = observer(NavIconParentClassUbObserved);
 
-export class NavToMapIcon extends NavIconParentClass {
+
+class NavToMapIconUnObserved extends NavIconParentClass {
+  componentWillReact() {
+    console.log('map icon reacts')
+  }
+
   render() {
-    return <div className='view-select-button-container' onClick={() => this.props.onClick()}>
+    const { mapReadyToView } = mapStore;
+    let inlineStyle: any = {};
+    let functionToFireOnClick = this.props.onClick;
+
+    if(!mapReadyToView) {
+      inlineStyle.color = 'lightgrey';
+      functionToFireOnClick = () => {
+        console.log('do nothing')
+      }
+    }
+    return <div
+      className='view-select-button-container'
+      style={inlineStyle}
+      onClick={() => functionToFireOnClick()}
+    >
       <FaLocationArrow size={this.iconSize}/>
     </div>
   }
 }
+export let NavToMapIcon = observer(NavToMapIconUnObserved);
 
 export class NavToListIcon extends NavIconParentClass {
   render() {

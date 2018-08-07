@@ -48,7 +48,7 @@ class ExpandableDropdown extends React.Component<any, any> {
 
   renderTitle() {
     let titleStyle = {
-      border: '1px solid red',
+      // border: '1px solid red',
       padding: '.3rem',
       width: '100%',
       display: 'flex',
