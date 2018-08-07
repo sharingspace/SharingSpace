@@ -14,7 +14,6 @@ import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
 
-
 class NavIconParentClass extends React.Component<any, any> {
   iconSize: number;
   constructor(props) {

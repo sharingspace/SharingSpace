@@ -4,16 +4,25 @@ import { observer } from 'mobx-react';
 import {
   FaEnvelope,
   FaCog,
-  FaInfoCircle
+  FaInfoCircle,
+  FaLocationArrow,
+  FaList,
+  FaTh
 } from 'react-icons/fa';
 import SearchInput from '../SearchInput';
 import ExpandableDropdown from '../ExpandableDropdown';
+import { drawerStore } from '../../stores';
 
+interface LineItemProps {
+  title: string,
+  icon: any,
+  onClick: any
+}
 
-class LineItem extends React.Component<any, any> {
+class LineItem extends React.Component<LineItemProps, any> {
   render() {
     let Icon = this.props.icon;
-    return <div className='each-right-entry-container'>
+    return <div className='each-right-entry-container' onClick={(e) => this.props.onClick(e)}>
       <div className='each-drawer-title-container'>
         {this.props.title}
       </div>
@@ -25,6 +34,22 @@ class LineItem extends React.Component<any, any> {
 }
 
 class DrawerRight extends React.Component<any, {}> {
+
+  navTo(route: string) {
+    const { push } = this.props.history;
+    push(route);
+    drawerStore.closeDrawerRight();
+
+  }
+
+  renderNavItems() {
+
+    return <div>
+      <LineItem title={'Grid View'} icon={FaLocationArrow} onClick={() => this.navTo('/grid') }/>
+      <LineItem title={'List View'} icon={FaList} onClick={() => this.navTo('/list') }/>
+      <LineItem title={'Map View'} icon={FaTh} onClick={() => this.navTo('/map') }/>
+    </div>
+  }
 
   renderProfile() {
     let name = 'My Name';
@@ -65,7 +90,7 @@ class DrawerRight extends React.Component<any, {}> {
           <div style={nameStyle as any}>{name}</div>
         </div>
 
-        <LineItem title={'Messages'} icon={FaEnvelope} />
+        <LineItem title={'Messages'} icon={FaEnvelope} onClick={() => console.log('on click')}/>
 
       </div>
     )
@@ -86,15 +111,15 @@ class DrawerRight extends React.Component<any, {}> {
         </div>
       </div>
 
-      <LineItem title={'Information'} icon={FaInfoCircle} />
-      <LineItem title={'Controls'} icon={FaCog} />
+      <LineItem title={'Information'} icon={FaInfoCircle} onClick={() => console.log('on click')}/>
+      <LineItem title={'Controls'} icon={FaCog} onClick={() => console.log('on click')}/>
 
     </div>
   }
 
   renderOptionsBottom() {
     return (<div>
-      <LineItem title={'Settings'} icon={FaCog} />
+      <LineItem title={'Settings'} icon={FaCog} onClick={() => console.log('on click')}/>
     </div>)
   }
 
@@ -152,6 +177,7 @@ class DrawerRight extends React.Component<any, {}> {
     return (
       <div style={masterContainerStyle as any} className='drawer-right-container'>
         <div style={topStaticStyle as any}>
+          {this.renderNavItems()}
           {this.renderProfile()}
           {this.renderThisChannelData()}
           {this.renderLineBreak()}
