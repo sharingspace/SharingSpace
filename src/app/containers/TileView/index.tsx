@@ -6,8 +6,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import Tile from './tile';
 import Packery from 'packery';
 import LoadingWheel from '../LoadingWheel';
-import { listStore } from '../../stores';
-import packeryStorage from './packeryStorage';
+import { listStore, packeryStore } from '../../stores';
 
 class TileView extends React.Component<Props, {}> {
 
@@ -18,33 +17,44 @@ class TileView extends React.Component<Props, {}> {
 
   constructor(props) {
     super(props);
-    this.packeryGridRef = React.createRef();
-
   }
 
   routerWillLeave(nextLocation) {
     return false;
   }
 
+  appendPackeryElemToDom(packeryElem) {
+    let containerElem = document.querySelector('.packery-grid-react-container');
+    containerElem.appendChild(packeryElem);
+  }
+
   componentDidMount() {
     const { listLoading, listJS } = listStore;
-    setTimeout(() => {
-      let list = listJS;
-      packeryStorage.initPackeryElem(this.packeryGridRef);
-      packeryStorage.initPackeryObject();
-      packeryStorage.populatePackery(list);
-    }, 0);
+    const { packeryElem } = packeryStore;
+
+    // check if elem exists
+    if(packeryElem) {
+      // if it does, append it to dom
+      this.appendPackeryElemToDom(packeryElem)
+    } else {
+      // else create it and then append it
+      this.initPackeryElemAndObject();
+      this.appendPackeryElemToDom(packeryElem)
+    }
+
   }
 
   componentWillReact() {
     const { listLoading, listJS } = listStore;
-    packeryStorage.populatePackery(listJS);
+    packeryStore.populatePackery(listJS);
   }
 
   renderGrid() {
     const { listJS, listLoading } = listStore;
+    const { packeryGridRef } = packeryStore;
+
     return (
-      <div ref={this.packeryGridRef} className='packery-grid'></div>
+      <div className='packery-grid-react-container'></div>
     )
   }
 

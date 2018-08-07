@@ -1,4 +1,7 @@
 import Packery from 'packery';
+import { listStore } from '../index';
+console.log('=================== listJS', listStore)
+import React from 'react';
 
 class PackeryStorage {
 
@@ -10,11 +13,17 @@ class PackeryStorage {
     this.packeryObject = {};
     this.packeryElem = null;
     this.elemsInList = [];
+    this.initPackeryElemAndObject();
   }
 
-  initPackeryElem(ref) {
-    let packeryElem = ref.current;
-    packeryElem.style.cssText = `height: 10rem`;
+  initPackeryElemAndObject() {
+    this.initPackeryElem();
+    this.initPackeryObject();
+  }
+
+  initPackeryElem() {
+    let packeryElem = document.createElement('div');
+    packeryElem.className = 'packery-elem-target-container';
     this.packeryElem = packeryElem;
   }
 
@@ -108,5 +117,4 @@ class PackeryStorage {
 
 }
 
-let packeryStorage = new PackeryStorage();
-export default packeryStorage;
+export default PackeryStorage;
