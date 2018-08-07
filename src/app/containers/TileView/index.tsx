@@ -12,7 +12,6 @@ class TileView extends React.Component<Props, {}> {
 
   packeryElem: any;
   packeryObject: any;
-  packeryGridRef: any;
   unregisterLeaveHook: any;
 
   constructor(props) {
@@ -30,7 +29,7 @@ class TileView extends React.Component<Props, {}> {
 
   componentDidMount() {
     const { listLoading, listJS } = listStore;
-    const { packeryElem } = packeryStore;
+    const { packeryElem, initPackeryElemAndObject } = packeryStore;
 
     // check if elem exists
     if(packeryElem) {
@@ -38,7 +37,7 @@ class TileView extends React.Component<Props, {}> {
       this.appendPackeryElemToDom(packeryElem)
     } else {
       // else create it and then append it
-      this.initPackeryElemAndObject();
+      initPackeryElemAndObject();
       this.appendPackeryElemToDom(packeryElem)
     }
 
@@ -51,8 +50,6 @@ class TileView extends React.Component<Props, {}> {
 
   renderGrid() {
     const { listJS, listLoading } = listStore;
-    const { packeryGridRef } = packeryStore;
-
     return (
       <div className='packery-grid-react-container'></div>
     )

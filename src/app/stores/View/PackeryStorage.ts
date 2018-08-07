@@ -1,6 +1,5 @@
 import Packery from 'packery';
 import { listStore } from '../index';
-console.log('=================== listJS', listStore)
 import React from 'react';
 
 class PackeryStorage {

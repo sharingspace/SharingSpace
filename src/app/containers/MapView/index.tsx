@@ -1,12 +1,8 @@
 import { Props } from '../Root';
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import mapStorage from './mapStorage';
-import { sizeStore, listStore } from '../../stores';
+import { sizeStore, listStore, mapStore } from '../../stores';
 import LoadingWheel from '../LoadingWheel';
-
-// prevent typescript error because of how we're importing
-declare let L: any
 
 class MapView extends React.Component<any, {}> {
 
@@ -16,52 +12,40 @@ class MapView extends React.Component<any, {}> {
 
   componentWillReact() {
     const { listJS } = listStore;
+    this.resizeMapElem();
+    mapStore.addMarkers(listJS);
+  }
+
+  resizeMapElem() {
     const { width, height } = sizeStore;
-    mapStorage.resizeMapElem(width);
-    mapStorage.addMarkers(listJS);
+    mapStore.resizeMapElem(width);
   }
-
-  initMap() {
-    const { width } = sizeStore;
-    let mapElem = document.createElement('div');
-    mapElem.setAttribute('id', 'map_elem_id');
-    mapElem.style.width = width + 'px';
-    mapElem.style.height = '100%';
-    this.appendMapElemToParent(mapElem)
-
-    let mapObject =  L.Wrld.map("map_elem_id", mapStorage.apiKey, {
-      center: [ mapStorage.initLat, mapStorage.initLng ],
-      zoom: mapStorage.initZoom,
-      indoorsEnabled: true,
-      // zoomControl: true,
-      // maxZoom: 19
-    });
-
-    // store on storage class
-    mapStorage.saveMapElem(mapElem);
-    mapStorage.saveMapObject(mapObject);
-  }
-
 
   appendMapElemToParent(elemToAdd) {
+    const { width, height } = sizeStore;
     let containerElem = document.querySelector('.map-view-container');
     containerElem.appendChild(elemToAdd);
-  }
-
-  initOrRetrieveMap() {
-    if(!mapStorage.isMapElemSaved()) {
-      this.initMap()
-    } else {
-      this.appendMapElemToParent(mapStorage.retrieveMapElem());
-    }
+    this.resizeMapElem();
   }
 
   componentDidMount() {
-    this.initOrRetrieveMap();
-    // mapStorage.addMarkers();
+    const { mapElem } = mapStore;
+
+    console.log('== component did mount', mapElem)
+
+    setTimeout(() => {
+      if(mapElem) {
+        this.appendMapElemToParent(mapElem)
+      } else {
+        mapStore.initMapElemAndObject();
+        this.appendMapElemToParent(mapElem);
+      }
+    }, 0)
+
   }
 
   renderLoadingWheel() {
+    const { mapReadyToView } = mapStore;
     const { listLoading } = listStore;
     let containerStyle = {
       // border: '1px solid red',
@@ -82,7 +66,7 @@ class MapView extends React.Component<any, {}> {
       fontWeight: 'bold',
       fontSize: '1.5rem'
     }
-    if(listLoading) {
+    if(listLoading || !mapReadyToView) {
       return <div style={containerStyle as any}>
         <div style={innerDivStyle as any}>
           <LoadingWheel />

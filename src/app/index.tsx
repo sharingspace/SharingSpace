@@ -13,12 +13,9 @@ import MapView from './containers/MapView';
 // HOC
 import RouteHOC from './containers/routeHOC';
 // Stores
-import { navStore, sizeStore } from 'stores';
+import { navStore, sizeStore, mapStore } from 'stores';
 // Utilities
 import _ from 'lodash'
-
-
-import mapStorage from './containers/MapView/mapStorage';
 
 // creat history
 const history = createBrowserHistory();
@@ -52,6 +49,38 @@ class App extends React.Component<any, any> {
     sizeStore.setSize(h, w);
   }
 
+  renderHiddenMapView() {
+    // there's a crazy little bug with the Wrld3D plugin
+    // I'm rendering it as a dom element but not rendered to the page
+    // everything works great, but it gets stuck in a loading cycle
+    // the only way to fix this is by rendering visibly on the page
+    // at first load
+    // no matter what page we navigat to, it will always render this view
+    // as soon as the map is ready, this will be removed
+    //
+    // css values are set to hide it visibly even though it's 'visible' in the inspector
+    // ie: it's on the dom and it's on the page, but users can't see it
+    //
+    // this solves my problem... don't ask why...
+    
+    const { mapReadyToView } = mapStore;
+    if(mapReadyToView) {
+      return null;
+    }
+    let style = {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      border: '1px solid red',
+      height: 100,
+      width: 100,
+      display: 'none'
+    }
+    return <div style={style}>
+      <MapView />
+    </div>
+  }
+
   render() {
     const { width, height } = sizeStore;
     let appMasterStyle = {
@@ -71,6 +100,7 @@ class App extends React.Component<any, any> {
             </Switch>
           </Root>
         </Router>
+        {this.renderHiddenMapView()}
       </div>
     );
   }
