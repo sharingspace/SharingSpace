@@ -18,7 +18,8 @@ import {
   NavToMapIcon,
   NavToListIcon,
   NavToGridIcon,
-  NavToMembersIcon
+  NavToMembersIcon,
+  HamburgerIcon
 } from '../NavIcons';
 
 class Header extends React.Component<any, any> {
@@ -28,10 +29,6 @@ class Header extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.iconSize = 40;
-  }
-
-  menuButtonPressed() {
-    drawerStore.openDrawerRight();
   }
 
   navToUserList() {
@@ -51,9 +48,11 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightHamburger() {
-    return <div className='header-hamburger-menu-container' onClick={() => this.menuButtonPressed()}>
-      <FaBars className='active-icon' size={this.iconSize} />
-    </div>
+    return <HamburgerIcon onClick={() => drawerStore.openDrawerRight()} />
+  }
+
+  renderLeftHamburger() {
+    return <HamburgerIcon onClick={() => drawerStore.openDrawerLeft()} />
   }
 
   renderNewEntry() {
@@ -79,16 +78,27 @@ class Header extends React.Component<any, any> {
     </div>
   }
 
+  renderLeftMobile() {
+    return <div className='header-left-mobile'>
+        <SearchInput />
+    </div>
+  }
+
+  renderLeftDesktop() {
+    return <div className='header-left-desktop'>
+        {this.renderLeftHamburger()}
+        <SearchInput />
+    </div>
+  }
+
   render() {
     return (
         <div className={'header-container'}>
-          <div className={'header-left'}>
-            <SearchInput />
-          </div>
+          {this.renderLeftMobile()}
+          {this.renderLeftDesktop()}
 
           {this.renderRightMobile()}
           {this.renderRightDesktop()}
-
         </div>
     );
   }

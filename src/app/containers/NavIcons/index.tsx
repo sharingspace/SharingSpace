@@ -14,7 +14,12 @@ import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
 
-class NavIconParentClass extends React.Component<any, any> {
+
+interface NavIconParentProps {
+  onClick: any
+}
+
+class NavIconParentClass extends React.Component<NavIconParentProps, any> {
   iconSize: number;
   constructor(props) {
     super(props);
@@ -50,6 +55,14 @@ export class NavToMembersIcon extends NavIconParentClass {
   render() {
     return <div className='header-icon-container' onClick={() => this.props.onClick()}>
       <FaUserFriends size={this.iconSize} />
+    </div>
+  }
+}
+
+export class HamburgerIcon extends NavIconParentClass {
+  render() {
+    return <div className='header-hamburger-menu-container' onClick={() => this.props.onClick()}>
+      <FaBars className='active-icon' size={this.iconSize} />
     </div>
   }
 }

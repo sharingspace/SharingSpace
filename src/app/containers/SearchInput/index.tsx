@@ -13,12 +13,15 @@ class SearchInput extends React.Component<any, {}> {
   render() {
 
     let inlineContainerStyle = {
-      border: '1px solid red',
+      // border: '1px solid blue',
       paddingLeft: '.3rem',
       paddingRight: '.3rem',
+      display: 'flex',
+      width: '100%'
     }
 
     let inlineInputStyle = {
+      flex: 1,
       fontSize: '1.1rem',
       borderRadius: '1.5rem',
       border: '1px solid lightgrey',
