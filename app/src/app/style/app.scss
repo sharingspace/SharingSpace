@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+// Imported Utilities
+@import '~antd/dist/antd.css';
+@import '../../../node_modules/include-media/dist/_include-media';
+
+// React grid
+@import '../../../node_modules/react-grid-layout/css/styles.css';
+@import '../../../node_modules/react-resizable/css/styles.css';
+
+// Leaflet css for wrld3D
+@import '../../../node_modules/leaflet/dist/leaflet.css';
+
+// google fonts
+@import url('https://fonts.googleapis.com/css?family=Chelsea+Market|Source+Sans+Pro');
+
+$global-blue: #1890FF;
+$global-red: #FF0000;
+$global-dark: #3a3a3a;
+$global-light: white;
+$global-edge-padding: .5rem;
+
+body, html {
+  font-size: 19px;
+  background-color: white;
+  color: $global-dark;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+$breakpoints: (
+  'phone': 320px,
+  'tablet': 768px,
+  'desktop': 1024px
+) !default;
+
+a {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: red;
+  }
+  &:active {
+    color: green;
+  }
+}
+
+h1, h2, h3, h4 {
+  padding: .2rem;
+  margin: .2rem;
+  @include media ('<tablet') {
+    text-align: center;
+  }
+  font-family: 'Chelsea Market', cursive;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+.app_master_container {
+  // border: 1px solid red;
+}
+
+.global-icon-classname {
+  border: 1px solid red;
+  &:hover {
+    border: 1px solid blue;
+  }
+  &:active {
+    border: 1px solid green;
+  }
+}
+
+.drawer-container {
+  // background-color: red;
+  padding: .5rem;
+
+}
+
+$active-icon-color: #565656;
+.active-icon {
+  color: $active-icon-color;
+  &:hover {
+    color: lighten($active-icon-color, 10%);
+  }
+  &:active {
+    color: darken($active-icon-color, 5%);
+  }
+  cursor: pointer;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+///////////////////////////////////////////////////
+// Imports
+@import '../containers/Root/index';
+@import '../containers/Header/header';
+@import '../containers/DrawerRight/index';
+@import '../containers/ListView/index';
+@import '../containers/HomeView/index';
+@import '../containers/TileView/index';
+@import '../containers/TileView/tile/index';
+@import '../containers/MapView/index';
+@import '../containers/ExpandableDropdown/index';
+@import '../containers/LoadingWheel/index';

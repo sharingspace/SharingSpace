@@ -1,0 +1,13 @@
+app/node_modules
+app/yarn.lock
+app/package-lock.json
+app/npm-debug.log
+app/.git
+app/.gitignore
+.DS_Store
+app/.DS_Store
+
+node_modules
+yarn.lock
+package-lock.json
+npm-debug.log
