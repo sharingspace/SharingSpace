@@ -8,6 +8,11 @@ Brian Fogg
 brian.fogg@animallabs.co
 
 
+
+# To develop
+`sh start.sh`
+
+
 ## Getting Started
 
 ### Pre-Requisites
@@ -26,6 +31,18 @@ This will execute the `start` command in `package.json` which currently looks li
 `"start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --env.frontendsource dev --env.configSelect dev --colors --port 3000 --open"`
 
 This should fire up `webpack-dev-server` and open a tab in chrome (or your browser of default)
+
+
+### or just do it all with Docker!
+
+#### Start dev server
+Run `sh start.sh`
+Point browerser to `localhost:3000`
+
+
+#### Generate bundle files
+Run `sh build.sh`
+Grab generated files from `./build_results` folder
 
 
 ## Tech Stack
