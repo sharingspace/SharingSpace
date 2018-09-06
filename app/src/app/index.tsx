@@ -16,7 +16,8 @@ import RouteHOC from './containers/routeHOC';
 // Stores
 import { navStore, sizeStore, mapStore } from 'stores';
 // Utilities
-import _ from 'lodash'
+import { throttle } from './services/utils';
+
 
 // creat history
 const history = createBrowserHistory();
@@ -34,14 +35,11 @@ class App extends React.Component<any, any> {
 
     this.setSize();
     // set size explicitly on resize
-    window.onresize = _.throttle((data) => {
+    window.onresize = throttle((data) => {
       setInterval(() => {
         this.setSize();
       }, 100)
-    }, this.resizeThrottleTime, {
-      leading: true,
-      trailing: true
-    });
+    }, this.resizeThrottleTime, this);
   }
 
   setSize() {

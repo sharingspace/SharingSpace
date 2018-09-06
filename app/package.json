@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --env.frontendsource dev --env.configSelect dev --colors  --host 0.0.0.0 --port 3000",
     "startprod": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --env.frontendsource dev --env.configSelect dev --colors  --host 0.0.0.0 --port 3000",
-    "build": "webpack -p --progress --colors --env.frontendsource prod --env.configSelect prod ",
+    "build": "webpack -p --progress --colors --env.frontendsource prod --env.configSelect prod --verbose",
     "deploy": "npm run deploypatch",
     "deployminor": "npm version minor && rimraf dist/* && npm run build && node gcloudDeploy.js",
     "deploypatch": "npm version patch && rimraf dist/* && npm run build && node gcloudDeploy.js"
@@ -38,6 +38,7 @@
     "html-webpack-plugin": "^2.30.1",
     "include-media": "^1.4.9",
     "mobx-react-devtools": "5.0.0",
+    "node-sass": "4.9.3",
     "postcss": "^6.0.13",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.0.2",
@@ -54,8 +55,7 @@
     "webpack": "^3.10.0",
     "webpack-closure-compiler": "^2.1.6",
     "webpack-dev-server": "^2.9.3",
-    "webpack-hot-middleware": "^2.20.0",
-    "node-sass": "4.9.3"
+    "webpack-hot-middleware": "^2.20.0"
   },
   "dependencies": {
     "@material-ui/core": "^1.4.2",
@@ -64,7 +64,6 @@
     "antd": "^3.5.4",
     "install": "^0.12.1",
     "leaflet-easybutton": "^2.3.0",
-    "lodash": "^4.17.10",
     "mobx": "^4.0.0",
     "mobx-react": "^5.0.0",
     "mobx-react-form": "^1.32.3",

@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN cachebuster=324803294802
+RUN cachebuster=32480329480
 
 # RUN apt-get -qq install -y sudo
 RUN apt-get -qq update
@@ -24,6 +24,9 @@ RUN apt install -qq -y yarn
 RUN mkdir /app
 WORKDIR /app
 COPY ./app /app
+
+RUN cachebuster=3248032948
+
 
 RUN rm -rf node_modules
 RUN yarn --pure-lockfile

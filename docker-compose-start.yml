@@ -6,7 +6,7 @@ services:
     volumes:
       - ./app:/app
       - /app/node_modules/
-
+      - ./build_results:/build_results
     command: yarn start
     ports:
       - "3000:3000"

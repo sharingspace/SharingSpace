@@ -1,0 +1,10 @@
+version: '3'
+services:
+  reactapp:
+    build:
+      context: .
+    volumes:
+      - ./app:/app
+      - /app/node_modules/
+      - ./build_results:/app/dist
+    command: yarn run build
