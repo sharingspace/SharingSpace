@@ -1,0 +1,9 @@
+.expandable-dropdown-title-container {
+  @extend .noselect;
+  &:hover {
+    background: darken($global-light, 5%);
+  }
+  &:active {
+    background: $global-light;
+  }
+}

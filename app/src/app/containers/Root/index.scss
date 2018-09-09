@@ -1,0 +1,19 @@
+.root-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // border: 1px solid green;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.root-header-container {
+  width: 100%;
+}
+
+.root-children {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
