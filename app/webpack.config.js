@@ -47,8 +47,8 @@ const plugins = (env) => {
     new HtmlWebpackPlugin({
       template: 'assets/index.ejs',
       favicon: 'assets/images/favicon.png',
-      jsfilesource: env.frontendsource === 'prod' ? 'https://search_nurture_frontend.animallabs.co/bundle.js.gz' : '/bundle.js',
-      jsvendorsource: env.frontendsource === 'prod' ? 'https://search_nurture_frontend.animallabs.co/vendor.bundle.js.gz' : '/vendor.bundle.js',
+      jsfilesource: env.frontendsource === 'prod' ? 'https://test.animallabs.co/bundle.js.gz' : '/bundle.js',
+      jsvendorsource: env.frontendsource === 'prod' ? 'https://test.animallabs.co/vendor.bundle.js.gz' : '/vendor.bundle.js',
       inject: false,
     }),
   ];

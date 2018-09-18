@@ -1,7 +1,7 @@
 const Storage = require('@google-cloud/storage');
 const fs = require('fs');
-const projectId = 'search-nurture';
-const bucketName = 'search_nurture_frontend.animallabs.co';
+const projectId = 'test-project-id';
+const bucketName = 'test-project-bucket-name.animallabs.co';
 const keyFilename = 'auth/google_dev_upload.json';
 const buildFileLocation = './dist/';
 

@@ -1,4 +1,4 @@
 export default {
   appEnv: 'prod',
-  apiServer: 'http://searchnurtureapi.animallabs.co/'
+  apiServer: 'http://test.animallabs.co/'
 };
