@@ -19,7 +19,8 @@ import {
   NavToListIcon,
   NavToGridIcon,
   NavToMembersIcon,
-  HamburgerIcon
+  HamburgerIcon,
+  SharingSpaceIcon
 } from '../NavIcons';
 
 class Header extends React.Component<any, any> {
@@ -36,7 +37,7 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightMembers() {
-    return <NavToMembersIcon onClick={() => this.navToUserList()} />
+    return <NavToMembersIcon onClick={() => this.navToUserList()} />;
   }
 
   navTo(route) {
@@ -48,58 +49,68 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightHamburger() {
-    return <HamburgerIcon onClick={() => drawerStore.openDrawerRight()} />
+    return <HamburgerIcon onClick={() => drawerStore.openDrawerRight()} />;
   }
 
   renderLeftHamburger() {
-    return <HamburgerIcon onClick={() => drawerStore.openDrawerLeft()} />
+    return <HamburgerIcon onClick={() => drawerStore.openDrawerLeft()} />;
   }
 
   renderNewEntry() {
-    return <div className='header-icon-container' onClick={() => this.navToNewEntry()}>
-      <FaPlusSquare size={this.iconSize} />
-    </div>
+    return (
+      <div className="header-icon-container" onClick={() => this.navToNewEntry()}>
+        <FaPlusSquare size={this.iconSize} />
+      </div>
+    );
   }
 
   renderRightMobile() {
-    return <div className={'header-right-mobile'}>
-      {this.renderRightHamburger()}
-    </div>
+    return (
+      <div className={'header-right-mobile'}>
+        {this.renderRightHamburger()}
+      </div>
+    );
   }
 
   renderRightDesktop() {
-    return <div className={'header-right-desktop'}>
-      {this.renderRightMembers()}
-      <NavToGridIcon onClick={() => this.navTo('/grid')} />
-      <NavToMapIcon onClick={() => this.navTo('/map')} />
-      <NavToListIcon onClick={() => this.navTo('/list')} />
-      {this.renderNewEntry()}
-      {this.renderRightHamburger()}
-    </div>
+    return (
+      <div className={'header-right-desktop'}>
+        {this.renderRightMembers()}
+        <NavToGridIcon onClick={() => this.navTo('/grid')} />
+        <NavToMapIcon onClick={() => this.navTo('/map')} />
+        <NavToListIcon onClick={() => this.navTo('/list')} />
+        {this.renderNewEntry()}
+        {this.renderRightHamburger()}
+      </div>
+    );
   }
 
   renderLeftMobile() {
-    return <div className='header-left-mobile'>
+    return (
+      <div className="header-left-mobile">
         <SearchInput />
-    </div>
+      </div>
+    );
   }
 
   renderLeftDesktop() {
-    return <div className='header-left-desktop'>
-        {this.renderLeftHamburger()}
+    return (
+      <div className="header-left-desktop">
+        <SharingSpaceIcon onClick={() => this.navTo('/')} />
         <SearchInput />
-    </div>
+      </div>
+    );
   }
 
   render() {
     return (
-        <div className={'header-container'}>
-          {this.renderLeftMobile()}
-          {this.renderLeftDesktop()}
+      <div className={'header-container'}>
+        {this.renderLeftMobile()}
+        {this.renderLeftDesktop()}
 
-          {this.renderRightMobile()}
-          {this.renderRightDesktop()}
-        </div>
+        {this.renderRightMobile()}
+        {this.renderRightDesktop()}
+      </div>
     );
   }
 }
