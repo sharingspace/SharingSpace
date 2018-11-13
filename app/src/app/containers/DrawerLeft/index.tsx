@@ -10,55 +10,56 @@ import {
 } from 'react-icons/fa';
 
 class DrawerLeft extends React.Component<Props, {}> {
-
   renderDomains() {
     let list = [1, 2, 3, 4, 5];
-    return (<div>
-      {list.map((elem, i) => {
-        return <div key={i} className='each-sharing-network-container'>
-          <div className='each-drawer-icon-container'>
-            <FaThLarge />
-          </div>
-          <div className='each-drawer-title-container'>
-            Sharing Network {i}
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaShare />
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaClone />
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaTrash />
-          </div>
-        </div>
-      })}
-    </div>)
+    return (
+      <div>
+        {list.map((elem, i) => {
+          return <div key={i} className="each-sharing-network-container">
+            <div className="each-drawer-icon-container">
+              <FaThLarge />
+            </div>
+            <div className="each-drawer-title-container">
+              Space {i}
+            </div>
+            <div className="each-drawer-icon-container">
+              <FaShare />
+            </div>
+            <div className="each-drawer-icon-container">
+              <FaClone />
+            </div>
+          </div>;
+        })}
+      </div>
+    );
   }
 
   renderMyChannels() {
     let list = [1, 2, 3, 4, 5];
-    return (<div>
-      {list.map((elem, i) => {
-        return <div key={i} className='each-channel-container'>
-          <div className='each-drawer-icon-container'>
-            <FaSquare />
-          </div>
-          <div className='each-drawer-title-container'>
-            My Channel {i}
-          </div>
+    return (
+      <div>
+        {list.map((elem, i) => {
+          return <div key={i} className="each-channel-container">
+            <div className="each-drawer-icon-container">
+              <FaSquare />
+            </div>
+            <div className="each-drawer-title-container">
+              My Channel {i}
+            </div>
 
-        </div>
-      })}
-    </div>)
+          </div>;
+        })}
+      </div>
+    );
   }
 
   renderLineBreak() {
-    return (<div>
-      <hr />
-    </div>)
+    return (
+      <div>
+        <hr />
+      </div>
+    );
   }
-
 
   render() {
     return (
