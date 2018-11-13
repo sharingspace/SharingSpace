@@ -7,7 +7,8 @@ import {
   FaList,
   FaUserFriends,
   FaPlusSquare,
-  FaTh
+  FaTh,
+  FaCaretDown
 } from 'react-icons/fa';
 import { drawerStore, navStore, mapStore } from '../../stores';
 import { Route, Switch } from 'react-router';
@@ -108,6 +109,16 @@ export class SharingSpaceIcon extends NavIconParentClass {
     return (
       <div className="header-icon-container" onClick={() => this.props.onClick()}>
         <img src={logo} alt="SharingSpace Logo" style={logoStyle} />
+      </div>
+    );
+  }
+}
+
+export class TriangleDownIcon extends NavIconParentClass {
+  render() {
+    return (
+      <div className="header-icon-container" onClick={() => this.props.onClick()}>
+        <FaCaretDown className="active-icon" size={this.iconSize} />
       </div>
     );
   }

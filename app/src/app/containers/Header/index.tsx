@@ -20,7 +20,8 @@ import {
   NavToGridIcon,
   NavToMembersIcon,
   HamburgerIcon,
-  SharingSpaceIcon
+  SharingSpaceIcon,
+  TriangleDownIcon
 } from '../NavIcons';
 
 class Header extends React.Component<any, any> {
@@ -97,6 +98,7 @@ class Header extends React.Component<any, any> {
     return (
       <div className="header-left-desktop">
         <SharingSpaceIcon onClick={() => this.navTo('/')} />
+        <TriangleDownIcon onClick={() => drawerStore.openDrawerLeft()} />
         <SearchInput />
       </div>
     );
