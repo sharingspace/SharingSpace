@@ -152,6 +152,10 @@ class DrawerRight extends React.Component<any, {}> {
     );
   }
 
+  renderViewDropdown() {
+    return <ExpandableDropdown title={'View'} childComponent={this.renderNavItems()} />;
+  }
+
   renderChannelDropdown() {
     let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     return <ExpandableDropdown title={'Channels'} list={list} />;
@@ -205,7 +209,8 @@ class DrawerRight extends React.Component<any, {}> {
     return (
       <div style={masterContainerStyle as any} className="drawer-right-container">
         <div style={topStaticStyle as any}>
-          {this.renderNavItems()}
+          {this.renderViewDropdown()}
+          {this.renderLineBreak()}
           {this.renderProfile()}
           {this.renderThisChannelData()}
           {this.renderLineBreak()}
