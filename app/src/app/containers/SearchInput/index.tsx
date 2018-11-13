@@ -26,6 +26,7 @@ class SearchInput extends React.Component<any, {}> {
       marginTop: '.5rem',
       marginBottom: '.5rem',
       padding: '.5rem',
+      paddingLeft: '1.5rem',
       width: '100%'
     };
 
