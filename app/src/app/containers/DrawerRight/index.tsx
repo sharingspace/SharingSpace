@@ -139,7 +139,6 @@ class DrawerRight extends React.Component<any, {}> {
         </div>
 
         <LineItem disabled={false} title={'Information'} icon={FaInfoCircle} onClick={() => console.log('on click')}/>
-        <LineItem disabled={false} title={'Controls'} icon={FaCog} onClick={() => console.log('on click')}/>
       </div>
     );
   }
@@ -154,31 +153,6 @@ class DrawerRight extends React.Component<any, {}> {
 
   renderViewDropdown() {
     return <ExpandableDropdown title={'View'} childComponent={this.renderNavItems()} />;
-  }
-
-  renderChannelDropdown() {
-    let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return <ExpandableDropdown title={'Channels'} list={list} />;
-  }
-
-  renderNetworksDropdown() {
-    let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return <ExpandableDropdown title={'Networks'} list={list} />;
-  }
-
-  renderScrollableMiddle() {
-    let scrollableStyle = {
-      // border: '1px solid red',
-      flex: 1,
-      overflowY: 'scroll'
-    };
-    return (
-      <div style={scrollableStyle as any}>
-        {this.renderChannelDropdown()}
-        {this.renderLineBreak()}
-        {this.renderNetworksDropdown()}
-      </div>
-    );
   }
 
   render() {
@@ -214,9 +188,6 @@ class DrawerRight extends React.Component<any, {}> {
           {this.renderProfile()}
           {this.renderThisChannelData()}
           {this.renderLineBreak()}
-        </div>
-        <div style={middleScrollStyle as any}>
-        {this.renderScrollableMiddle()}
         </div>
         <div style={bottomStaticStyle as any}>
           {this.renderOptionsBottom()}
