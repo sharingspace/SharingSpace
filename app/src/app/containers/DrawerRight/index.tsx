@@ -130,11 +130,15 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   renderThisChannelData() {
+    const aboutStyle = {
+      color: 'slategrey',
+      fontSize: '1rem'
+    };
     return (
       <div>
         <div className="each-right-entry-container">
           <div className="each-drawer-title-container">
-            About this Space
+            <span style={aboutStyle}>About this Space</span>
           </div>
         </div>
 
@@ -186,10 +190,8 @@ class DrawerRight extends React.Component<any, {}> {
           {this.renderViewDropdown()}
           {this.renderLineBreak()}
           {this.renderProfile()}
-          {this.renderThisChannelData()}
           {this.renderLineBreak()}
-        </div>
-        <div style={bottomStaticStyle as any}>
+          {this.renderThisChannelData()}
           {this.renderOptionsBottom()}
         </div>
       </div>
