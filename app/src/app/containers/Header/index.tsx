@@ -13,6 +13,7 @@ import { drawerStore, navStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
+import ExpandableDropdown from '../ExpandableDropdown';
 
 import {
   NavToMapIcon,
@@ -74,12 +75,19 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightDesktop() {
+    const navList = [
+      <NavToGridIcon key="grid" onClick={() => this.navTo('/grid')} />,
+      <NavToMapIcon key="map" onClick={() => this.navTo('/map')} />,
+      <NavToListIcon key="list" onClick={() => this.navTo('/list')} />,
+    ];
+
     return (
       <div className={'header-right-desktop'}>
+        <ExpandableDropdown objectList={navList} isHeader={true} />
         {this.renderRightMembers()}
-        <NavToGridIcon onClick={() => this.navTo('/grid')} />
+        {/* <NavToGridIcon onClick={() => this.navTo('/grid')} />
         <NavToMapIcon onClick={() => this.navTo('/map')} />
-        <NavToListIcon onClick={() => this.navTo('/list')} />
+        <NavToListIcon onClick={() => this.navTo('/list')} /> */}
         {this.renderNewEntry()}
         {this.renderRightHamburger()}
       </div>

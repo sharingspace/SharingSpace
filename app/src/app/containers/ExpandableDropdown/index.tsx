@@ -3,7 +3,9 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
   FaChevronDown,
-  FaChevronUp
+  FaChevronUp,
+  FaCaretUp,
+  FaMapMarkerAlt
 } from 'react-icons/fa';
 
 class ExpandableDropdown extends React.Component<any, any> {
@@ -24,10 +26,24 @@ class ExpandableDropdown extends React.Component<any, any> {
   }
 
   renderDropdownIcon() {
-    if(this.state.dropdownOpen) {
-      return <FaChevronUp />;
+    const { isHeader } = this.props; // if the user sets it to the header
+    const { dropdownOpen } = this.state;
+
+    const CloseIcon: any = isHeader 
+      ? FaMapMarkerAlt 
+      : FaChevronDown;
+
+    const OpenIcon: any = isHeader
+      ? FaCaretUp
+      : FaChevronUp;
+
+    const openStyle = isHeader ? { size: 40 } : {};
+    const closeStyle = isHeader ? { size: 40 } : {};
+
+    if (dropdownOpen) {
+      return <OpenIcon {...openStyle} />;
     } else {
-      return <FaChevronDown />;
+      return <CloseIcon {...closeStyle} />;
     }
   }
 
@@ -49,25 +65,41 @@ class ExpandableDropdown extends React.Component<any, any> {
       : null;
   }
 
+  // currently using on header views dropdown
   // render components given as array of objects
   renderObjectList() {
     const { objectList } = this.props;
     const { dropdownOpen } = this.state;
+
+    const containerStyle: any = {
+      position: 'absolute', 
+      zIndex: 1, 
+      backgroundColor: 'white', 
+      border: '2px solid white',
+      boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)'
+    };
+
+    const itemStyle: any = { 
+      display: 'block', 
+      paddingTop: '.5rem', 
+      paddingBottom: '.5rem' 
+    };
 
     if (!objectList || !objectList.length) {
       return;
     }
     return dropdownOpen 
       ? (
-        <div>
+        <div style={containerStyle}>
           { objectList.map(component => (
-            <div>{component}</div>
+            <div key={component.key} style={itemStyle}>{component}</div>
           ))}
         </div>
       )
       : null;
   }
 
+  // currently using on right nav bar views dropdown
   // render child component 
   // passed inside expandabledropdown
   renderChildComponent() {
@@ -82,7 +114,6 @@ class ExpandableDropdown extends React.Component<any, any> {
 
   renderTitle() {
     let titleStyle = {
-      // border: '1px solid red',
       padding: '.3rem',
       width: '100%',
       display: 'flex',
@@ -91,7 +122,7 @@ class ExpandableDropdown extends React.Component<any, any> {
       justifyContent: 'space-between'
     };
     return (
-      <div style={titleStyle as any} className="expandable-dropdown-title-container" onClick={() => this.titlePressed()}>
+      <div className="expandable-dropdown-title-container" style={titleStyle as any} onClick={() => this.titlePressed()}>
         <div>{this.props.title}</div>
         {this.renderDropdownIcon()}
       </div>
