@@ -3,7 +3,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
   FaEnvelope,
-  FaCog,
+  FaCogs,
   FaInfoCircle,
   FaLocationArrow,
   FaList,
@@ -151,7 +151,7 @@ class DrawerRight extends React.Component<any, {}> {
   renderOptionsBottom() {
     return (
       <div>
-        <LineItem disabled={false} title={'Settings'} icon={FaCog} onClick={() => console.log('on click')}/>
+        <LineItem disabled={false} title={'Settings'} icon={FaCogs} onClick={() => console.log('on click')}/>
       </div>
     );
   }
