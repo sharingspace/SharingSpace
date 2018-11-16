@@ -99,7 +99,8 @@ class DrawerRight extends React.Component<any, {}> {
     let nameStyle = {
       fontSize: '1.1rem',
       fontWeight: 'bold',
-      flex: 1
+      flex: 1,
+      marginRight: '.5rem'
     };
 
     return (
