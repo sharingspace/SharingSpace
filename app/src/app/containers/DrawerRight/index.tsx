@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import {
   FaEnvelope,
   FaCogs,
+  FaCog,
   FaInfoCircle,
   FaLocationArrow,
   FaList,
@@ -103,11 +104,17 @@ class DrawerRight extends React.Component<any, {}> {
       marginRight: '.5rem'
     };
 
+    const iconStyle = {
+      marginLeft: '.5rem'
+    };
+
     return (
       <div className="drawer-right-profile-container">
         <div style={profileContainer as any}>
           <div style={inlineImageStyle as any} />
-          <div style={nameStyle as any}>{name}</div>
+          <div style={nameStyle as any} className="each-right-entry-container" onClick={() => console.log('do something')}>
+            {name} <FaCog style={iconStyle} />
+          </div>
         </div>
         <LineItem disabled={false} title={'Messages'} icon={FaEnvelope} onClick={() => console.log('on click')}/>
       </div>
