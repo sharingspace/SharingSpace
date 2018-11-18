@@ -118,7 +118,7 @@ export class TriangleDownIcon extends NavIconParentClass {
   render() {
     return (
       <div className="header-icon-container" onClick={() => this.props.onClick()}>
-        <FaCaretDown className="active-icon" size={this.iconSize} />
+        <FaCaretDown className="active-icon" size={25} />
       </div>
     );
   }
