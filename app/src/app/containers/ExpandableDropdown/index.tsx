@@ -73,7 +73,7 @@ class ExpandableDropdown extends React.Component<any, any> {
 
     const containerStyle: any = {
       position: 'absolute', 
-      zIndex: 2147483647, 
+      zIndex: 101, // 100: map overlay
       backgroundColor: 'white', 
       border: '2px solid white',
       boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)'

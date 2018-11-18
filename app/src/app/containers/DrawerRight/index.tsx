@@ -169,6 +169,7 @@ class DrawerRight extends React.Component<any, {}> {
 
   render() {
     let masterContainerStyle = {
+      zIndex: 102, // 100: map overlay, 101: view dropdown
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
