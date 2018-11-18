@@ -8,7 +8,8 @@ import {
   FaInfoCircle,
   FaLocationArrow,
   FaList,
-  FaTh
+  FaTh,
+  FaUserPlus
 } from 'react-icons/fa';
 import SearchInput from '../SearchInput';
 import ExpandableDropdown from '../ExpandableDropdown';
@@ -72,10 +73,10 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   renderProfile() {
-    let name = 'My Name';
-    let profileImgUrl = 'http://www.person.hu/data/upload/pics/mate_original.png';
-    let imageSize = 4;
-    let inlineImageStyle = {
+    const name = 'My Name';
+    const profileImgUrl = 'http://www.person.hu/data/upload/pics/mate_original.png';
+    const imageSize = 4;
+    const inlineImageStyle = {
       background: 'url(' + profileImgUrl + ')',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -84,26 +85,25 @@ class DrawerRight extends React.Component<any, {}> {
       borderRadius: imageSize / 2 + 'rem',
       border: '3px solid #353535',
       flex: '0 auto ' + imageSize + 'rem',
-      margin: '.5rem'
+      margin: '.5rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     };
-
-    let profileContainer = {
+    const profileContainer = {
       display: 'flex',
       flex: 1,
       flexDirection: 'row',
-      // border: '1px solid green',
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center'
     };
-
-    let nameStyle = {
+    const nameStyle = {
       fontSize: '1.1rem',
       fontWeight: 'bold',
       flex: 1,
       marginRight: '.5rem'
     };
-
     const iconStyle = {
       marginLeft: '.5rem'
     };
@@ -111,7 +111,9 @@ class DrawerRight extends React.Component<any, {}> {
     return (
       <div className="drawer-right-profile-container">
         <div style={profileContainer as any}>
-          <div style={inlineImageStyle as any} />
+          <div style={inlineImageStyle as any}>
+            <FaUserPlus size={40} />
+          </div>
           <div style={nameStyle as any} className="each-right-entry-container" onClick={() => console.log('do something')}>
             {name} <FaCog style={iconStyle} />
           </div>
