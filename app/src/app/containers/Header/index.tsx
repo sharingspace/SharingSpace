@@ -117,7 +117,6 @@ class Header extends React.Component<any, any> {
       <div className={'header-container'}>
         {this.renderLeftMobile()}
         {this.renderLeftDesktop()}
-
         {this.renderRightMobile()}
         {this.renderRightDesktop()}
       </div>

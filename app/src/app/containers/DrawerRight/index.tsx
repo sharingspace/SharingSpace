@@ -196,8 +196,10 @@ class DrawerRight extends React.Component<any, {}> {
     return (
       <div style={masterContainerStyle as any} className="drawer-right-container">
         <div style={topStaticStyle as any}>
-          {this.renderViewDropdown()}
-          {this.renderLineBreak()}
+          <div className="drawer-right-mobile">
+            {this.renderViewDropdown()}
+            {this.renderLineBreak()}
+          </div>
           {this.renderProfile()}
           {this.renderLineBreak()}
           {this.renderThisChannelData()}
