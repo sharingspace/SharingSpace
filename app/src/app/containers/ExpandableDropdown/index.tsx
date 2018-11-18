@@ -17,6 +17,7 @@ class ExpandableDropdown extends React.Component<any, any> {
     this.state = {
       dropdownOpen: false
     };
+    this.closeDropdown = this.closeDropdown.bind(this);
   }
 
   titlePressed() {
@@ -65,6 +66,10 @@ class ExpandableDropdown extends React.Component<any, any> {
       : null;
   }
 
+  closeDropdown() {
+    this.setState({ dropdownOpen: false });
+  }
+
   // currently using on header views dropdown
   // render components given as array of objects
   renderObjectList() {
@@ -92,7 +97,7 @@ class ExpandableDropdown extends React.Component<any, any> {
       ? (
         <div style={containerStyle}>
           { objectList.map(component => (
-            <div key={component.key} style={itemStyle}>{component}</div>
+            <div onClick={this.closeDropdown} key={component.key} style={itemStyle}>{component}</div>
           ))}
         </div>
       )
