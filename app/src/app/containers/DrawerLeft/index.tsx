@@ -42,9 +42,6 @@ const style: any = {
   },
   otherIcons: {
     color: '#979797'
-  },
-  button: {
-    
   }
 };
 
