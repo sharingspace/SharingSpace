@@ -31,9 +31,10 @@ class ExpandableDropdown extends React.Component<any, any> {
     const { isHeader } = this.props; // if the user sets it to the header
     const { dropdownOpen } = this.state;
     const caretSize = 25;
-    const headerIconStyle = {
+    const headerIconStyle: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
+      flexDirection: 'row',
       justifyContent: 'center'
     };
 
