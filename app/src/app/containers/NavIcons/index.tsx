@@ -7,6 +7,7 @@ import {
   FaList,
   FaUserFriends,
   FaPlusSquare,
+  FaMapMarkerAlt,
   FaTh,
   FaCaretDown
 } from 'react-icons/fa';
@@ -53,7 +54,7 @@ class NavToMapIconUnObserved extends NavIconParentClass {
         style={inlineStyle}
         onClick={() => functionToFireOnClick()}
       >
-        <FaLocationArrow size={this.iconSize}/>
+        <FaMapMarkerAlt size={this.iconSize}/>
       </div>
     ); 
   }
