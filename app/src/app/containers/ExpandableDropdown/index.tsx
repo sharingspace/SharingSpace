@@ -5,6 +5,7 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaCaretUp,
+  FaCaretDown,
   FaMapMarkerAlt
 } from 'react-icons/fa';
 
@@ -29,22 +30,30 @@ class ExpandableDropdown extends React.Component<any, any> {
   renderDropdownIcon() {
     const { isHeader } = this.props; // if the user sets it to the header
     const { dropdownOpen } = this.state;
+    const caretSize = 25;
+    const headerIconStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    };
 
-    const CloseIcon: any = isHeader 
-      ? FaMapMarkerAlt 
-      : FaChevronDown;
-
-    const OpenIcon: any = isHeader
-      ? FaCaretUp
-      : FaChevronUp;
-
-    const openStyle = isHeader ? { size: 40 } : {};
-    const closeStyle = isHeader ? { size: 40 } : {};
+    const headerOpenIcon: any = (
+      <div style={headerIconStyle}>
+        <FaMapMarkerAlt size={40} />
+        <FaCaretDown size={caretSize} />
+      </div>
+    );
+    const headerCloseIcon: any = (
+      <div style={headerIconStyle}>
+        <FaMapMarkerAlt size={40} />
+        <FaCaretUp size={caretSize} />
+      </div>
+    );
 
     if (dropdownOpen) {
-      return <OpenIcon {...openStyle} />;
+      return isHeader ? headerCloseIcon : <FaChevronUp />;
     } else {
-      return <CloseIcon {...closeStyle} />;
+      return isHeader ? headerOpenIcon : <FaChevronDown />;
     }
   }
 
@@ -77,7 +86,8 @@ class ExpandableDropdown extends React.Component<any, any> {
     const { dropdownOpen } = this.state;
 
     const containerStyle: any = {
-      position: 'absolute', 
+      position: 'absolute',
+      width: '4rem',
       zIndex: 101, // 100: map overlay
       backgroundColor: 'white', 
       border: '2px solid white',

@@ -54,7 +54,6 @@ class DrawerRight extends React.Component<any, {}> {
     const { push } = this.props.history;
     push(route);
     drawerStore.closeDrawerRight();
-
   }
 
   renderNavItems() {
