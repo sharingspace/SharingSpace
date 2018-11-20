@@ -24,8 +24,9 @@ interface LineItemProps {
 
 class LineItem extends React.Component<LineItemProps, any> {
   render() {
-    let inlineStyle: any = {};
-    let functionToFire = this.props.onClick;
+    const inlineStyle: any = {};
+    const functionToFire = this.props.onClick;
+    const Icon = this.props.icon;
 
     // this is to prevent map nav from working until map is loaded
     // if(this.props.disabled) {
@@ -35,7 +36,6 @@ class LineItem extends React.Component<LineItemProps, any> {
     //   inlineStyle.color = 'lightgrey';
     // }
 
-    let Icon = this.props.icon;
     return (
       <div style={inlineStyle as any} className="each-right-entry-container" onClick={(e) => functionToFire(e)}>
         <div className="each-drawer-title-container">
@@ -123,11 +123,11 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   renderLineBreak() {
-    let style = {
+    const style = {
       marginTop: '.1rem',
       marginBottom: '.1rem',
     };
-    let lineStyle = {
+    const lineStyle = {
       height: '1px',
       backgroundColor: 'lightgrey',
     };
@@ -150,61 +150,47 @@ class DrawerRight extends React.Component<any, {}> {
             <span style={aboutStyle}>About this Space</span>
           </div>
         </div>
-
-        <LineItem disabled={false} title={'Information'} icon={FaInfoCircle} onClick={() => console.log('on click')}/>
+        <LineItem 
+          disabled={false} 
+          title={'Information'} 
+          icon={FaInfoCircle} 
+          onClick={() => console.log('on click')}
+        />
       </div>
     );
-  }
-
-  renderOptionsBottom() {
-    return (
-      <div>
-        <LineItem disabled={false} title={'Settings'} icon={FaCogs} onClick={() => console.log('on click')}/>
-      </div>
-    );
-  }
-
-  renderViewDropdown() {
-    return <ExpandableDropdown title={'View'} childComponent={this.renderNavItems()} />;
   }
 
   render() {
-    let masterContainerStyle = {
+    const masterContainerStyle: any = {
       zIndex: 102, // 100: map overlay, 101: view dropdown
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
       flex: 1,
-      // width: '10rem'
     };
-
-    let topStaticStyle = {
+    const topStaticStyle: any = {
       flex: 0,
-      // border: '1px solid green'
     };
-
-    let middleScrollStyle = {
-      flex: 1,
-      // border: '1px solid blue',
-      overflowY: 'scroll'
+    const middleStaticStyle: any = {
+      flex: 1
     };
-
-    let bottomStaticStyle = {
+    const bottomStaticStyle: any = {
       flex: 0,
-      // border: '1px solid orange'
     };
 
     return (
-      <div style={masterContainerStyle as any} className="drawer-right-container">
-        <div style={topStaticStyle as any}>
+      <div style={masterContainerStyle} className="drawer-right-container">
+        <div style={topStaticStyle}>
           <div className="drawer-right-mobile">
-            {this.renderViewDropdown()}
+            <ExpandableDropdown title={'View'} childComponent={this.renderNavItems()} />
             {this.renderLineBreak()}
           </div>
+        </div>
+        <div style={middleStaticStyle}>
           {this.renderProfile()}
           {this.renderLineBreak()}
           {this.renderThisChannelData()}
-          {this.renderOptionsBottom()}
+          <LineItem disabled={false} title={'Settings'} icon={FaCogs} onClick={() => console.log('[!] on click')}/>
         </div>
       </div>
     );

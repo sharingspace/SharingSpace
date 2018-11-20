@@ -1,0 +1,18 @@
+.add-space-button {
+	height: 3rem;
+	width: 100%;
+	background-color: #52599f;
+	border-radius: 2px;
+	border: none;
+	color: white;
+	outline: none;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.add-space-button:hover {
+	background-color: #575ea8;
+}
+
+.add-space-button:active {
+	background-color: #454b87;
+}

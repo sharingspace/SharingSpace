@@ -7,24 +7,44 @@ import {
   FaShareAlt
 } from 'react-icons/fa';
 
-const style = {
-  container: {
-    margin: '2rem 5rem 2rem 2rem',
+const style: any = {
+  mainRenderContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    flex: 1,
+    backgroundColor: '#333333'
   },
+  topStatic: { flex: 0 },
+  middleStatic: { flex: 1 },
+  bottomStatic: { 
+    flex: 0,
+    padding: '2rem 2rem 1rem 2rem',
+  },
+  domainContainer: { margin: '0.5rem 5rem 2rem 2rem' },
   header: {
     fontSize: '2rem',
-    marginBottom: '0.5rem'
+    margin: '2rem 5rem 0rem 2rem',
+    color: '#f3f3f3'
   },
   listContent: {
-    paddingBottom: '0.5rem'
+    paddingBottom: '1rem'
   },
   firstIcon: {
+    color: '#6a6a6a',
     paddingLeft: '0px',
     paddingRight: '0px'
   },
   title: {
+    color: '#6a6a6a',
     width: '8rem',
     paddingRight: '2rem'
+  },
+  otherIcons: {
+    color: '#979797'
+  },
+  button: {
+    
   }
 };
 
@@ -39,8 +59,7 @@ class DrawerLeft extends React.Component<Props, {}> {
     ];
 
     return (
-      <div style={style.container}>
-        <div style={style.header}>Spaces</div>
+      <div style={style.domainContainer}>
         {temporaryList.map(temporaryWord => (
           <div key={temporaryWord} className="each-sharing-network-container" style={style.listContent}>
             <div className="each-drawer-icon-container" style={style.firstIcon}>
@@ -49,10 +68,10 @@ class DrawerLeft extends React.Component<Props, {}> {
             <div className="each-drawer-title-container" style={style.title}>
               {temporaryWord}
             </div>
-            <div className="each-drawer-icon-container">
+            <div className="each-drawer-icon-container" style={style.otherIcons}>
               <FaShareAlt size={otherIconsSize} />
             </div>
-            <div className="each-drawer-icon-container">
+            <div className="each-drawer-icon-container" style={style.otherIcons}>
               <FaClone size={otherIconsSize} />
             </div>
           </div>
@@ -63,8 +82,18 @@ class DrawerLeft extends React.Component<Props, {}> {
 
   render() {
     return (
-      <div className="drawer-left-container">
-        {this.renderDomains()}
+      <div style={style.mainRenderContainer} className="drawer-left-container">
+        <div style={style.topStatic}>
+          <div style={style.header}>Spaces</div>
+        </div>
+        <div style={style.middleStatic}>
+          {this.renderDomains()}
+        </div>
+        <div style={style.bottomStatic}>
+          <button className="add-space-button">
+            New Space
+          </button>
+        </div>
       </div>
     );
   }
