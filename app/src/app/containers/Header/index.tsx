@@ -22,7 +22,8 @@ import {
   NavToMembersIcon,
   HamburgerIcon,
   SharingSpaceIcon,
-  TriangleDownIcon
+  TriangleDownIcon,
+  NavToShapesIcon
 } from '../NavIcons';
 
 class Header extends React.Component<any, any> {
@@ -75,19 +76,20 @@ class Header extends React.Component<any, any> {
   }
 
   renderRightDesktop() {
-    const navList = [
+    const viewsList = [
       <NavToGridIcon key="grid" onClick={() => this.navTo('/grid')} />,
       <NavToMapIcon key="map" onClick={() => this.navTo('/map')} />,
       <NavToListIcon key="list" onClick={() => this.navTo('/list')} />,
     ];
+    const membersList = [
+      <NavToShapesIcon key="shapes" onClick={() => console.log('[!] shapes icon tba')} />,
+      <NavToMembersIcon key="members" onClick={() => this.navToUserList()} />
+    ];
 
     return (
       <div className={'header-right-desktop'}>
-        <ExpandableDropdown objectList={navList} isHeader={true} />
-        {this.renderRightMembers()}
-        {/* <NavToGridIcon onClick={() => this.navTo('/grid')} />
-        <NavToMapIcon onClick={() => this.navTo('/map')} />
-        <NavToListIcon onClick={() => this.navTo('/list')} /> */}
+        <ExpandableDropdown objectList={viewsList} isHeader={true} icon={'FaMapMarkerAlt'} />
+        <ExpandableDropdown objectList={membersList} isHeader={true} icon={'FaUserFriends'} />
         {this.renderNewEntry()}
         {this.renderRightHamburger()}
       </div>

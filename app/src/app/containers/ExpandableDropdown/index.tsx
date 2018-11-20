@@ -6,7 +6,8 @@ import {
   FaChevronUp,
   FaCaretUp,
   FaCaretDown,
-  FaMapMarkerAlt
+  FaMapMarkerAlt,
+  FaUserFriends
 } from 'react-icons/fa';
 
 class ExpandableDropdown extends React.Component<any, any> {
@@ -28,9 +29,11 @@ class ExpandableDropdown extends React.Component<any, any> {
   }
 
   renderDropdownIcon() {
-    const { isHeader } = this.props; // if the user sets it to the header
+    // isHeader: if the user sets it to the header
+    // icon: FaMapMarkerAlt or FaUserFriends for the dropdowns on right header
+    const { isHeader, icon } = this.props; 
     const { dropdownOpen } = this.state;
-    const caretSize = 25;
+    const caretSize = 15;
     const headerIconStyle: React.CSSProperties = {
       display: 'flex',
       alignItems: 'center',
@@ -38,15 +41,22 @@ class ExpandableDropdown extends React.Component<any, any> {
       justifyContent: 'center'
     };
 
+    let StaticIcon;
+    if (icon === 'FaMapMarkerAlt') {
+      StaticIcon = FaMapMarkerAlt;
+    } else if (icon === 'FaUserFriends') {
+      StaticIcon = FaUserFriends;
+    }
+
     const headerOpenIcon: any = (
       <div style={headerIconStyle}>
-        <FaMapMarkerAlt size={40} />
+        <StaticIcon size={40} />
         <FaCaretDown size={caretSize} />
       </div>
     );
     const headerCloseIcon: any = (
       <div style={headerIconStyle}>
-        <FaMapMarkerAlt size={40} />
+        <StaticIcon size={40} />
         <FaCaretUp size={caretSize} />
       </div>
     );
@@ -88,7 +98,6 @@ class ExpandableDropdown extends React.Component<any, any> {
 
     const containerStyle: any = {
       position: 'absolute',
-      width: '4rem',
       zIndex: 101, // 100: map overlay
       backgroundColor: 'white', 
       border: '2px solid white',

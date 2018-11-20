@@ -3,13 +3,12 @@ import { observer } from 'mobx-react';
 import { Button } from 'antd';
 import {
   FaBars,
-  FaLocationArrow,
   FaList,
   FaUserFriends,
-  FaPlusSquare,
   FaMapMarkerAlt,
   FaTh,
-  FaCaretDown
+  FaCaretDown,
+  FaShapes
 } from 'react-icons/fa';
 import { drawerStore, navStore, mapStore } from '../../stores';
 import { Route, Switch } from 'react-router';
@@ -86,6 +85,16 @@ export class NavToMembersIcon extends NavIconParentClass {
     return (
       <div className="header-icon-container" onClick={() => this.props.onClick()}>
         <FaUserFriends size={this.iconSize} />
+      </div>
+    );
+  }
+}
+
+export class NavToShapesIcon extends NavIconParentClass {
+  render() {
+    return (
+      <div className="header-icon-container" onClick={() => this.props.onClick()}>
+        <FaShapes size={this.iconSize} />
       </div>
     );
   }
