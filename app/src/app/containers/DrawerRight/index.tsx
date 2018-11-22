@@ -11,9 +11,43 @@ import {
   FaTh,
   FaUserPlus
 } from 'react-icons/fa';
-import SearchInput from '../SearchInput';
 import ExpandableDropdown from '../ExpandableDropdown';
 import { drawerStore, mapStore } from '../../stores';
+
+const style: any = {
+  topStatic: {
+    flex: 0,
+  },
+  middleStatic: {
+    flex: 1
+  },
+  bottomStatic: {
+    flex: 0,
+  },
+  profileContainer: {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#ffffff',
+  },
+  profileImageContainer: {
+    marginRight: '0.5rem'
+  },
+  profileImage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '2.5rem',
+    width: '2.5rem',
+    borderRadius: '1.25rem',
+    border: '1px solid #ffffff',
+  },
+  profileName: {
+    fontSize: '28px',
+    flex: 1,
+  }
+};
 
 interface LineItemProps {
   title: string;
@@ -24,7 +58,6 @@ interface LineItemProps {
 
 class LineItem extends React.Component<LineItemProps, any> {
   render() {
-    const inlineStyle: any = {};
     const functionToFire = this.props.onClick;
     const Icon = this.props.icon;
 
@@ -37,13 +70,9 @@ class LineItem extends React.Component<LineItemProps, any> {
     // }
 
     return (
-      <div style={inlineStyle as any} className="each-right-entry-container" onClick={(e) => functionToFire(e)}>
-        <div className="each-drawer-title-container">
-          {this.props.title}
-        </div>
-        <div className="each-drawer-icon-container">
-          <Icon />
-        </div>
+      <div className="each-right-entry-container" onClick={(e) => functionToFire(e)}>
+        <div className="each-drawer-icon-container"><Icon /></div>
+        <div className="each-drawer-title-container">{this.props.title}</div>
       </div>
     );
   }
@@ -59,7 +88,7 @@ class DrawerRight extends React.Component<any, {}> {
   renderNavItems() {
     const { mapReadyToView } = mapStore;
     let mapItemDisabled = false;
-    if(!mapReadyToView) {
+    if (!mapReadyToView) {
       mapItemDisabled = true;
     }
     return (
@@ -72,124 +101,57 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   renderProfile() {
-    const name = 'My Name';
-    const profileImgUrl = 'http://www.person.hu/data/upload/pics/mate_original.png';
-    const imageSize = 4;
-    const inlineImageStyle = {
-      background: 'url(' + profileImgUrl + ')',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      height: imageSize + 'rem',
-      width: imageSize + 'rem',
-      borderRadius: imageSize / 2 + 'rem',
-      border: '3px solid #353535',
-      flex: '0 auto ' + imageSize + 'rem',
-      margin: '.5rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    };
-    const profileContainer = {
-      display: 'flex',
-      flex: 1,
-      flexDirection: 'row',
-      width: '100%',
-      alignItems: 'center',
-      justifyContent: 'center'
-    };
-    const nameStyle = {
-      fontSize: '1.1rem',
-      fontWeight: 'bold',
-      flex: 1,
-      marginRight: '.5rem'
-    };
-    const iconStyle = {
-      marginLeft: '.5rem'
-    };
-
+    const defaultName = 'Keira Deane';
     return (
       <div className="drawer-right-profile-container">
-        <div style={profileContainer as any}>
-          <div style={inlineImageStyle as any}>
-            <FaUserPlus size={40} />
+        <div style={style.profileContainer}>
+          <div style={style.profileImageContainer}>
+            <div style={style.profileImage}> {/* this is the circle */}
+              <FaUserPlus size={25} />
+            </div>
           </div>
-          <div style={nameStyle as any} className="each-right-entry-container" onClick={() => console.log('do something')}>
-            {name} <FaCog style={iconStyle} />
-          </div>
+          <div style={style.profileName} onClick={() => console.log('tba')}>{defaultName}</div>
         </div>
-        <LineItem disabled={false} title={'Messages'} icon={FaEnvelope} onClick={() => console.log('on click')}/>
       </div>
     );
   }
 
-  renderLineBreak() {
-    const style = {
-      marginTop: '.1rem',
-      marginBottom: '.1rem',
-    };
-    const lineStyle = {
-      height: '1px',
-      backgroundColor: 'lightgrey',
-    };
-    return (
-      <div style={style}>
-        <div style={lineStyle} />
-      </div>
-    );
-  }
-
-  renderThisChannelData() {
-    const aboutStyle = {
-      color: 'slategrey',
-      fontSize: '1rem'
-    };
+  renderMenu() {
     return (
       <div>
-        <div className="each-right-entry-container">
-          <div className="each-drawer-title-container">
-            <span style={aboutStyle}>About this Space</span>
-          </div>
-        </div>
+        <LineItem 
+          disabled={false} 
+          title={'Messages'} 
+          icon={FaEnvelope} 
+          onClick={() => console.log('tba')}
+        />
+        <LineItem 
+          disabled={false} 
+          title={'Controls'} 
+          icon={FaCog} 
+          onClick={() => console.log('tba')}
+        />
         <LineItem 
           disabled={false} 
           title={'Information'} 
           icon={FaInfoCircle} 
-          onClick={() => console.log('on click')}
+          onClick={() => console.log('tba')}
         />
       </div>
     );
   }
 
   render() {
-    const masterContainerStyle: any = {
-      zIndex: 102, // 100: map overlay, 101: view dropdown
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-      flex: 1,
-    };
-    const topStaticStyle: any = {
-      flex: 0,
-    };
-    const middleStaticStyle: any = {
-      flex: 1
-    };
-    const bottomStaticStyle: any = {
-      flex: 0,
-    };
-
     return (
-      <div style={masterContainerStyle} className="drawer-right-container">
-        <div style={topStaticStyle}>
+      <div className="drawer-right-container">
+        <div style={style.topStatic}>
           <div className="drawer-right-mobile">
             <ExpandableDropdown title={'View'} childComponent={this.renderNavItems()} />
-            {this.renderLineBreak()}
           </div>
         </div>
-        <div style={middleStaticStyle}>
+        <div style={style.middleStatic}>
           {this.renderProfile()}
-          {this.renderLineBreak()}
-          {this.renderThisChannelData()}
+          {this.renderMenu()}
           <LineItem disabled={false} title={'Settings'} icon={FaCogs} onClick={() => console.log('[!] on click')}/>
         </div>
       </div>
