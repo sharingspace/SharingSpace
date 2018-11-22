@@ -22,7 +22,7 @@ const style: any = {
     flex: 1
   },
   bottomStatic: {
-    flex: 0,
+    flex: '1 1 0%'
   },
   profileContainer: {
     display: 'flex',
@@ -46,6 +46,17 @@ const style: any = {
   profileName: {
     fontSize: '28px',
     flex: 1,
+  },
+  break: {
+    margin: '1rem -2rem 0.5rem -0.5rem',
+    borderWidth: '0.5px'
+  },
+  spaceName: {
+    textAlign: 'center',
+    color: '#ffffff',
+    fontSize: '28px',
+    marginLeft: '1rem',
+    marginBottom: '1.25rem',
   }
 };
 
@@ -85,6 +96,7 @@ class DrawerRight extends React.Component<any, {}> {
     drawerStore.closeDrawerRight();
   }
 
+  // TODO: redo
   renderNavItems() {
     const { mapReadyToView } = mapStore;
     let mapItemDisabled = false;
@@ -131,10 +143,23 @@ class DrawerRight extends React.Component<any, {}> {
           icon={FaCog} 
           onClick={() => console.log('tba')}
         />
+      </div>
+    );
+  }
+
+  renderSpaceMenu() {
+    return (
+      <div>
         <LineItem 
           disabled={false} 
           title={'Information'} 
           icon={FaInfoCircle} 
+          onClick={() => console.log('tba')}
+        />
+        <LineItem 
+          disabled={false} 
+          title={'Settings'} 
+          icon={FaCogs} 
           onClick={() => console.log('tba')}
         />
       </div>
@@ -142,6 +167,7 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   render() {
+    const spaceName = 'Space Name'
     return (
       <div className="drawer-right-container">
         <div style={style.topStatic}>
@@ -152,7 +178,11 @@ class DrawerRight extends React.Component<any, {}> {
         <div style={style.middleStatic}>
           {this.renderProfile()}
           {this.renderMenu()}
-          <LineItem disabled={false} title={'Settings'} icon={FaCogs} onClick={() => console.log('[!] on click')}/>
+        </div>
+        <hr style={style.break} />
+        <div style={style.bottomStatic}>
+          <div style={style.spaceName}>{spaceName}</div>
+          {this.renderSpaceMenu()}
         </div>
       </div>
     );
