@@ -10,6 +10,38 @@ import {
   FaUserFriends
 } from 'react-icons/fa';
 
+const style: any = {
+  headerIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  dropdownContainer: {
+    position: 'absolute',
+    zIndex: 101, // 100: map overlay
+    backgroundColor: 'white', 
+    border: '2px solid white',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)'
+  },
+  dropdownItem: { 
+    display: 'block', 
+    paddingTop: '.5rem', 
+    paddingBottom: '.5rem' 
+  },
+  title: {
+    padding: '.3rem',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  mainContainer: {
+    margin: '0rem -1.5rem 1.25rem 0rem'
+  }
+};
+
 class ExpandableDropdown extends React.Component<any, any> {
   title: string;
   icon: any;
@@ -34,12 +66,6 @@ class ExpandableDropdown extends React.Component<any, any> {
     const { isHeader, icon } = this.props; 
     const { dropdownOpen } = this.state;
     const caretSize = 15;
-    const headerIconStyle: React.CSSProperties = {
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'center'
-    };
 
     let StaticIcon;
     if (icon === 'FaMapMarkerAlt') {
@@ -49,22 +75,22 @@ class ExpandableDropdown extends React.Component<any, any> {
     }
 
     const headerOpenIcon: any = (
-      <div style={headerIconStyle}>
+      <div style={style.headerIcon}>
         <StaticIcon size={40} />
         <FaCaretDown size={caretSize} />
       </div>
     );
     const headerCloseIcon: any = (
-      <div style={headerIconStyle}>
+      <div style={style.headerIcon}>
         <StaticIcon size={40} />
         <FaCaretUp size={caretSize} />
       </div>
     );
 
     if (dropdownOpen) {
-      return isHeader ? headerCloseIcon : <FaChevronUp />;
+      return isHeader ? headerCloseIcon : <FaChevronUp size={15} />;
     } else {
-      return isHeader ? headerOpenIcon : <FaChevronDown />;
+      return isHeader ? headerOpenIcon : <FaChevronDown size={15} />;
     }
   }
 
@@ -96,28 +122,14 @@ class ExpandableDropdown extends React.Component<any, any> {
     const { objectList } = this.props;
     const { dropdownOpen } = this.state;
 
-    const containerStyle: any = {
-      position: 'absolute',
-      zIndex: 101, // 100: map overlay
-      backgroundColor: 'white', 
-      border: '2px solid white',
-      boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)'
-    };
-
-    const itemStyle: any = { 
-      display: 'block', 
-      paddingTop: '.5rem', 
-      paddingBottom: '.5rem' 
-    };
-
     if (!objectList || !objectList.length) {
       return;
     }
     return dropdownOpen 
       ? (
-        <div style={containerStyle}>
+        <div style={style.dropdownContainer}>
           { objectList.map(component => (
-            <div onClick={this.closeDropdown} key={component.key} style={itemStyle}>{component}</div>
+            <div onClick={this.closeDropdown} key={component.key} style={style.dropdownItem}>{component}</div>
           ))}
         </div>
       )
@@ -138,16 +150,10 @@ class ExpandableDropdown extends React.Component<any, any> {
   }
 
   renderTitle() {
-    let titleStyle = {
-      padding: '.3rem',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
-    };
+    const { isHeader } = this.props;
+    const className: string = isHeader ? 'expandable-dropdown-title-container' : 'expandable-dropdown-title-container-sidebar';
     return (
-      <div className="expandable-dropdown-title-container" style={titleStyle as any} onClick={() => this.titlePressed()}>
+      <div className={className} style={style.title} onClick={() => this.titlePressed()}>
         <div>{this.props.title}</div>
         {this.renderDropdownIcon()}
       </div>
@@ -155,8 +161,9 @@ class ExpandableDropdown extends React.Component<any, any> {
   }
 
   render() {
+    const { isHeader } = this.props;
     return (
-      <div>
+      <div style={!isHeader ? style.mainContainer : {}}>
         {this.renderTitle()}
         {this.renderList()}
         {this.renderObjectList()}
