@@ -67,6 +67,28 @@ class ExpandableDropdown extends React.Component<any, any> {
     this.onClickChildIcon = this.onClickChildIcon.bind(this);
   }
 
+  componentDidMount() {
+    // select the icon according to site path
+    // e.g. http://0.0.0.0:3000/{pathname}
+    const { pathname } = window.location;
+    let selectedMapIcon = '';
+
+    switch(pathname) {
+      case '/grid':
+        selectedMapIcon = 'FaTh';
+        break;
+      case '/map':
+        selectedMapIcon = 'FaMapMarkerAlt';
+        break;
+      case '/list':
+        selectedMapIcon = 'FaList';
+        break;
+      default:
+        selectedMapIcon = 'FaTh';
+    }
+    this.setState({ selectedMapIcon });
+  }
+
   titlePressed() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
