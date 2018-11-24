@@ -96,13 +96,9 @@ class DrawerRight extends React.Component<any, {}> {
     drawerStore.closeDrawerRight();
   }
 
-  // TODO: redo
   renderNavItems() {
     const { mapReadyToView } = mapStore;
-    let mapItemDisabled = false;
-    if (!mapReadyToView) {
-      mapItemDisabled = true;
-    }
+    const mapItemDisabled = !mapReadyToView ? true : false;
     return (
       <div>
         <LineItem disabled={false} title={'Grid View'} icon={FaTh} onClick={() => this.navTo('/grid')}/>
@@ -167,7 +163,7 @@ class DrawerRight extends React.Component<any, {}> {
   }
 
   render() {
-    const spaceName = 'Space Name'
+    const spaceName = 'Space Name';
     return (
       <div className="drawer-right-container">
         <div style={style.topStatic}>
