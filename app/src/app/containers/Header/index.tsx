@@ -7,13 +7,13 @@ import {
   FaList,
   FaUserFriends,
   FaPlusSquare,
-  FaTh
 } from 'react-icons/fa';
 import { drawerStore, navStore } from '../../stores';
 import { Route, Switch } from 'react-router';
 import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
 import ExpandableDropdown from '../ExpandableDropdown';
+import { Category } from '../NavIcons';
 
 import {
   NavToMapIcon,
@@ -27,7 +27,6 @@ import {
 } from '../NavIcons';
 
 class Header extends React.Component<any, any> {
-
   iconSize: number;
 
   constructor(props) {
@@ -77,19 +76,19 @@ class Header extends React.Component<any, any> {
 
   renderRightDesktop() {
     const viewsList = [
-      <NavToGridIcon key="grid" onClick={() => this.navTo('/grid')} />,
-      <NavToMapIcon key="map" onClick={() => this.navTo('/map')} />,
-      <NavToListIcon key="list" onClick={() => this.navTo('/list')} />,
+      <NavToGridIcon key="grid" icon="FaTh" category={Category.map} onClick={() => this.navTo('/grid')} />,
+      <NavToMapIcon key="map" icon="FaMapMarkerAlt" category={Category.map} onClick={() => this.navTo('/map')} />,
+      <NavToListIcon key="list" icon="FaList" category={Category.map} onClick={() => this.navTo('/list')} />,
     ];
     const membersList = [
-      <NavToShapesIcon key="shapes" onClick={() => console.log('[!] shapes icon tba')} />,
-      <NavToMembersIcon key="members" onClick={() => this.navToUserList()} />
+      <NavToShapesIcon key="shapes" icon="FaShapes" category={Category.people} onClick={() => console.log('[!] shapes icon tba')} />,
+      <NavToMembersIcon key="members" icon="FaUserFriends" category={Category.people} onClick={() => this.navToUserList()} />
     ];
 
     return (
       <div className={'header-right-desktop'}>
-        <ExpandableDropdown objectList={viewsList} isHeader={true} icon={'FaMapMarkerAlt'} />
-        <ExpandableDropdown objectList={membersList} isHeader={true} icon={'FaUserFriends'} />
+        <ExpandableDropdown objectList={viewsList} isHeader={true} name={'map'} />
+        <ExpandableDropdown objectList={membersList} isHeader={true} name={'people'} />
         {this.renderNewEntry()}
         {this.renderRightHamburger()}
       </div>

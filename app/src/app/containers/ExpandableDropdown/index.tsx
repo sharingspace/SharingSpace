@@ -7,7 +7,10 @@ import {
   FaCaretUp,
   FaCaretDown,
   FaMapMarkerAlt,
-  FaUserFriends
+  FaUserFriends,
+  FaTh,
+  FaList,
+  FaShapes
 } from 'react-icons/fa';
 
 const style: any = {
@@ -42,6 +45,14 @@ const style: any = {
   }
 };
 
+const equivalentIcons = {
+  ['FaTh']: FaTh,
+  ['FaMapMarkerAlt']: FaMapMarkerAlt,
+  ['FaList']: FaList,
+  ['FaShapes']: FaShapes,
+  ['FaUserFriends']: FaUserFriends
+};
+
 class ExpandableDropdown extends React.Component<any, any> {
   title: string;
   icon: any;
@@ -49,9 +60,11 @@ class ExpandableDropdown extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      selectedMapIcon: 'FaTh',
+      selectedPeopleIcon: 'FaShapes' 
     };
-    this.closeDropdown = this.closeDropdown.bind(this);
+    this.onClickChildIcon = this.onClickChildIcon.bind(this);
   }
 
   titlePressed() {
@@ -63,15 +76,15 @@ class ExpandableDropdown extends React.Component<any, any> {
   renderDropdownIcon() {
     // isHeader: if the user sets it to the header
     // icon: FaMapMarkerAlt or FaUserFriends for the dropdowns on right header
-    const { isHeader, icon } = this.props; 
-    const { dropdownOpen } = this.state;
+    const { isHeader, name } = this.props; 
+    const { dropdownOpen, selectedMapIcon, selectedPeopleIcon } = this.state;
     const caretSize = 15;
 
     let StaticIcon;
-    if (icon === 'FaMapMarkerAlt') {
-      StaticIcon = FaMapMarkerAlt;
-    } else if (icon === 'FaUserFriends') {
-      StaticIcon = FaUserFriends;
+    if (name === 'map') {
+      StaticIcon = equivalentIcons[selectedMapIcon];
+    } else if (name === 'people') {
+      StaticIcon = equivalentIcons[selectedPeopleIcon];
     }
 
     const headerOpenIcon: any = (
@@ -112,8 +125,13 @@ class ExpandableDropdown extends React.Component<any, any> {
       : null;
   }
 
-  closeDropdown() {
-    this.setState({ dropdownOpen: false });
+  onClickChildIcon(component) {
+    const { icon, category } = component.props;
+    const selectedName = category === 'MAP' ? 'selectedMapIcon' : 'selectedPeopleIcon';
+    this.setState({
+      dropdownOpen: false,
+      [selectedName]: icon
+    });
   }
 
   // currently using on header views dropdown
@@ -129,7 +147,7 @@ class ExpandableDropdown extends React.Component<any, any> {
       ? (
         <div style={style.dropdownContainer}>
           { objectList.map(component => (
-            <div onClick={this.closeDropdown} key={component.key} style={style.dropdownItem}>{component}</div>
+            <div onClick={() => this.onClickChildIcon(component)} key={component.key} style={style.dropdownItem}>{component}</div>
           ))}
         </div>
       )

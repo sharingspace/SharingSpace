@@ -16,8 +16,15 @@ import { withRouter } from 'react-router';
 import SearchInput from '../SearchInput';
 import logo from '../../../assets/images/logo.png';
 
+export enum Category {
+  map = 'MAP',
+  people = 'PEOPLE'
+}
+
 interface NavIconParentProps {
   onClick: any;
+  icon?: string;
+  category?: Category;
 }
 
 class NavIconParentClassUbObserved extends React.Component<NavIconParentProps, any> {
