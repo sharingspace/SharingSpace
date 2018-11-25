@@ -76,7 +76,6 @@ $header-text-color: $global-dark;
 
 .header-right-mobile {
   @extend .header-right;
-  border: 1px solid green;
   @include media('>=tablet') {
     display: none;
   }

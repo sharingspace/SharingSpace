@@ -2,70 +2,95 @@ import { Props } from '../Root';
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
-  FaThLarge,
-  FaShare,
+  FaTh,
   FaClone,
-  FaTrash,
-  FaSquare
+  FaShareAlt
 } from 'react-icons/fa';
 
+const style: any = {
+  mainRenderContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    flex: 1,
+    backgroundColor: '#333333'
+  },
+  topStatic: { flex: 0 },
+  middleStatic: { flex: 1 },
+  bottomStatic: { 
+    flex: 0,
+    padding: '2rem 2rem 1rem 2rem',
+  },
+  domainContainer: { margin: '0.5rem 5rem 2rem 2rem' },
+  header: {
+    fontSize: '2rem',
+    margin: '2rem 5rem 0rem 2rem',
+    color: '#f3f3f3'
+  },
+  listContent: {
+    paddingBottom: '1rem'
+  },
+  firstIcon: {
+    color: '#6a6a6a',
+    paddingLeft: '0px',
+    paddingRight: '0px'
+  },
+  title: {
+    color: '#6a6a6a',
+    width: '8rem',
+    paddingRight: '2rem'
+  },
+  otherIcons: {
+    color: '#979797'
+  }
+};
+
 class DrawerLeft extends React.Component<Props, {}> {
-
   renderDomains() {
-    let list = [1, 2, 3, 4, 5];
-    return (<div>
-      {list.map((elem, i) => {
-        return <div key={i} className='each-sharing-network-container'>
-          <div className='each-drawer-icon-container'>
-            <FaThLarge />
+    const otherIconsSize = 15;
+    const temporaryList = [
+      'Age of Solar',
+      'Arcosanti',
+      'Phx Makers',
+      'Cat Lovers',
+    ];
+
+    return (
+      <div style={style.domainContainer}>
+        {temporaryList.map(temporaryWord => (
+          <div key={temporaryWord} className="each-sharing-network-container" style={style.listContent}>
+            <div className="each-drawer-icon-container" style={style.firstIcon}>
+              <FaTh />
+            </div>
+            <div className="each-drawer-title-container" style={style.title}>
+              {temporaryWord}
+            </div>
+            <div className="each-drawer-icon-container" style={style.otherIcons}>
+              <FaShareAlt size={otherIconsSize} />
+            </div>
+            <div className="each-drawer-icon-container" style={style.otherIcons}>
+              <FaClone size={otherIconsSize} />
+            </div>
           </div>
-          <div className='each-drawer-title-container'>
-            Sharing Network {i}
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaShare />
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaClone />
-          </div>
-          <div className='each-drawer-icon-container'>
-            <FaTrash />
-          </div>
-        </div>
-      })}
-    </div>)
+        ))}
+      </div>
+    );
   }
-
-  renderMyChannels() {
-    let list = [1, 2, 3, 4, 5];
-    return (<div>
-      {list.map((elem, i) => {
-        return <div key={i} className='each-channel-container'>
-          <div className='each-drawer-icon-container'>
-            <FaSquare />
-          </div>
-          <div className='each-drawer-title-container'>
-            My Channel {i}
-          </div>
-
-        </div>
-      })}
-    </div>)
-  }
-
-  renderLineBreak() {
-    return (<div>
-      <hr />
-    </div>)
-  }
-
 
   render() {
     return (
-      <div className="drawer-left-container">
-        {this.renderDomains()}
-        {this.renderLineBreak()}
-        {this.renderMyChannels()}
+      <div style={style.mainRenderContainer} className="drawer-left-container">
+        <div style={style.topStatic}>
+          <div style={style.header}>Spaces</div>
+        </div>
+        <div style={style.middleStatic}>
+          {this.renderDomains()}
+        </div>
+        <div style={style.bottomStatic}>
+          <button className="add-space-button">
+            New Space
+          </button>
+        </div>
       </div>
     );
   }

@@ -7,3 +7,8 @@
     background: $global-light;
   }
 }
+
+.expandable-dropdown-title-container-sidebar {
+  @extend .noselect;
+  color: #ffffff;
+}
