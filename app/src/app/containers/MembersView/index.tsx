@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyledBadge, StyledCard, StyledContainer, StyledTitle } from './styled';
+import { observer } from 'mobx-react';
+import { membersStore } from '../../stores';
 
 const dummyData = [
   { name: 'Marlon', role: 'admin' },
@@ -7,17 +9,27 @@ const dummyData = [
   { name: 'Jess', role: 'slave' },
   { name: 'Jikubb', role: 'assistant slave' },
   { name: 'Joel', role: 'nobody' },
-]
+];
 
-const MembersView = () => (
-  <StyledContainer>
-    {dummyData && dummyData.map(data => (
-      <StyledCard>
-        <StyledTitle>{data.name}</StyledTitle>
-        <StyledBadge>{data.role}</StyledBadge>
-      </StyledCard>
-    ))}
-  </StyledContainer>
-);
+class MembersView extends Component {
+  componentDidMount() {
+    membersStore.fetchMembers();
+  }
 
-export default MembersView;
+  render() {
+    const { members } = membersStore;
+    console.log('members', members);
+    return (
+      <StyledContainer>
+        {members && members.map(member => (
+          <StyledCard key={member.id}>
+            <StyledTitle>{member.display_name}</StyledTitle>
+            <StyledBadge>role</StyledBadge>
+          </StyledCard>
+        ))}
+      </StyledContainer>
+    );
+  }
+}
+
+export default observer(MembersView);

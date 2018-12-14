@@ -7,14 +7,16 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledCard = styled.div`
+	display: flex;
+	alignItems: center;
   padding-bottom: 10px;
   border-bottom: 1px solid lightgrey;
 	margin-bottom: 10px;
 `;
 export const StyledBadge = styled.div`
+	height: 1.7rem;
 	margin-left: 1rem;
 	margin-top: 0.78rem;
-	position: absolute;
 	border-radius: 100px;
 	color: #bfbcc2;
 	font-size: 0.90rem;

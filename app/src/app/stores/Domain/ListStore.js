@@ -44,6 +44,7 @@ class ListStore {
     if(!this.list) {
       return [];
     } else {
+      console.log('this.list', this.list)
       return this.formatListData( toJS(this.list.rows) );
     }
   }
