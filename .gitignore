@@ -2,5 +2,5 @@
 app/auth/
 app/node_modules/
 .DS_Store
-dist/
+# dist/
 google_dev_upload.json

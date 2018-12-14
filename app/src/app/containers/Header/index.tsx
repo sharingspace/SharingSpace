@@ -82,7 +82,7 @@ class Header extends React.Component<any, any> {
     ];
     const membersList = [
       <NavToShapesIcon key="shapes" icon="FaShapes" category={Category.people} onClick={() => console.log('[!] shapes icon tba')} />,
-      <NavToMembersIcon key="members" icon="FaUserFriends" category={Category.people} onClick={() => this.navToUserList()} />
+      <NavToMembersIcon key="members" icon="FaUserFriends" category={Category.people} onClick={() => this.navTo('/members')} />
     ];
 
     return (
