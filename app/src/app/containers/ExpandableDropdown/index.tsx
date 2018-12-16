@@ -70,8 +70,8 @@ class ExpandableDropdown extends React.Component<any, any> {
   componentDidMount() {
     // select the icon according to site path
     // e.g. http://0.0.0.0:3000/{pathname}
+    let { selectedMapIcon, selectedPeopleIcon } = this.state;
     const { pathname } = window.location;
-    let selectedMapIcon = '';
 
     switch(pathname) {
       case '/grid':
@@ -83,10 +83,13 @@ class ExpandableDropdown extends React.Component<any, any> {
       case '/list':
         selectedMapIcon = 'FaList';
         break;
+      case '/members':
+        selectedPeopleIcon = 'FaUserFriends';
+        break;
       default:
         selectedMapIcon = 'FaTh';
     }
-    this.setState({ selectedMapIcon });
+    this.setState({ selectedMapIcon, selectedPeopleIcon });
   }
 
   titlePressed() {
