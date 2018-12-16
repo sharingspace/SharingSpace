@@ -23,7 +23,7 @@ class MembersStore {
   async generateToken() {
     const tokenName = 'bearer_tkn'
     const token = await this.getToken()
-    localStorage.setItem(tokenName, `${Bearer} ${token}`)
+    localStorage.setItem(tokenName, `Bearer ${token}`)
 
     return localStorage.getItem(tokenName)
   }
