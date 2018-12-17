@@ -1,39 +1,25 @@
 import React from 'react';
-import {
-  FaSpinner,
-} from 'react-icons/fa';
+import { FaSpinner } from 'react-icons/fa';
 
-class LoadingWheel extends React.Component {
-  render() {
-    let containerStyle = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100%',
-      flexDirection: 'column'
-    }
-
-    let size = 4;
-    let spinSpeed = 2;
-    let iconContainer = {
-      // border: '1px solid red',
-      color: 'grey',
-      height: size + 'rem',
-      width: size + 'rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      'WebkitAnimation': `spin ${spinSpeed}s linear infinite`,
-      'MozAnimation': `spin ${spinSpeed}s linear infinite`,
-      'animation': `spin ${spinSpeed}s linear infinite`
-    }
-
-    return <div style={containerStyle as any}>
-      <div className='' style={iconContainer as any}>
-        <FaSpinner size={size * 12} />
-      </div>
-    </div>
+const style: any = {
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '80%'
+  },
+  icon: {
+    color: 'grey',
+    'WebkitAnimation': 'spin 1s linear infinite',
+    'MozAnimation': 'spin 1s linear infinite',
+    'animation': 'spin 1s linear infinite'
   }
-}
+};
+
+const LoadingWheel = () => (
+  <div style={style.container}>
+    <FaSpinner style={style.icon} size={40} />
+  </div>
+);
 
 export default LoadingWheel;

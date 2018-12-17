@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyledBadge, StyledCard, StyledContainer, StyledTitle } from './styled';
 import { observer } from 'mobx-react';
 import { membersStore } from '../../stores';
+import LoadingWheel from '../LoadingWheel';
 
 const dummyData = [
   { name: 'Marlon', role: 'admin' },
@@ -17,9 +18,10 @@ class MembersView extends Component {
   }
 
   render() {
-    const { members } = membersStore;
+    const { members, fetchingData } = membersStore;
     return (
       <StyledContainer>
+        {fetchingData && <LoadingWheel />}
         {members && members.map(member => (
           <StyledCard key={member.id}>
             <StyledTitle>{member.display_name}</StyledTitle>
