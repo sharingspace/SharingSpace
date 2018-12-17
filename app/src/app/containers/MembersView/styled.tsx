@@ -34,3 +34,8 @@ export const StyledTitle = styled.div`
 	font-size: 2.125rem;
 	display: inline-block;
 `;
+export const StyledImg = styled.img`
+	height: 60px;
+	width: 60px;
+	margin-right: 1rem;	
+`;
