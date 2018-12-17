@@ -18,13 +18,12 @@ class MembersView extends Component {
 
   render() {
     const { members } = membersStore;
-    console.log('members', members);
     return (
       <StyledContainer>
         {members && members.map(member => (
           <StyledCard key={member.id}>
             <StyledTitle>{member.display_name}</StyledTitle>
-            <StyledBadge>role</StyledBadge>
+            <StyledBadge>{member.role_name || 'Role'}</StyledBadge>
           </StyledCard>
         ))}
       </StyledContainer>

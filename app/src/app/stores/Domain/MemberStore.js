@@ -108,12 +108,13 @@ class MembersStore {
         members = members.concat(communityMembers[2])
       });
 
+      console.log('[!] COMBINED MEMBERS', members)
       runInAction('Update state after fetching members', () => {
         this.members = toJS(members);
         this.fetchingData = false;
       });
     }
-    
+
     combineMembers();
   };
 }
