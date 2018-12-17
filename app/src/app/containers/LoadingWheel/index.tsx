@@ -10,15 +10,15 @@ const style: any = {
   },
   icon: {
     color: 'grey',
-    'WebkitAnimation': 'spin 1s linear infinite',
-    'MozAnimation': 'spin 1s linear infinite',
-    'animation': 'spin 1s linear infinite'
+    'WebkitAnimation': 'spin 0.75s linear infinite',
+    'MozAnimation': 'spin 0.75s linear infinite',
+    'animation': 'spin 0.75s linear infinite'
   }
 };
 
 const LoadingWheel = () => (
   <div style={style.container}>
-    <FaSpinner style={style.icon} size={40} />
+    <FaSpinner style={style.icon} size={60} />
   </div>
 );
 
