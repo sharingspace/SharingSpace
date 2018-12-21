@@ -42,7 +42,9 @@ class MembersStore {
     if (existingToken) { // if a token exists, check expiration
       try {
         const communities = await this.getCommunities(existingToken) // try to query communities
-        if (communities.length) {
+        const { meta, data } = communities
+
+        if (meta.code === 200 && data.length) {
           console.log('[!] token not expired, returning')
           return existingToken
         } else {
@@ -70,7 +72,11 @@ class MembersStore {
         method: 'get',
         url
       })
-      return response.data
+
+      if (response.status === 200) {
+        console.log('[!] getCommunities response', response)
+        return response.data
+      }
     } catch (e) {
       console.log('[!] getcommunities error', e.message)
       throw e
@@ -88,7 +94,11 @@ class MembersStore {
           Accept: 'application/json'
         }
       })
-      return response.data;
+
+      if (response.status === 200) {
+        console.log('[!] getMembers response', response)
+        return response.data;
+      }
     } catch (e) {
       console.log('[!] getmembers error', e.message)
       throw e
@@ -97,25 +107,38 @@ class MembersStore {
 
   // @action('Getting members from laravel api')
   async fetchMembers() {
-    this.fetchingData = true;
-    const token = await this.checkToken()
-    const communities = await this.getCommunities(token) // format: [ true, "", [{ id, name, ... }]]
-
-    const combineMembers = async () => {
-      let members = []
-      await this.asyncForEach(communities[2], async (community) => { // see communities format for `communities[2]` explanation
-        const communityMembers = await this.getMembers(community.id, token)
-        members = members.concat(communityMembers[2])
-      });
-
-      console.log('[!] COMBINED MEMBERS', members)
-      runInAction('Update state after fetching members', () => {
-        this.members = toJS(members);
+    try {
+      this.fetchingData = true;
+      const token = await this.checkToken()
+      const communities = await this.getCommunities(token) // format: { meta: { code, message }, data }
+  
+      if (communities.meta.code === 200) {
+        const combineMembers = async () => {
+          let allMembers = []
+          await this.asyncForEach(communities.data, async (community) => {
+            const members = await this.getMembers(community.id, token)
+            if (members.meta.code === 200) {
+              allMembers = allMembers.concat(members.data)
+            }
+          });
+    
+          console.log('[!] COMBINED MEMBERS', allMembers)
+          runInAction('Update state after fetching members', () => {
+            this.members = toJS(allMembers);
+            this.fetchingData = false;
+          });
+        }
+    
+        combineMembers();
+      } else {
         this.fetchingData = false;
-      });
+        return;
+      }
+    } catch(e) {
+      console.log('[!] failed to fetchMembers', e.message)
+      this.fetchingData = false
+      throw e
     }
-
-    combineMembers();
   };
 }
 
