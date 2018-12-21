@@ -121,7 +121,7 @@ class MembersStore {
               allMembers = allMembers.concat(members.data)
             }
           });
-    
+
           console.log('[!] COMBINED MEMBERS', allMembers)
           runInAction('Update state after fetching members', () => {
             this.members = toJS(allMembers);
