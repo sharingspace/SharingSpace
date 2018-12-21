@@ -27,7 +27,7 @@ class MembersView extends Component {
           <StyledCard key={member.id}>
             <StyledImg src={user} alt="profile image" />
             <StyledTitle>{member.display_name}</StyledTitle>
-            <StyledBadge>{member.role_name || 'Role'}</StyledBadge>
+            <StyledBadge>{member.role_name || 'User'}</StyledBadge>
           </StyledCard>
         ))}
       </StyledContainer>
