@@ -1,29 +1,35 @@
-// Dependencies
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { Router, Route, Switch, Redirect } from 'react-router';
 import { observer } from 'mobx-react';
 import { IconContext } from 'react-icons';
-// Containers
+
 import Root from './containers/Root';
 import ListView from './containers/ListView';
 import TileView from './containers/TileView';
 import MapView from './containers/MapView';
 import HomeView from './containers/HomeView';
-// HOC
+import MembersView from './containers/MembersView';
+
 import RouteHOC from './containers/routeHOC';
-// Stores
 import { navStore, sizeStore, mapStore } from 'stores';
-// Utilities
 import { throttle } from './services/utils';
-
-
-// creat history
 const history = createBrowserHistory();
 
-class App extends React.Component<any, any> {
+const style: any = {
+  mapContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    border: '1px solid red',
+    height: 1,
+    width: 1,
+    display: 'none'
+  }
+}
 
+class App extends React.Component<any, any> {
   resizeThrottleTime: number;
 
   constructor(props) {
@@ -32,13 +38,12 @@ class App extends React.Component<any, any> {
   }
 
   componentDidMount() {
-
     this.setSize();
     // set size explicitly on resize
     window.onresize = throttle((data) => {
       setInterval(() => {
         this.setSize();
-      }, 100)
+      }, 100);
     }, this.resizeThrottleTime, this);
   }
 
@@ -63,29 +68,20 @@ class App extends React.Component<any, any> {
     // this solves my problem... don't ask why...
 
     const { mapReadyToView } = mapStore;
-    if(mapReadyToView) {
+    if (mapReadyToView) {
       return null;
     }
-    let style = {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      border: '1px solid red',
-      height: 1,
-      width: 1,
-      display: 'none'
-    }
-    return <div style={style as any}>
-      <MapView />
-    </div>
+
+    return (
+      <div style={style.mapContainer}>
+        <MapView />
+      </div>
+    );
   }
 
   render() {
     const { width, height } = sizeStore;
-    let appMasterStyle = {
-      height: height,
-      width: width
-    }
+    const appMasterStyle = { height, width };
 
     return (
       <div className={'app_master_container'} style={appMasterStyle}>
@@ -96,7 +92,8 @@ class App extends React.Component<any, any> {
               <Route exact={true} path="/list" component={ListView} />
               <Route exact={true} path="/grid" component={TileView} />
               <Route exact={true} path="/map" component={MapView} />
-              <Redirect from='*' to='/'/>
+              <Route exact={true} path="/members" component={MembersView} />
+              <Redirect from="*" to="/"/>
             </Switch>
           </Root>
         </Router>
